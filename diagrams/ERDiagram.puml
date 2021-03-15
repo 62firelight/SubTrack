@@ -1,0 +1,71 @@
+@startuml
+skinparam {
+	Style strictuml
+	RoundCorner 5
+        Database {
+		' the default border no longer matches the normal colours (bug?), so fix this
+		BorderColor #A80036
+	}
+	Sequence {
+		' make activations yellow too
+		LifeLineBackgroundColor #FDFDCD
+
+		' make stereotypes less ugly
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
+}
+
+entity Customer{
+    * customer_id
+--
+    * username
+    * password
+    * contact_num
+    * email_Address
+    * name
+    * card_details ??(together with customer or a new entity*)?
+}
+
+entity Company{
+    * company_id
+--
+    * name
+    * type (msuic, game, entertainment)
+    logo
+}
+
+entity Account{
+    * account_id
+--
+    * customer_id
+    * company_id
+    * start_date
+    * end_date
+}
+
+entity Bill{
+    * bill_id
+--
+    * account_id
+    * amount
+    * date
+    comments
+}
+
+entity Users{
+    * name
+    * account_id
+    notes
+}
+
+
+Customer ||..|{ Account
+Account }|..|| Company
+Account ||..|{ Bill
+Account ||.|{ Users
+@enduml
