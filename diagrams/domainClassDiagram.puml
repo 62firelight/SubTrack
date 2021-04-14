@@ -38,20 +38,27 @@ class "Customer" as customer {
 class "Subscription" as sub {
     -subscriptionId : String
     -name : String
-    -date_due/Renewal_Date : String
-    -date_issued : String
-    -type : String
+    -date_due/Renewal_Date : Date
+    -date_issued : Date
     -desciption: String
     -subscription_company_name: String
     -Subscription_Type: Boolean
-    
-    
   --
 }
  
 
- 
+class "Licence" as licence {
+  -licenceID: Sting
+  -licenceName: String
+  -date_issued: Date
+  -licence_Type: String
+  -expiry_date: Date
+  -description: String
+  -company_name: String
+ --
+ }
 customer -down-> sub
 customer -right-> licence
+customer -left-> Warranty
 
 @enduml
