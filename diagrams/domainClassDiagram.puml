@@ -52,5 +52,6 @@ class "Subscription" as sub {
 
  
 customer -down-> sub
+customer -right-> licence
 
 @enduml
