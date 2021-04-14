@@ -38,9 +38,13 @@ class "Customer" as customer {
 class "Subscription" as sub {
     -subscriptionId : String
     -name : String
-    -date_due : String
+    -date_due/Renewal_Date : String
     -date_issued : String
     -type : String
+    -desciption: String
+    -subscription_company_name: String
+    -Subscription_Type: Boolean
+    
     
   --
 }
