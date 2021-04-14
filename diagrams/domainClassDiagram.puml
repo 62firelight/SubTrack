@@ -1,0 +1,26 @@
+@startuml
+' ======= Style / Layout Tweaks =======
+
+skinparam {
+  Style StrictUML
+
+  ' use characters instead of icons for showing visibility
+  ClassAttributeIconSize 0
+
+  ' vertical spacing (make room for labels)
+  RankSep 100
+
+  ' horizontal spacing (make room for labels)
+  NodeSep 100
+}
+
+' Template
+class "Object" as object {
+    ' fields
+    -dataFieldName : String
+  --
+    ' methods
+    +publicMethod(dataFieldName : Object)
+}
+
+@enduml
