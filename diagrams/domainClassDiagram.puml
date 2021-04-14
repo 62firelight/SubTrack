@@ -1,26 +1,50 @@
 @startuml
-' ======= Style / Layout Tweaks =======
 
 skinparam {
-  Style StrictUML
-
-  ' use characters instead of icons for showing visibility
-  ClassAttributeIconSize 0
-
-  ' vertical spacing (make room for labels)
-  RankSep 100
-
-  ' horizontal spacing (make room for labels)
-  NodeSep 100
+	Style strictuml
+	RoundCorner 5
+        Database {
+		' the default border no longer matches the normal colours (bug?), so fix this
+		BorderColor #A80036
+	}
+	Sequence {
+		' make activations yellow too
+		LifeLineBackgroundColor #FDFDCD
+ 
+		' make stereotypes less ugly
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
 }
-
-' Template
-class "Object" as object {
-    ' fields
-    -dataFieldName : String
+ 
+entity Customer{
+    * customer_id
+    * username
+    * firstName
+    * lastName
+    * password
+    * contact_num
+    * email_Address
+    * card_details? 
   --
-    ' methods
-    +publicMethod(dataFieldName : Object)
 }
 
+entity Subscription{
+    * Subscription_id
+    * name
+    * date_due
+      date_issued
+     type 
+    
+  --
+}
+ 
+
+ 
+Customer -down-> Subscription
+@enduml
 @enduml
