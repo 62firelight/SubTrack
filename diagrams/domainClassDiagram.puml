@@ -1,0 +1,52 @@
+@startuml
+
+skinparam {
+    Style strictuml
+    RoundCorner 5
+    ' use characters instead of icons for showing visibility
+    ClassAttributeIconSize 0
+    Database {
+	' the default border no longer matches the normal colours (bug?), so fix this
+	BorderColor #A80036
+    }
+    Sequence {
+	' make activations yellow too
+	LifeLineBackgroundColor #FDFDCD
+
+	' make stereotypes less ugly
+	Stereotype {
+		Font {
+			Size 11
+			Style plain
+		}
+	}
+    }
+}
+ 
+class "Customer" as customer {
+    -customerId : String
+    -username : String
+    -firstName : String
+    -lastName : String
+    -password : String
+    -contactNum : String
+    -email : String
+    '-card_details? 
+  --
+}
+
+class "Subscription" as sub {
+    -subscriptionId : String
+    -name : String
+    -date_due : String
+    -date_issued : String
+    -type : String
+    
+  --
+}
+ 
+
+ 
+customer -down-> sub
+
+@enduml
