@@ -25,11 +25,12 @@ public class Server extends Jooby{
     CustomerDAO customerDao = new CustomerJdbcDAO();
     SaleDAO saleDao = new SaleJdbcDAO();*/
     public Server(){
-        port(8080);
+        port(8081);
         use(new Gzon());
+        use(new AssetModule());
        /* use(new ProductModule(productDao));
         use(new CustomerModule(customerDao));
-        use(new AssetModule());
+        
         use (new SaleModule(saleDao));*/
     }
     public static void main(String[] args) throws Exception {
