@@ -47,18 +47,8 @@ class "Subscription" as sub {
 }
  
 
-class "Licence" as licence {
-  -licenceID: Sting
-  -licenceName: String
-  -date_issued: Date
-  -licence_Type: String
-  -expiry_date: Date
-  -description: String
-  -company_name: String
- --
- }
+
 customer -down-> sub
-customer -right-> licence
-customer -left-> Warranty
+
 
 @enduml
