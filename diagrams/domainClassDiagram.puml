@@ -24,31 +24,30 @@ skinparam {
 }
  
 class "Customer" as customer {
-    -customerId : String
-    -username : String
+    -customerId : String <<unique>> <<generated>>
+    -username : String <<unique>>
     -firstName : String
     -lastName : String
     -password : String
-    -contactNum : String
+    -phone : String
     -email : String
     '-card_details? 
   --
 }
 
 class "Subscription" as sub {
-    -subscriptionId : String
+    -subscriptionId : String <<unique>> <<generated>>
     -name : String
-    -date_due/Renewal_Date : Date
-    -date_issued : Date
+    -type: Boolean
+    -subscriptionPrice : BigDecimal
     -desciption: String
-    -subscription_company_name: String
-    -Subscription_Type: Boolean
+    -companyName: String
+    -dueDate : LocalDateTime
+    -issueDate : LocalDateTime
   --
 }
- 
 
-
-customer -down-> sub
+customer --> "-subscriptions\n0..*" sub
 
 
 @enduml
