@@ -1,24 +1,7 @@
 @startuml
-skinparam {
-	Style strictuml
-	RoundCorner 5
-        Database {
-		' the default border no longer matches the normal colours (bug?), so fix this
-		BorderColor #A80036
-	}
-	Sequence {
-		' make activations yellow too
-		LifeLineBackgroundColor #FDFDCD
-
-		' make stereotypes less ugly
-		Stereotype {
-			Font {
-				Size 11
-				Style plain
-			}
-		}
-	}
-}
+skinparam Style StrictUML
+skinparam LineType ortho
+skinparam monochrome true
 
 entity Customer{
     * customer_id
