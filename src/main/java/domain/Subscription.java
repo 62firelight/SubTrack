@@ -5,58 +5,84 @@
  */
 package domain;
 
-
-
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 /**
  *
  * @author yeah2
  */
 public class Subscription {
-    private String subsciptionID;
-    private String subscriptionName;
-    private LocalDateTime dateIssued;
-    private LocalDateTime dateDue;
-    private String subscriptionType;
+    private Integer subscriptionId;
+    private String name;
+    private Boolean type;
+    private BigDecimal subscriptionPrice;
+    private String description;
+    private String companyName;
+    private LocalDateTime dueDate;
+    private LocalDateTime issueDate;
 
-    public String getSubsciptionID() {
-        return subsciptionID;
+    public Integer getSubscriptionId() {
+        return subscriptionId;
     }
 
-    public String getSubscriptionName() {
-        return subscriptionName;
+    public void setSubscriptionId(Integer subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
 
-    public LocalDateTime getDateIssued() {
-        return dateIssued;
+    public String getName() {
+        return name;
     }
 
-    public LocalDateTime getDateDue() {
-        return dateDue;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSubscriptionType() {
-        return subscriptionType;
+    public Boolean getType() {
+        return type;
     }
 
-    public void setSubsciptionID(String subsciptionID) {
-        this.subsciptionID = subsciptionID;
+    public void setType(Boolean type) {
+        this.type = type;
     }
 
-    public void setSubscriptionName(String subscriptionName) {
-        this.subscriptionName = subscriptionName;
+    public BigDecimal getSubscriptionPrice() {
+        return subscriptionPrice;
     }
 
-    public void setDateIssued(LocalDateTime dateIssued) {
-        this.dateIssued = dateIssued;
+    public void setSubscriptionPrice(BigDecimal subscriptionPrice) {
+        this.subscriptionPrice = subscriptionPrice;
     }
 
-    public void setDateDue(LocalDateTime dateDue) {
-        this.dateDue = dateDue;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSubscriptionType(String subscriptionType) {
-        this.subscriptionType = subscriptionType;
+    public void setDescription(String description) {
+        this.description = description;
     }
-    
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public LocalDateTime getIssueDate() {
+        return issueDate;
+    }
+
+    public void setIssueDate(LocalDateTime issueDate) {
+        this.issueDate = issueDate;
+    }
+
 }
