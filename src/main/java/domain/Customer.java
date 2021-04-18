@@ -11,11 +11,11 @@ package domain;
  */
 public class Customer {
     private Integer customerId;
+    private String username;
     private String firstName;
     private String lastName;
-    private String username;
     private String password;
-    private Integer contactNum;
+    private String phoneNumber;
     private String emailAddress;
     //private Integer cardNum;
 
@@ -39,8 +39,8 @@ public class Customer {
         return password;
     }
 
-    public Integer getContactNum() {
-        return contactNum;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getEmailAddress() {
@@ -63,8 +63,8 @@ public class Customer {
         this.password = password;
     }
 
-    public void setContactNum(Integer contactNum) {
-        this.contactNum = contactNum;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setEmailAddress(String emailAddress) {
