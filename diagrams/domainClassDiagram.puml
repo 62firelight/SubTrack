@@ -24,19 +24,19 @@ skinparam {
 }
  
 class "Customer" as customer {
-    -customerId : String <<unique>> <<generated>>
+    -customerId : Integer <<unique>> <<generated>>
     -username : String <<unique>>
     -firstName : String
     -lastName : String
     -password : String
-    -phone : String
-    -email : String
+    -phoneNumber : String
+    -emailAddress : String
     '-card_details? 
   --
 }
 
 class "Subscription" as sub {
-    -subscriptionId : String <<unique>> <<generated>>
+    -subscriptionId : Integer <<unique>> <<generated>>
     -name : String
     -type: Boolean
     -subscriptionPrice : BigDecimal
