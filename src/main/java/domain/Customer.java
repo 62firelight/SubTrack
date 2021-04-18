@@ -10,13 +10,13 @@ package domain;
  * @author yeah2
  */
 public class Customer {
-    private Integer customerId;
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String password;
-    private String phoneNumber;
-    private String emailAddress;
+    private Integer customerId = 0;
+    private String username = "defaultUsername";
+    private String firstName = "defaultFirstName";
+    private String lastName = "defaultLastName";
+    private String password = "defaultPassword";
+    private String phoneNumber = "defaultPhoneNumber";
+    private String emailAddress = "defaultEmailAddress";
     //private Integer cardNum;
 
     public Integer getCustomerId() {

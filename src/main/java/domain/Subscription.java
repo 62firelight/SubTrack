@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
  * @author yeah2
  */
 public class Subscription {
-    private Integer subscriptionId;
-    private String name;
-    private Boolean type;
-    private BigDecimal subscriptionPrice;
-    private String description;
-    private String companyName;
-    private LocalDateTime dueDate;
-    private LocalDateTime issueDate;
+    private Integer subscriptionId = 0;
+    private String name = "defaultName";
+    private Boolean type = true; // rename this to paid?
+    private BigDecimal subscriptionPrice = new BigDecimal(0);
+    private String description = "defaultDescription";
+    private String companyName = "defaultCompanyName";
+    private LocalDateTime dueDate = LocalDateTime.now().plusMonths(1);
+    private LocalDateTime issueDate = LocalDateTime.now();
 
     public Integer getSubscriptionId() {
         return subscriptionId;
