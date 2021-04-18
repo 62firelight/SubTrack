@@ -21,6 +21,11 @@ public class Subscription {
     private LocalDateTime dueDate = LocalDateTime.now().plusMonths(1);
     private LocalDateTime issueDate = LocalDateTime.now();
 
+    @Override
+    public String toString() {
+        return "Subscription{" + "subscriptionId=" + subscriptionId + ", name=" + name + ", type=" + type + ", subscriptionPrice=" + subscriptionPrice + ", description=" + description + ", companyName=" + companyName + ", dueDate=" + dueDate + ", issueDate=" + issueDate + '}';
+    }     
+
     public Integer getSubscriptionId() {
         return subscriptionId;
     }

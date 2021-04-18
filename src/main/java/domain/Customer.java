@@ -19,6 +19,11 @@ public class Customer {
     private String emailAddress = "defaultEmailAddress";
     //private Integer cardNum;
 
+    @Override
+    public String toString() {
+        return "Customer{" + "customerId=" + customerId + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", phoneNumber=" + phoneNumber + ", emailAddress=" + emailAddress + '}';
+    }
+
     public Integer getCustomerId() {
         return customerId;
     }
