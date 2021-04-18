@@ -37,7 +37,7 @@ public class TestClass {
 
     @Test
     public void testSomething() {
-        assertThat(2 + 2, equalTo(3));
+        assertThat(1 + 1, equalTo(2));
     }
     
 }
