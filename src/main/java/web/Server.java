@@ -20,34 +20,36 @@ import org.jooby.json.Gzon;
  *
  * @author yeah2
  */
-public class Server extends Jooby{
-   /* ProductDAO productDao = new ProductJdbcDAO();
+public class Server extends Jooby {
+
+    /* ProductDAO productDao = new ProductJdbcDAO();
     CustomerDAO customerDao = new CustomerJdbcDAO();
     SaleDAO saleDao = new SaleJdbcDAO();*/
-    public Server(){
+    public Server() {
         port(8081);
         use(new Gzon());
         use(new AssetModule());
-       /* use(new ProductModule(productDao));
+        /* use(new ProductModule(productDao));
         use(new CustomerModule(customerDao));
         
         use (new SaleModule(saleDao));*/
     }
+
     public static void main(String[] args) throws Exception {
-   System.out.println("\nStarting Server.");
+        System.out.println("\nStarting Server.");
 
-   Server server = new Server();
+        Server server = new Server();
 
-   CompletableFuture.runAsync(() -> {
-      server.start();
-   });
+        CompletableFuture.runAsync(() -> {
+            server.start();
+        });
 
-   server.onStarted(() -> {
-      System.out.println("\nPress Enter to stop the server.");
-   });
+        server.onStarted(() -> {
+            System.out.println("\nPress Enter to stop the server.");
+        });
 
-   // wait for user to hit the Enter key
-   System.in.read();
-   System.exit(0);
-}
+        // wait for user to hit the Enter key
+        System.in.read();
+        System.exit(0);
+    }
 }
