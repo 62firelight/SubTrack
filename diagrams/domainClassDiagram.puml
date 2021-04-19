@@ -38,7 +38,8 @@ class "Customer" as customer {
 class "Subscription" as sub {
     -subscriptionId : Integer <<unique>> <<generated>>
     -name : String
-    -type: Boolean
+    -paid : Boolean
+    -category : String
     -subscriptionPrice : BigDecimal
     -desciption: String
     -companyName: String
