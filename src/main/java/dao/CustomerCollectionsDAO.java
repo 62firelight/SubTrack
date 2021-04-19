@@ -1,59 +1,53 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import domain.Customer;
-import domain.Subscription;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author tanlu824
- */
-public class CustomerCollectionsDAO {
-    
-	private static final Map<Integer, Customer> items = new HashMap<>();
-	private static final Multimap<Integer, Subscription> subscriptions = HashMultimap.create();
-	
-	static {
-		if(items.isEmpty()) {
-//			items.put("ACC123", new Customer());
-		}
-	}
+public final class CustomerCollectionsDAO implements CustomerDAO {
 
-	public List<Customer> getList() {
-		return new ArrayList<>(items.values());
-	}
+    private static final Map<String, Customer> customers = new HashMap<>();
 
-	public void addItem(Customer cust) {
-		items.put(cust.getCustomerId(), cust);
-	}
+    public CustomerCollectionsDAO() {
+        // some dummy data for testing
+        Customer boris = new Customer();
+        boris.setUsername("boris");
+        boris.setFirstName("Boris");
+        boris.setLastName("McNorris");
+        boris.setPassword("guest");
+        boris.setPhoneNumber("123456789");
+        boris.setEmailAddress("boris@example.net");
 
-	public Customer getById(String itemName) {
-		return items.get(itemName);
-	}
+        Customer doris = new Customer();
+        doris.setUsername("doris");
+        doris.setFirstName("Doris");
+        doris.setLastName("Dolores");
+        doris.setPassword("guest");
+        doris.setPhoneNumber("987654321");
+        doris.setEmailAddress("doris@example.net");
 
-	public void delete(String name) {
-		items.remove(name);
-	}
+        saveCustomer(boris);
+        saveCustomer(doris);
+    }
 
-	public void updateItem(Integer id, Customer updatedItem) {
-		items.put(id, updatedItem);
-	}
+    @Override
+    public void saveCustomer(Customer customer) {
+        System.out.println("Saving customer: " + customer);
+        customers.put(customer.getUsername(), customer);
+    }
 
-	public boolean exists(String itemName) {
-		return items.containsKey(itemName);
-	}
-	
-	public void addSubscription(Customer cust, Subscription sub) {
-		subscriptions.put(cust.getCustomerId(), sub);
-	}
+    @Override
+    public Customer getCustomer(String username) {
+        return customers.get(username);
+    }
+
+    @Override
+    public Boolean validateCredentials(String username, String password) {
+        if (customers.containsKey(username)) {
+            return customers.get(username).getPassword().equals(password);
+        } else {
+            return false;
+        }
+    }
+
 }
