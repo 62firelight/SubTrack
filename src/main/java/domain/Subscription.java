@@ -14,17 +14,18 @@ import java.time.LocalDateTime;
 public class Subscription {
     private Integer subscriptionId = 0;
     private String name = "defaultName";
-    private Boolean type = true; // rename this to paid?
+    private Boolean paid = true; // rename this to paid?
+    private String category = "defaultCategory";
     private BigDecimal subscriptionPrice = new BigDecimal(0);
     private String description = "defaultDescription";
     private String companyName = "defaultCompanyName";
-    private LocalDateTime dueDate = LocalDateTime.now().plusMonths(1);
+    private LocalDateTime dueDate = LocalDateTime.now().plusDays(30);
     private LocalDateTime issueDate = LocalDateTime.now();
 
     @Override
     public String toString() {
-        return "Subscription{" + "subscriptionId=" + subscriptionId + ", name=" + name + ", type=" + type + ", subscriptionPrice=" + subscriptionPrice + ", description=" + description + ", companyName=" + companyName + ", dueDate=" + dueDate + ", issueDate=" + issueDate + '}';
-    }     
+        return "Subscription{" + "subscriptionId=" + subscriptionId + ", name=" + name + ", paid=" + paid + ", category=" + category + ", subscriptionPrice=" + subscriptionPrice + ", description=" + description + ", companyName=" + companyName + ", dueDate=" + dueDate + ", issueDate=" + issueDate + '}';
+    }
 
     public Integer getSubscriptionId() {
         return subscriptionId;
@@ -42,12 +43,20 @@ public class Subscription {
         this.name = name;
     }
 
-    public Boolean getType() {
-        return type;
+    public Boolean getPaid() {
+        return paid;
     }
 
-    public void setType(Boolean type) {
-        this.type = type;
+    public void setPaid(Boolean paid) {
+        this.paid = paid;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public BigDecimal getSubscriptionPrice() {
@@ -90,4 +99,5 @@ public class Subscription {
         this.issueDate = issueDate;
     }
 
+    
 }
