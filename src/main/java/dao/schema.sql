@@ -19,10 +19,16 @@ create table Customer(
 );
 
 create table Subscription(
-    SubscriptionID varchar(50),
+    SubscriptionID auto_increment,
     subscriptionName varchar(50) not null,
-    dateIssued timestamp,
-    dateDue timestamp,
+    subscriptionPrice decimal(10,2) not null,
+    category varchar(50) not null,
+    companyName varchar(100) not null,
+    description varchar(100),
+    dateIssued date,
+    dateDue date,
     subscriptionType varchar(50) not null,
-    constraint SubscriptionID primary key (SubscriptionID)
+    paid boolean not null,
+    constraint SubscriptionID primary key (SubscriptionID),
+    constraint CustomerID_fk foreign key (CustomerID)
 );
