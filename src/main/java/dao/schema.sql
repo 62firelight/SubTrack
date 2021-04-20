@@ -22,12 +22,12 @@ create table Subscription(
     SubscriptionID auto_increment,
     subscriptionName varchar(50) not null,
     subscriptionPrice decimal(10,2) not null,
+    subscriptionType varchar(50) not null,
     category varchar(50) not null,
     companyName varchar(100) not null,
     description varchar(100),
     dateIssued date,
     dateDue date,
-    subscriptionType varchar(50) not null,
     paid boolean not null,
     constraint SubscriptionID primary key (SubscriptionID),
     constraint CustomerID_fk foreign key (CustomerID)
