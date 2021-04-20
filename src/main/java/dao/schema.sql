@@ -29,6 +29,7 @@ create table Subscription(
     dateIssued date,
     dateDue date,
     paid boolean not null,
+    customerID int,
     constraint SubscriptionID primary key (SubscriptionID),
-    constraint CustomerID_fk foreign key (CustomerID)
+    constraint CustomerID_fk foreign key (CustomerID) references Customer
 );
