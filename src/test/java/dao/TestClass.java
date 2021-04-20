@@ -7,6 +7,7 @@ package dao;
 
 import domain.Subscription;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
@@ -27,8 +28,16 @@ public class TestClass {
 
     @BeforeEach
     public void setUp() {
-        
-    }
+        Subscription sub1 = new Subscription();
+        sub1.setName("Netflix");
+        sub1.setSubscriptionId(123);
+        sub1.setPaid(false);
+        sub1.setCategory("Leisure");
+        sub1.setSubscriptionPrice(BigDecimal.TEN);
+        sub1.setDescription("Movies and TV");
+        sub1.setCompanyName("Netflix Inc.");
+       
+                }
 
     @AfterEach
     public void tearDown() {
