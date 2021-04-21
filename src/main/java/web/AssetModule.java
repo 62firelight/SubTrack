@@ -21,7 +21,7 @@ public class AssetModule extends Jooby{
         assets("/images/*.jpg");
 
         // make index.html the default page
-        assets("/", "wel.html");
+        assets("/", "home.html");
 
         // prevent 404 errors due to browsers requesting favicons
         get("/favicon.ico", () -> Results.noContent());

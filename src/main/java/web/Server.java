@@ -29,8 +29,9 @@ public class Server extends Jooby {
         port(8081);
         use(new Gzon());
         use(new AssetModule());
+        //use(new CustomerModule(customerDao));
         /* use(new ProductModule(productDao));
-        use(new CustomerModule(customerDao));
+        
         
         use (new SaleModule(saleDao));*/
     }
