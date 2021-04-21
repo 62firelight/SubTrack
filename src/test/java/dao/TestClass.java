@@ -5,6 +5,7 @@
  */
 package dao;
 
+import domain.Customer;
 import domain.Subscription;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,6 +29,12 @@ public class TestClass {
 
     @BeforeEach
     public void setUp() {
+       
+
+    CustomerCollectionsDAO CustDAO = new CustomerCollectionsDAO();
+    Customer cust1;
+    Customer cust2;
+
         Subscription sub1 = new Subscription();
         sub1.setName("Netflix");
         sub1.setSubscriptionId(123);
