@@ -5,10 +5,13 @@
  */
 package web;
 
+import org.jooby.Jooby;
+
 /**
  *
  * @author emmabrothers
  */
-public class SubscriptionModule {
+public class SubscriptionModule extends Jooby{
+    
     
 }
