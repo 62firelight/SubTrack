@@ -8,7 +8,11 @@ package dao;
 import domain.Customer;
 import domain.Subscription;
 import java.math.BigDecimal;
+import java.util.Collection;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+import net.sf.oval.constraint.AssertTrueCheck;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,7 +56,7 @@ public class TestClass {
 
     @AfterEach
     public void tearDown() {
-
+       
     }
 
     @Test
@@ -72,7 +76,7 @@ public class TestClass {
         cust2.setFirstName("ne");
         cust2.setLastName("ly");
         cust2.setUsername("a267");
-        cust2.setPassword("INF0");
+        cust2.setPassword("1234");
         cust2.setPhoneNumber("042");
         cust2.setEmailAddress("tudent.com");
         cust2.setCustomerId(2);
@@ -85,10 +89,11 @@ public class TestClass {
         Customer retrieved = CustDAO.getCustomer("bayta267");
 
         assertEquals("Retreived customer should be the same", cust1, retrieved);
-
         /**
          * assertTrue("cust1 should exist", CustDAO.contains(cust1));
          */
+        
+        
         //Follow up testing of save and get function testing manual attributes
         CustDAO.saveCustomer(cust2);
         Customer secondRetreieved = CustDAO.getCustomer("a267");
@@ -102,7 +107,9 @@ public class TestClass {
         assertEquals(cust2.getEmailAddress(), secondRetreieved.getEmailAddress());
         assertEquals(cust2.getCustomerId(), secondRetreieved.getCustomerId());
 
-        //credential validation
+        //credential validation test
+        assertTrue(CustDAO.validateCredentials("a267", "1234"));
+        assertFalse(CustDAO.validateCredentials("Taine", "Bayly"));
     }
 
     @Test
@@ -130,8 +137,8 @@ public class TestClass {
         subDAO.saveSubscription("subtest1", sub1);
 
         //below sits tests that should work if we adjust subscriptionDAO get method
-        /*
-        Subscription subRetrieved = subDAO.getSubscriptionsByUsername("Subtest1");
+        
+        Collection<Subscription> subRetrieved = subDAO.getSubscriptionsByUsername("subtest1");
         
         
         assertEquals("Retreived subscrpiton should be the same", sub1, subRetrieved);
@@ -139,7 +146,7 @@ public class TestClass {
         
         //Manual checks of each function attribute success for sub2
         subDAO.saveSubscription("subtest2",sub2);
-        
+        /*
         Subscription subRetrieved2 = subDAO.getSubscriptionsByUsername("Subtest2");
         assertEquals(sub2.getName(), subRetrieved2.getName());
         assertEquals(sub2.getSubscriptionId(), subRetrieved2.getgetSubscriptionId));
