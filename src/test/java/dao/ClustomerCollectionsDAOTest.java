@@ -71,7 +71,10 @@ public class ClustomerCollectionsDAOTest {
      
         Customer retrieved = CustDAO.getCustomer("bayta267");
         assertEquals("check if cust1 save was succesful in setup", cust1, retrieved);
-      
+        
+        CustDAO.saveCustomer(cust2);
+        Customer retrievedNext = CustDAO.getCustomer("a267");
+        assertEquals("check if cust2 was successfully saved to dao", cust2, retrievedNext);
     }
 
     @Test
