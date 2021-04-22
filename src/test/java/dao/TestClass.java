@@ -13,6 +13,8 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import net.sf.oval.constraint.AssertTrueCheck;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -138,11 +140,9 @@ public class TestClass {
 
         //below sits tests that should work if we adjust subscriptionDAO get method
         
-        Collection<Subscription> subRetrieved = subDAO.getSubscriptionsByUsername("subtest1");
+        Collection<Subscription> subsRetrieved = subDAO.getSubscriptionsByUsername("subtest1");
         
-        
-        assertEquals("Retreived subscrpiton should be the same", sub1, subRetrieved);
-        
+        assertThat(subsRetrieved, hasItem(sub1));
         
         //Manual checks of each function attribute success for sub2
         subDAO.saveSubscription("subtest2",sub2);
