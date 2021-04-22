@@ -50,6 +50,7 @@ public final class CustomerCollectionsDAO implements CustomerDAO {
         }
     }
 
+    @Override
     public void deleteCustomer(Customer customer) {
         System.out.println("Deleting customer: " + customer);
         customers.remove(customer.getUsername());
