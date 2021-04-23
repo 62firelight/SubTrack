@@ -14,9 +14,11 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+       <!-- <p>{{custCtrl.signInMessage}}</p> -->
+        
     </head>
     <body>
-        
+        <div ng-include="'menu.html'" align="right"></div>
          <h1> Create Account </h1>
          
          <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)" >
