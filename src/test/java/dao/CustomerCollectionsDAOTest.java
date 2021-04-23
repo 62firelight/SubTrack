@@ -27,7 +27,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
  *
  * @author Luke Tang
  */
-public class ClustomerCollectionsDAOTest {
+public class CustomerCollectionsDAOTest {
 
     private CustomerCollectionsDAO CustDAO = new CustomerCollectionsDAO();
     private Customer cust1;
