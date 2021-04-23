@@ -17,4 +17,8 @@ public interface SubscriptionDAO {
     void saveSubscription(String username, Subscription subscription);
 
     Collection<Subscription> getSubscriptionsByUsername(String username);
+    
+    void deleteSubscription(String username, Subscription subscription);
+    
+    void updateSubscription(Subscription subscription);
 }

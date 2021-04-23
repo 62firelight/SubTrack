@@ -15,9 +15,9 @@ import java.util.Collection;
  * @author Luke Tang
  */
 public class SubscriptionCollectionsDAO implements SubscriptionDAO {
-    
-    private static final Multimap<String, Subscription> subscriptions =
-            HashMultimap.create();
+
+    private static final Multimap<String, Subscription> subscriptions
+            = HashMultimap.create();
 
     @Override
     public void saveSubscription(String username, Subscription subscription) {
@@ -28,5 +28,17 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     public Collection<Subscription> getSubscriptionsByUsername(String username) {
         return subscriptions.get(username);
     }
-    
+
+    @Override
+    public void deleteSubscription(String username, Subscription subscription) {
+        if (subscriptions.containsKey(username)) {
+            subscriptions.remove(username, subscription);
+        }
+    }
+
+    @Override
+    public void updateSubscription(Subscription subscription) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

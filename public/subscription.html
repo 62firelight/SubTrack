@@ -6,11 +6,41 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/SubTrek.js"></script>
+        <title>Add Subscription</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1> Add Subscription </h1>
+
+        <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)" >
+            <label for=“name”>Name:</label>
+            <input type="text" ng-model="subscription.name" required>
+            <label for=“paid”>Paid?:</label>
+            <input type="text" ng-model="customer.paid" required>
+            <label for=“category”>Category:</label>
+            <input type="text" ng-model="customer.category" required>
+            <label for=“subscriptionPrice”>Subscription Price:</label>
+            <input type="text" ng-model="customer.subscriptionPrice" required>
+            <label for=“description”>description:</label>
+            <input type="text" ng-model="customer.description" required>
+            <label for=“companyName”>Company Name:</label>
+            <input type="text" ng-model="customer.companyName" required>
+            <label for=“dueDate”>Due Date:</label>
+            <input type="text" ng-model="customer.dueDate" required>
+            
+            <label for=“issueDate”>Issue Date:</label>
+            <input type="date" id="issueDate" name="trip-start"
+                   value="2021-07-22"
+                   min="2021-01-01" max="2021-12-31">
+
+
+
+            <button type="submit">Add Subscription</button>
+        </form>
     </body>
 </html>
