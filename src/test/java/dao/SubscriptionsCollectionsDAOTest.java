@@ -92,14 +92,13 @@ public class SubscriptionsCollectionsDAOTest {
         assertFalse(collection.contains(sub2));
         assertFalse(collection.contains(sub1));
         System.out.println(sub3);
-      
 
         //Testing the other independent user has saved items from setup
-         Collection<Subscription> collection2 = subDAO.getSubscriptionsByUsername("Taine");
+        Collection<Subscription> collection2 = subDAO.getSubscriptionsByUsername("Taine");
         assertThat(collection2, hasItem(sub1));
         assertThat(collection2, hasItem(sub2));
         assertFalse(collection2.contains(sub3));
-       
+
     }
 
     @Test

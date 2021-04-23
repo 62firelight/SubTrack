@@ -35,7 +35,6 @@ public class CustomerCollectionsDAOTest {
 
     @BeforeEach
     public void setUp() {
-       
 
         this.cust1 = new Customer();
         //This customer setup becomes redundant due to my set up
@@ -46,7 +45,7 @@ public class CustomerCollectionsDAOTest {
         cust1.setPhoneNumber("0273842");
         cust1.setEmailAddress("bayta@student.com");
         cust1.setCustomerId(1);
-        
+
         this.cust2 = new Customer();
         cust2.setFirstName("ne");
         cust2.setLastName("ly");
@@ -68,10 +67,10 @@ public class CustomerCollectionsDAOTest {
 
     @Test
     public void testSaveCustomer() {
-     
+
         Customer retrieved = CustDAO.getCustomer("bayta267");
         assertEquals("check if cust1 save was succesful in setup", cust1, retrieved);
-        
+
         CustDAO.saveCustomer(cust2);
         Customer retrievedNext = CustDAO.getCustomer("a267");
         assertEquals("check if cust2 was successfully saved to dao", cust2, retrievedNext);
@@ -79,7 +78,7 @@ public class CustomerCollectionsDAOTest {
 
     @Test
     public void testGetCustomer() {
-        
+
         //assertTrue("cust1 should exist", CustDAO.contains(cust1));
         CustDAO.saveCustomer(cust2);
         Customer secondRetreieved = CustDAO.getCustomer("a267");
@@ -97,13 +96,13 @@ public class CustomerCollectionsDAOTest {
     @Test
     public void testValidateCredentials() {
         CustDAO.saveCustomer(cust2);
-         assertTrue(CustDAO.validateCredentials("a267", "1234"));
-         assertFalse(CustDAO.validateCredentials("Taine", "Bayly"));
+        assertTrue(CustDAO.validateCredentials("a267", "1234"));
+        assertFalse(CustDAO.validateCredentials("Taine", "Bayly"));
     }
 
     @Test
     public void testDeleteCustomer() {
-       CustDAO.deleteCustomer(cust1);
-       assertNull(CustDAO.getCustomer("bayta267"));
+        CustDAO.deleteCustomer(cust1);
+        assertNull(CustDAO.getCustomer("bayta267"));
     }
 }
