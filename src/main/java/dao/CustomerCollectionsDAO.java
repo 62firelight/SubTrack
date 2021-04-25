@@ -10,24 +10,24 @@ public final class CustomerCollectionsDAO implements CustomerDAO {
 
     public CustomerCollectionsDAO() {
         // some dummy data for testing
-        Customer boris = new Customer();
-        boris.setUsername("boris");
-        boris.setFirstName("Boris");
-        boris.setLastName("McNorris");
-        boris.setPassword("guest");
-        boris.setPhoneNumber("123456789");
-        boris.setEmailAddress("boris@example.net");
-
-        Customer doris = new Customer();
-        doris.setUsername("doris");
-        doris.setFirstName("Doris");
-        doris.setLastName("Dolores");
-        doris.setPassword("guest");
-        doris.setPhoneNumber("987654321");
-        doris.setEmailAddress("doris@example.net");
-
-        saveCustomer(boris);
-        saveCustomer(doris);
+//        Customer boris = new Customer();
+//        boris.setUsername("boris");
+//        boris.setFirstName("Boris");
+//        boris.setLastName("McNorris");
+//        boris.setPassword("guest");
+//        boris.setPhoneNumber("123456789");
+//        boris.setEmailAddress("boris@example.net");
+//
+//        Customer doris = new Customer();
+//        doris.setUsername("doris");
+//        doris.setFirstName("Doris");
+//        doris.setLastName("Dolores");
+//        doris.setPassword("guest");
+//        doris.setPhoneNumber("987654321");
+//        doris.setEmailAddress("doris@example.net");
+//
+//        saveCustomer(boris);
+//        saveCustomer(doris);
     }
 
     @Override
@@ -50,4 +50,9 @@ public final class CustomerCollectionsDAO implements CustomerDAO {
         }
     }
 
+    @Override
+    public void deleteCustomer(Customer customer) {
+        System.out.println("Deleting customer: " + customer);
+        customers.remove(customer.getUsername());
+    }
 }
