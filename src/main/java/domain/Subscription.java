@@ -21,10 +21,12 @@ public class Subscription {
     private String companyName = "defaultCompanyName";
     private LocalDateTime dueDate = LocalDateTime.now().plusDays(30);
     private LocalDateTime issueDate = LocalDateTime.now();
+    
+    private Customer customer;
 
     @Override
     public String toString() {
-        return "Subscription{" + "subscriptionId=" + subscriptionId + ", name=" + name + ", paid=" + paid + ", category=" + category + ", subscriptionPrice=" + subscriptionPrice + ", description=" + description + ", companyName=" + companyName + ", dueDate=" + dueDate + ", issueDate=" + issueDate + '}';
+        return "Subscription{" + "subscriptionId=" + subscriptionId + ", name=" + name + ", paid=" + paid + ", category=" + category + ", subscriptionPrice=" + subscriptionPrice + ", description=" + description + ", companyName=" + companyName + ", dueDate=" + dueDate + ", issueDate=" + issueDate + ", customer=" + customer + '}';
     }
 
     public Integer getSubscriptionId() {
@@ -99,5 +101,12 @@ public class Subscription {
         this.issueDate = issueDate;
     }
 
-    
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
 }
