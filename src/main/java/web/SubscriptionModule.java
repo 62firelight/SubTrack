@@ -36,7 +36,7 @@ public class SubscriptionModule extends Jooby{
         });
         
             
-    // used similar get method as CustomerModule.java as they both were 
+    // used similar get method as CustomerModule.java as they both were by username however need to do the save subscription method 
     
 }
 }
