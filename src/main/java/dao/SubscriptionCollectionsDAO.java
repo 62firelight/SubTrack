@@ -40,7 +40,7 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
 
     @Override
     public void updateSubscription(Subscription subscription) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        subscriptions.put(subscription.getCustomer().getUsername(), subscription);
     }
 
 }
