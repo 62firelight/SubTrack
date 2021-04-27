@@ -14,6 +14,7 @@ import org.jooby.Jooby;
 
 import dao.SubscriptionDAO;
 import domain.Customer;
+import domain.Subscription;
 import org.jooby.Jooby;
 import org.jooby.Result;
 import org.jooby.Status;
@@ -26,7 +27,7 @@ public class SubscriptionModule extends Jooby{
    // saveSubscription
    // getSubscriptionsByUsername
     public SubscriptionModule(SubscriptionDAO subscriptionDao){
-        get("/api/subscription/:username", (req) -> {
+        get("/api/subscriptions/:username", (req) -> {
             String username = req.param("username").value();
             if(subscriptionDao.getSubscriptionsByUsername(username) == null){
                 return new Result().status(Status.NOT_FOUND);
@@ -36,8 +37,11 @@ public class SubscriptionModule extends Jooby{
         });
         
             
-    // used similar get method as CustomerModule.java as they both were by username however need to do the save subscription method 
-    
+     post("/api/subscriptions", (req, rsp) -> {
+            Subscription subscription = req.body().to(Subscription.class);
+            subscriptionDao.saveSubscription(subscription);
+            rsp.status(Status.CREATED);
+        });
 }
 }
     
