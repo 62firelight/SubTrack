@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author yeah2
  */
 public class Customer {
+
     private Integer customerId = 0;
     private String username = "defaultUsername";
     private String firstName = "defaultFirstName";
@@ -19,7 +20,17 @@ public class Customer {
     private String password = "defaultPassword";
     private String phoneNumber = "defaultPhoneNumber";
     private String emailAddress = "defaultEmailAddress";
+
     //private Integer cardNum;
+    public Customer(Integer customerID, String username, String firstname, String lastname, String password, String phoneNumber, String emailAddress) {
+        this.customerId = customerID;
+        this.username = username;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+    }
 
     @Override
     public String toString() {
@@ -106,5 +117,5 @@ public class Customer {
         }
         return true;
     }
-    
+
 }
