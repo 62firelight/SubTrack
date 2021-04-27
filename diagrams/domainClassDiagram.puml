@@ -48,7 +48,6 @@ class "Subscription" as sub {
   --
 }
 
-customer --> "-subscriptions\n0..*" sub
-
+sub --> "-customer\n1" customer
 
 @enduml

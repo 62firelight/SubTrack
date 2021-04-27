@@ -5,6 +5,7 @@
  */
 package dao;
 
+import domain.Customer;
 import domain.Subscription;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -33,6 +34,24 @@ public class SubscriptionsCollectionsDAOTest {
 
     @BeforeEach
     public void setUp() {
+        
+        Customer cust1 = new Customer();
+        cust1.setFirstName("Taine");
+        cust1.setLastName("Bayly");
+        cust1.setUsername("bayta267");
+        cust1.setPassword("INFO310");
+        cust1.setPhoneNumber("0273842");
+        cust1.setEmailAddress("bayta@student.com");
+        cust1.setCustomerId(1);
+        
+        Customer cust2 = new Customer();
+        cust2.setFirstName("Luke");
+        cust2.setLastName("Tang");
+        cust2.setUsername("tanlu824");
+        cust2.setPassword("INFO310");
+        cust2.setPhoneNumber("0276292");
+        cust2.setEmailAddress("tanlu@student.com");
+        cust2.setCustomerId(2);
 
         sub1 = new Subscription();
         this.sub1.setName("Netflix");
@@ -42,6 +61,7 @@ public class SubscriptionsCollectionsDAOTest {
         this.sub1.setSubscriptionPrice(BigDecimal.TEN);
         this.sub1.setDescription("Movies and TV");
         this.sub1.setCompanyName("Netflix Inc.");
+        this.sub1.setCustomer(cust1);
 
         sub2 = new Subscription();
         this.sub2.setName("flix");
@@ -51,6 +71,7 @@ public class SubscriptionsCollectionsDAOTest {
         this.sub2.setSubscriptionPrice(BigDecimal.TEN);
         this.sub2.setDescription("TV");
         this.sub2.setCompanyName("flix Inc.");
+        this.sub2.setCustomer(cust1);
 
         sub3 = new Subscription();
         this.sub3.setName("Shares");
@@ -60,23 +81,25 @@ public class SubscriptionsCollectionsDAOTest {
         this.sub3.setSubscriptionPrice(BigDecimal.TEN);
         this.sub3.setDescription("Investing");
         this.sub3.setCompanyName("Sharsies");
+        this.sub3.setCustomer(cust2);
 
-        subDAO.saveSubscription("Taine", sub1);
-        subDAO.saveSubscription("Taine", sub2);
+        subDAO.saveSubscription(sub1);
+        subDAO.saveSubscription(sub2);
 
     }
 
     @AfterEach
     public void tearDown() {
-        subDAO.deleteSubscription("Taine", sub1);
-        subDAO.deleteSubscription("Taine", sub2);
-        subDAO.deleteSubscription("Luke", sub3);
+        subDAO.deleteSubscription(sub1);
+        subDAO.deleteSubscription(sub2);
+        subDAO.deleteSubscription(sub3);
     }
 
     @Test
     public void testGetSubscriptionByUsername() {
 
-        Collection<Subscription> collection = subDAO.getSubscriptionsByUsername("Taine");
+        Collection<Subscription> collection = 
+                subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
         //assertThat(subDAO.hasItem(1));
         assertTrue(collection.contains(sub1));
         assertTrue(collection.contains(sub2));
@@ -86,15 +109,17 @@ public class SubscriptionsCollectionsDAOTest {
     @Test
     public void testSaveSubscription() {
         //Testing a new user saving subscription, whilst another user exists already. Test of user Independence
-        subDAO.saveSubscription("Luke", sub3);
-        Collection<Subscription> collection = subDAO.getSubscriptionsByUsername("Luke");
+        subDAO.saveSubscription(sub3);
+        Collection<Subscription> collection = 
+                subDAO.getSubscriptionsByUsername(sub3.getCustomer().getUsername());
         assertTrue(collection.contains(sub3));
         assertFalse(collection.contains(sub2));
         assertFalse(collection.contains(sub1));
         System.out.println(sub3);
 
         //Testing the other independent user has saved items from setup
-        Collection<Subscription> collection2 = subDAO.getSubscriptionsByUsername("Taine");
+        Collection<Subscription> collection2 = 
+                subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
         assertThat(collection2, hasItem(sub1));
         assertThat(collection2, hasItem(sub2));
         assertFalse(collection2.contains(sub3));
@@ -103,8 +128,9 @@ public class SubscriptionsCollectionsDAOTest {
 
     @Test
     public void testDeleteSubscription() {
-        subDAO.deleteSubscription("Taine", sub1);
-        Collection<Subscription> collection = subDAO.getSubscriptionsByUsername("Taine");
+        subDAO.deleteSubscription(sub1);
+        Collection<Subscription> collection = 
+                subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
         assertTrue(collection.contains(sub2));
         assertFalse(collection.contains(sub1));
         //assertNull(CustDAO.getCustomer("bayta267"));
