@@ -13,11 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import org.h2.jdbc.JdbcConnection;
-/**
- *
- * @author trbay
- */
-public class CustomerJdbcDAO {
+///**
+// *
+// * @author trbay
+// */
+public class CustomerJdbcDAO implements CustomerDAO {
      private String url = "jdbc:h2:tcp://localhost/info310proj";
 
     public CustomerJdbcDAO() {
@@ -65,7 +65,7 @@ public class CustomerJdbcDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Integer id = rs.getInt("Customer_Id");
+                Integer id = rs.getInt("CustomerId");
                 String user_name = rs.getString("Username");
                 String firstname = rs.getString("Firstname");
                 String lastname = rs.getString("Lastname");
@@ -104,5 +104,10 @@ public class CustomerJdbcDAO {
         }
     }
 
-    
+    @Override
+    public void deleteCustomer(Customer customer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 }
