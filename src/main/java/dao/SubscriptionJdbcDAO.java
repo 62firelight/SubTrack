@@ -28,7 +28,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     }
     @Override
     public void saveSubscription(Subscription subscription) {
-   String sql = "merge into subscription (SubscriptionID, Name, Paid, Category, SubscriptionPrice, Description, CompanyName, DueDate, IssueDate, Customer) values (?,?,?,?,?,?,?,?,?,?)";
+   String sql = "merge into subscription (SubscriptionID, Name, Paid, Category, SubscriptionPrice, Description, CompanyName, DueDate, IssueDate, CustomerID) values (?,?,?,?,?,?,?,?,?,?)";
 
   
         try (
@@ -41,9 +41,9 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
             stmt.setBigDecimal(5, subscription.getSubscriptionPrice());
             stmt.setString(6, subscription.getDescription());
             stmt.setString(7, subscription.getCompanyName());
-            stmt.setString(8, subscription.getDueDate().toString());
-            stmt.setString(9, subscription.getIssueDate().toString());
-            stmt.setObject(10,subscription.getCustomer()); //Unsure od setObject
+            stmt.setString(8, subscription.getDueDate().toLocalDate().toString());
+            stmt.setString(9, subscription.getIssueDate().toLocalDate().toString());
+            stmt.setInt(10,subscription.getCustomer().getCustomerId()); //Unsure od setObject
             
 
             stmt.executeUpdate();
