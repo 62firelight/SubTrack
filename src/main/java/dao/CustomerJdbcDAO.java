@@ -30,15 +30,14 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void saveCustomer(Customer customer) {
-        String sql = "insert into Customer (CustomerID, Username, Firstname, Lastname, Password, phoneNumber, Email_Address) values(?,?,?,?,?,?,?)";
+        String sql = "insert into Customer (CustomerID, Username, Firstname, Lastname, Password, phoneNumber, Email_Address) values(null,?,?,?,?,?,?)";
 
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 
-            ResultSet rs = stmt.getGeneratedKeys();
+            //ResultSet rs = stmt.getGeneratedKeys();
 
-            stmt.setString(1, rs.toString());
             stmt.setString(1, customer.getUsername());
             stmt.setString(2, customer.getFirstName());
             stmt.setString(3, customer.getLastName());
