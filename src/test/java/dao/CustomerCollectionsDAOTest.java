@@ -29,12 +29,19 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
  */
 public class CustomerCollectionsDAOTest {
 
-    private CustomerCollectionsDAO CustDAO = new CustomerCollectionsDAO();
+    private CustomerDAO CustDAO;
     private Customer cust1;
     private Customer cust2;
 
     @BeforeEach
     public void setUp() {
+        CustDAO = new CustomerCollectionsDAO();
+        
+          // Currently, only the saveCustomer() test works with the JDBC DAO 
+          // though this requires you to comment out everything in tearDown() 
+          // and the entirety of the other test methods
+//        CustDAO = new CustomerJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
+//                + "'src/main/java/dao/schema.sql'");
 
         this.cust1 = new Customer();
         //This customer setup becomes redundant due to my set up

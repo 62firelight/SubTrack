@@ -28,13 +28,20 @@ import static junit.framework.Assert.assertTrue;
  */
 public class SubscriptionsCollectionsDAOTest {
 
-    private SubscriptionCollectionsDAO subDAO = new SubscriptionCollectionsDAO();
+    private SubscriptionCollectionsDAO subDAO;
     private Subscription sub1;
     private Subscription sub2;
     private Subscription sub3;
 
     @BeforeEach
     public void setUp() {
+        
+        subDAO = new SubscriptionCollectionsDAO();
+        
+        // Haven't tested the JDBC DAO with any tests yet, but assume that will
+        // all fail until shown otherwise
+//      subDAO = new CustomerJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
+//                + "'src/main/java/dao/schema.sql'");
         
         Customer cust1 = new Customer();
         cust1.setFirstName("Taine");
