@@ -10,12 +10,14 @@
 
 create table Customer(
     CustomerID int auto_increment,
-    username varchar(50) not null,
+    username varchar(50) not null unique,
     password varchar(50) not null,
     firstName varchar(50) not null,
     lastName varchar(50) not null,
+    phoneNumber varchar(50) not null,
     emailAddress varchar(50) not null,
-    constraint CustomerID primary key (CustomerID)
+
+    constraint Customer_PK primary key (CustomerID)
 );
 
 create table Subscription(
@@ -30,6 +32,7 @@ create table Subscription(
     dateDue date,
     paid boolean not null,
     customerID int,
-    constraint SubscriptionID primary key (SubscriptionID),
-    constraint CustomerID_fk foreign key (CustomerID) references Customer
+
+    constraint Subscription_PK primary key (SubscriptionID),
+    constraint CustomerID_FK foreign key (CustomerID) references Customer
 );

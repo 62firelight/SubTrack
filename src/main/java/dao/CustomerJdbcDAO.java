@@ -30,7 +30,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void saveCustomer(Customer customer) {
-        String sql = "insert into Customer (CustomerID, Username, Firstname, Lastname, Password, phoneNumber, Email_Address) values(null,?,?,?,?,?,?)";
+        String sql = "insert into Customer (CustomerID, Username, Password, Firstname, Lastname, phoneNumber, EmailAddress) values(null,?,?,?,?,?,?)";
 
         try (
                 Connection dbCon = DbConnection.getConnection(url);
@@ -39,9 +39,9 @@ public class CustomerJdbcDAO implements CustomerDAO {
             //ResultSet rs = stmt.getGeneratedKeys();
 
             stmt.setString(1, customer.getUsername());
-            stmt.setString(2, customer.getFirstName());
-            stmt.setString(3, customer.getLastName());
-            stmt.setString(4, customer.getPassword());
+            stmt.setString(2, customer.getPassword());
+            stmt.setString(3, customer.getFirstName());
+            stmt.setString(4, customer.getLastName());
             stmt.setString(5, customer.getPhoneNumber());
             stmt.setString(6, customer.getEmailAddress());
             
@@ -66,9 +66,9 @@ public class CustomerJdbcDAO implements CustomerDAO {
             while (rs.next()) {
                 Integer id = rs.getInt("CustomerId");
                 String user_name = rs.getString("Username");
+                String password = rs.getString("Password");
                 String firstname = rs.getString("Firstname");
                 String lastname = rs.getString("Lastname");
-                String password = rs.getString("Password");
                 String phoneNumber = rs.getString("PhoneNumber");
                 String emailAddress = rs.getString("EmailAddress");
            
