@@ -10,6 +10,7 @@ import domain.Subscription;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -139,6 +140,14 @@ public class SubscriptionsCollectionsDAOTest {
 
     @Test
     public void testUpdateSubscription() {
+        sub1.setDescription("SUBS");
+        
+        subDAO.updateSubscription(sub1);
+        
+        Collection<Subscription> collection = subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
+        
+        assertTrue(collection.contains(sub1));
+        assertThat(collection, hasSize(2));
         //assertThat(1 + 1, equalTo(2));
     }
 
