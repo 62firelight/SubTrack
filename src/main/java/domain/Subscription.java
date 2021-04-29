@@ -6,12 +6,14 @@
 package domain;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 /**
  *
  * @author yeah2
  */
 public class Subscription {
+
     private Integer subscriptionId = 0;
     private String name = "defaultName";
     private Boolean paid = true; // rename this to paid?
@@ -19,19 +21,37 @@ public class Subscription {
     private BigDecimal subscriptionPrice = new BigDecimal(0);
     private String description = "defaultDescription";
     private String companyName = "defaultCompanyName";
-    private LocalDateTime dueDate = LocalDateTime.now().plusDays(30);
-    private LocalDateTime issueDate = LocalDateTime.now();
-    
+    private LocalDate dueDate = LocalDate.now().plusDays(30);
+    private LocalDate issueDate = LocalDate.now();
+
     private Customer customer;
 
-    @Override
-    public String toString() {
+    public Subscription() {
+    }
+
+    public Subscription(Integer subscripitonId, String name, Boolean paid, String category, BigDecimal subscriptionPrice, String description, String companyName, LocalDate dueDate, LocalDate issueDate, Integer customerId) {
+        this.subscriptionId = subscriptionId;
+        this.name = this.name;
+        this.paid = paid;
+        this.category = category;
+        this.subscriptionPrice = subscriptionPrice;
+        this.description = description;
+        this.companyName = companyName;
+        this.dueDate = dueDate;
+        this.issueDate = issueDate;
+        customerId = customer.getCustomerId();
+    
+}
+@Override
+        public String toString() {
         return "Subscription{" + "subscriptionId=" + subscriptionId + ", name=" + name + ", paid=" + paid + ", category=" + category + ", subscriptionPrice=" + subscriptionPrice + ", description=" + description + ", companyName=" + companyName + ", dueDate=" + dueDate + ", issueDate=" + issueDate + ", customer=" + customer + '}';
     }
 
     public Integer getSubscriptionId() {
         return subscriptionId;
     }
+
+    
 
     public void setSubscriptionId(Integer subscriptionId) {
         this.subscriptionId = subscriptionId;
@@ -85,19 +105,19 @@ public class Subscription {
         this.companyName = companyName;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    public LocalDateTime getIssueDate() {
+    public LocalDate getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(LocalDateTime issueDate) {
+    public void setIssueDate(LocalDate issueDate) {
         this.issueDate = issueDate;
     }
 

@@ -105,7 +105,21 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void deleteCustomer(Customer customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String sql = "delete from customer where CustomerID = ?";
+        try(
+            // get a connection to the database
+            Connection dbCon = DbConnection.getConnection(url);
+
+            // create the statement
+            PreparedStatement stmt = dbCon.prepareStatement(sql);
+        ) {
+            stmt.setInt(1, customer.getCustomerId());
+            stmt.executeUpdate();  // execute the statement
+            
+        }catch(SQLException ex){
+            throw new DAOException(ex.getMessage(), ex);
+        }
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
