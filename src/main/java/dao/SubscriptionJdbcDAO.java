@@ -5,10 +5,16 @@
  */
 package dao;
 
+import domain.Customer;
 import domain.Subscription;
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 ///**
@@ -55,7 +61,38 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 
     @Override
     public Collection<Subscription> getSubscriptionsByUsername(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String sql = "select * from Subscription where CustomerID = ?";
+         
+        try (
+                Connection dbCon = DbConnection.getConnection(url);
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Integer id = rs.getInt("SubscriptionId");
+                String name = rs.getString("Name");
+                Boolean paid = rs.getBoolean("Paid");
+                String category = rs.getString("Category");
+                BigDecimal subPrice = rs.getBigDecimal("SubscriptionPrice");
+                String companyName = rs.getString("CompanyName");
+                String description = rs.getString("Description");
+                Date x = rs.getDate("IssueDate");
+                LocalDate issueDate = x.toLocalDate(); // conversion line
+                Date y = rs.getDate("DueDate");
+                LocalDate DueDate = y.toLocalDate(); //conversion line
+                Integer customerId = rs.getInt("CustomerId");
+                //commented out to keep file integrity 
+                //Subscription sub1 = new Subscription(id, name, paid, category, subPrice, companyName, description, issueDate, dueDate, customerId);
+               // return sub1;
+            }
+            return null;
+
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
