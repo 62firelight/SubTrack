@@ -6,7 +6,7 @@
 package domain;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  *
@@ -21,12 +21,15 @@ public class Subscription {
     private BigDecimal subscriptionPrice = new BigDecimal(0);
     private String description = "defaultDescription";
     private String companyName = "defaultCompanyName";
-    private LocalDateTime dueDate = LocalDateTime.now().plusDays(30);
-    private LocalDateTime issueDate = LocalDateTime.now();
+    private LocalDate dueDate = LocalDate.now().plusDays(30);
+    private LocalDate issueDate = LocalDate.now();
 
     private Customer customer;
 
-    public Subscription(Integer subscripitonId, String name, Boolean paid, String category, BigDecimal subscriptionPrice, String description, String companyName, LocalDateTime dueDate, LocalDateTime issueDate, Integer customerId) {
+    public Subscription() {
+    }
+
+    public Subscription(Integer subscripitonId, String name, Boolean paid, String category, BigDecimal subscriptionPrice, String description, String companyName, LocalDate dueDate, LocalDate issueDate, Integer customerId) {
         this.subscriptionId = subscriptionId;
         this.name = this.name;
         this.paid = paid;
@@ -102,19 +105,19 @@ public class Subscription {
         this.companyName = companyName;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    public LocalDateTime getIssueDate() {
+    public LocalDate getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(LocalDateTime issueDate) {
+    public void setIssueDate(LocalDate issueDate) {
         this.issueDate = issueDate;
     }
 

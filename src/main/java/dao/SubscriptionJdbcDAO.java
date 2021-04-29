@@ -47,8 +47,8 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
             stmt.setBigDecimal(5, subscription.getSubscriptionPrice());
             stmt.setString(6, subscription.getDescription());
             stmt.setString(7, subscription.getCompanyName());
-            stmt.setString(8, subscription.getDueDate().toLocalDate().toString());
-            stmt.setString(9, subscription.getIssueDate().toLocalDate().toString());
+            stmt.setString(8, subscription.getDueDate().toString());
+            stmt.setString(9, subscription.getIssueDate().toString());
             stmt.setInt(10,subscription.getCustomer().getCustomerId()); //Unsure od setObject
             
 
