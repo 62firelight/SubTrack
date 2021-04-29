@@ -14,7 +14,11 @@ import java.util.Collection;
  */
 public interface SubscriptionDAO {
 
-    void saveSubscription(String username, Subscription subscription);
+    void saveSubscription(Subscription subscription);
 
     Collection<Subscription> getSubscriptionsByUsername(String username);
+    
+    void deleteSubscription(Subscription subscription);
+    
+    void updateSubscription(Subscription subscription);
 }

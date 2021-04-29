@@ -18,4 +18,6 @@ public interface CustomerDAO {
     Customer getCustomer(String username);
 
     Boolean validateCredentials(String username, String password);
+    
+    void deleteCustomer(Customer customer);
 }

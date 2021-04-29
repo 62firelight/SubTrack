@@ -15,18 +15,32 @@ import java.util.Collection;
  * @author Luke Tang
  */
 public class SubscriptionCollectionsDAO implements SubscriptionDAO {
-    
-    private static final Multimap<String, Subscription> subscriptions =
-            HashMultimap.create();
+
+    private static final Multimap<String, Subscription> subscriptions
+            = HashMultimap.create();
 
     @Override
-    public void saveSubscription(String username, Subscription subscription) {
-        subscriptions.put(username, subscription);
+    public void saveSubscription(Subscription subscription) {
+        subscriptions.put(subscription.getCustomer().getUsername(), 
+                subscription);
     }
 
     @Override
     public Collection<Subscription> getSubscriptionsByUsername(String username) {
+        System.out.println(subscriptions.get(username));
         return subscriptions.get(username);
     }
-    
+
+    @Override
+    public void deleteSubscription(Subscription subscription) {
+        if (subscriptions.containsKey(subscription.getCustomer().getUsername())) {
+            subscriptions.remove(subscription.getCustomer().getUsername(), subscription);
+        }
+    }
+
+    @Override
+    public void updateSubscription(Subscription subscription) {
+        subscriptions.put(subscription.getCustomer().getUsername(), subscription);
+    }
+
 }
