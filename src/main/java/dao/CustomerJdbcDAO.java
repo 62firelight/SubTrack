@@ -30,7 +30,9 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void saveCustomer(Customer customer) {
-        String sql = "insert into Customer (CustomerID, Username, Password, Firstname, Lastname, phoneNumber, EmailAddress) values(null,?,?,?,?,?,?)";
+        String sql = "insert into Customer (Customer_ID, Username, "
+                + "Firstname, Lastname, Password, Phone_Number, Email_Address) "
+                + "values (null,?,?,?,?,?,?)";
 
         try (
                 Connection dbCon = DbConnection.getConnection(url);
@@ -64,15 +66,15 @@ public class CustomerJdbcDAO implements CustomerDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Integer id = rs.getInt("CustomerId");
-                String user_name = rs.getString("Username");
+                Integer id = rs.getInt("Customer_ID");
+                //String user_name = rs.getString("Username");
                 String password = rs.getString("Password");
                 String firstname = rs.getString("Firstname");
                 String lastname = rs.getString("Lastname");
-                String phoneNumber = rs.getString("PhoneNumber");
-                String emailAddress = rs.getString("EmailAddress");
+                String phoneNumber = rs.getString("Phone_Number");
+                String emailAddress = rs.getString("Email_Address");
            
-                Customer cust1 = new Customer(id, user_name, firstname, lastname, password, phoneNumber, emailAddress);
+                Customer cust1 = new Customer(id, username, firstname, lastname, password, phoneNumber, emailAddress);
                 return cust1;
             }
             return null;
@@ -84,7 +86,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public Boolean validateCredentials(String username, String password) {
-         String sql = "select * from customer where Username = ? and Password = ?";
+         String sql = "select * from Customer where Username = ? and Password = ?";
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
@@ -105,7 +107,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void deleteCustomer(Customer customer) {
-         String sql = "delete from customer where CustomerID = ?";
+         String sql = "delete from Customer where Customer_ID = ?";
         try(
             // get a connection to the database
             Connection dbCon = DbConnection.getConnection(url);

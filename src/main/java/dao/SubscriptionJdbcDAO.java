@@ -15,7 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 ///**
 // *
@@ -34,7 +36,10 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     }
     @Override
     public void saveSubscription(Subscription subscription) {
-   String sql = "merge into subscription (SubscriptionID, Name, Paid, Category, SubscriptionPrice, Description, CompanyName, DueDate, IssueDate, CustomerID) values (?,?,?,?,?,?,?,?,?,?)";
+   String sql = "merge into subscription (Subscription_ID, Name, Paid, Category,"
+           + " Subscription_Price, Description, Company_Name, Due_Date, "
+           + "Issue_Date, Customer_ID) "
+           + "values (?,?,?,?,?,?,?,?,?,?)";
 
   
         try (
@@ -61,32 +66,60 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 
     @Override
     public Collection<Subscription> getSubscriptionsByUsername(String username) {
-         String sql = "select * from Subscription where CustomerID = ?";
+         String sql = "select * from Subscription "
+                 + "inner join Customer using (Customer_ID) "
+                 + "where Username = ?";
          
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
+            
+            // Using a List to preserve the order in which the data was returned 
+            // from the query.
+            List<Subscription> subs = new ArrayList<>();
 
             while (rs.next()) {
-                Integer id = rs.getInt("SubscriptionId");
+                Integer id = rs.getInt("Subscription_ID");
                 String name = rs.getString("Name");
                 Boolean paid = rs.getBoolean("Paid");
                 String category = rs.getString("Category");
-                BigDecimal subPrice = rs.getBigDecimal("SubscriptionPrice");
-                String companyName = rs.getString("CompanyName");
+                BigDecimal subPrice = rs.getBigDecimal("Subscription_Price");
+                String companyName = rs.getString("Company_Name");
                 String description = rs.getString("Description");
-                Date x = rs.getDate("IssueDate");
+                Date x = rs.getDate("Issue_Date");
                 LocalDate issueDate = x.toLocalDate(); // conversion line
-                Date y = rs.getDate("DueDate");
-                LocalDate DueDate = y.toLocalDate(); //conversion line
-                Integer customerId = rs.getInt("CustomerId");
+                Date y = rs.getDate("Due_Date");
+                LocalDate dueDate = y.toLocalDate(); //conversion line
+                
+                // construct a customer using details
+                Customer customer = new Customer();
+                customer.setCustomerId(rs.getInt("Customer_ID"));
+                customer.setUsername(rs.getString("Username"));
+                customer.setFirstName(rs.getString("Firstname"));
+                customer.setLastName(rs.getString("Lastname"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setPhoneNumber(rs.getString("Phone_Number"));
+                customer.setEmailAddress(rs.getString("Email_Address"));
+                
                 //commented out to keep file integrity 
-                //Subscription sub1 = new Subscription(id, name, paid, category, subPrice, companyName, description, issueDate, dueDate, customerId);
+                Subscription sub = new Subscription();
+                sub.setSubscriptionId(id);
+                sub.setName(name);
+                sub.setPaid(paid);
+                sub.setCategory(category);
+                sub.setSubscriptionPrice(subPrice);
+                sub.setCompanyName(companyName);
+                sub.setDescription(description);
+                sub.setIssueDate(issueDate);
+                sub.setDueDate(dueDate);
+                sub.setCustomer(customer);
+                
+                subs.add(sub);
                // return sub1;
             }
-            return null;
+            return subs;
 
         } catch (SQLException ex) {
             throw new DAOException(ex.getMessage(), ex);
@@ -98,7 +131,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     @Override
     public void deleteSubscription(Subscription subscription) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        String sql = "delete from subscription where SubscriptionID = ?";
+        String sql = "delete from subscription where Subscription_ID = ?";
         try(
             // get a connection to the database
             Connection dbCon = DbConnection.getConnection(url);
