@@ -41,9 +41,9 @@ public class CustomerJdbcDAO implements CustomerDAO {
             //ResultSet rs = stmt.getGeneratedKeys();
 
             stmt.setString(1, customer.getUsername());
-            stmt.setString(2, customer.getPassword());
-            stmt.setString(3, customer.getFirstName());
-            stmt.setString(4, customer.getLastName());
+            stmt.setString(2, customer.getFirstName());
+            stmt.setString(3, customer.getLastName());
+            stmt.setString(4, customer.getPassword());
             stmt.setString(5, customer.getPhoneNumber());
             stmt.setString(6, customer.getEmailAddress());
             
@@ -97,7 +97,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
             if (rs.next()) {
                 return true;
             } else {
-                return null;
+                return false;
             }
 
         } catch (SQLException ex) {
