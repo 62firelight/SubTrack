@@ -151,7 +151,8 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 
     @Override
     public void updateSubscription(Subscription subscription) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        saveSubscription(subscription); // essentially performs an update
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
