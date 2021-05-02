@@ -7,6 +7,7 @@ package domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
@@ -127,6 +128,31 @@ public class Subscription {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.subscriptionId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Subscription other = (Subscription) obj;
+        if (!Objects.equals(this.subscriptionId, other.subscriptionId)) {
+            return false;
+        }
+        return true;
     }
 
 }
