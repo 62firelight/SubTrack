@@ -107,7 +107,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void deleteCustomer(Customer customer) {
-         String sql = "delete from Customer where Customer_ID = ?";
+         String sql = "delete from Customer where Username = ?";
         try(
             // get a connection to the database
             Connection dbCon = DbConnection.getConnection(url);
@@ -115,7 +115,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);
         ) {
-            stmt.setInt(1, customer.getCustomerId());
+            stmt.setString(1, customer.getUsername());
             stmt.executeUpdate();  // execute the statement
             
         }catch(SQLException ex){
