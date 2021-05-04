@@ -1,6 +1,11 @@
 @startuml
 skinparam style strictuml
 
-actor "Team" as team
+actor "Team" as team 
+participant "GitBucket" as git <<version control>>
+participant "JUnit" as junit <<framework>>
+
+team++
+team -> git++ : commit and push
 
 @enduml
