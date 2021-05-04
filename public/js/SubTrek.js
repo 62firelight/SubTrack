@@ -20,7 +20,7 @@ module.factory('signInAPI', function ($resource){
 module.controller('CustomerController', function(registerAPI,$window,signInAPI, $sessionStorage) {
     this.registerCustomer = function (customer) {
         registerAPI.save(null, customer,
-
+        
         // success callback
         function () {
             $window.location = 'signin.html';
@@ -71,4 +71,37 @@ module.controller('CustomerController', function(registerAPI,$window,signInAPI, 
         $sessionStorage.$reset();
         $window.location = 'home.html';
     }
+});
+
+
+module.factory('addSubscriptionAPI', function($resource){
+    return $resource('api/subscriptions');
+});
+
+module.factory('subscriptionAPI', function($resource){
+   return $resource('api/subscriptions/:username'); 
+});
+
+module.controller('SubscriptionController', function(addSubscriptionAPI, subscriptionAPI, $window){
+    let ctrl = this;
+    
+    alert('in subscription controller');
+    
+    this.addSubscription = function(username, subscription){
+        addSubscriptionAPI.save({'username': username}, subscription,
+        
+        function(){
+            $window.location = 'home.html';
+        },
+        
+        function(error){
+            console.log(error);
+        }
+        );
+        console.log(subscription + " for " + username);
+    };
+    
+    this.getSubscriptions = function(username){
+       this.subscriptions = subscriptionAPI.query({'username': username});
+    };
 });
