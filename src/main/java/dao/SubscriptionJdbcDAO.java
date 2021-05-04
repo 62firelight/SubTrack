@@ -112,8 +112,8 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 sub.setSubscriptionPrice(subPrice);
                 sub.setCompanyName(companyName);
                 sub.setDescription(description);
-                sub.setIssueDate(issueDate);
-                sub.setDueDate(dueDate);
+                sub.setIssueDate(issueDate.toString());
+                sub.setDueDate(dueDate.toString());
                 sub.setCustomer(customer);
                 
                 subs.add(sub);
