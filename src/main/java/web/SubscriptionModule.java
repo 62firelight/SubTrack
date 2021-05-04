@@ -5,7 +5,6 @@
  */
 package web;
 
-import org.jooby.Jooby;
 
 /**
  *
@@ -13,8 +12,8 @@ import org.jooby.Jooby;
  */
 
 import dao.SubscriptionDAO;
-import domain.Customer;
 import domain.Subscription;
+import java.time.LocalDate;
 import org.jooby.Jooby;
 import org.jooby.Result;
 import org.jooby.Status;
@@ -39,6 +38,11 @@ public class SubscriptionModule extends Jooby{
             
      post("/api/subscriptions", (req, rsp) -> {
             Subscription subscription = req.body().to(Subscription.class);
+            
+            LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
+            System.out.println(dueDate);
+            subscription.setDueDate(dueDate.toString());
+            
             subscriptionDao.saveSubscription(subscription);
             rsp.status(Status.CREATED);
         });
