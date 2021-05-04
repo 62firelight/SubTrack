@@ -9,18 +9,20 @@ participant "Feature Tests" as feature <<Selenium>> #red
 
 team++
 team -> git++ : commit and push
-team--
-git -> git++ : initialize build
+git -> git : initialize build
 
 git -> git : compile and assemble code
 
 git -> unit++ #99FF99: run unit tests
+note right of git: Test Data Access Object \n(DAO) classes
 return success
 
 git -> integration++ #red : run integration tests
+note right of git: Test web server operations
 return success
 
 git -> feature++ #red : run feature tests
+note right of git: Test website presentation features
 return success
 
 return success
