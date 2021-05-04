@@ -1,0 +1,13 @@
+@startuml
+skinparam monochrome true
+left to right direction
+
+usecase (while) as while
+usecase (extract) as blank1
+usecase (return) as blank2
+
+(start) -> while
+while -left--> blank1 
+blank1 --> while
+while --> blank2 
+@enduml
