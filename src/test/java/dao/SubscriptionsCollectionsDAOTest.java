@@ -28,7 +28,13 @@ import static junit.framework.Assert.assertTrue;
  */
 public class SubscriptionsCollectionsDAOTest {
 
-    private SubscriptionCollectionsDAO subDAO;
+    private CustomerDAO custDAO;
+    private SubscriptionDAO subDAO;
+    
+    private Customer cust1;
+    private Customer cust2;
+    private static Integer custId = 1; // simulate H2's auto increment
+    
     private Subscription sub1;
     private Subscription sub2;
     private Subscription sub3;
@@ -36,30 +42,36 @@ public class SubscriptionsCollectionsDAOTest {
     @BeforeEach
     public void setUp() {
         
-        subDAO = new SubscriptionCollectionsDAO();
+//        subDAO = new SubscriptionCollectionsDAO();
         
         // Haven't tested the JDBC DAO with any tests yet, but assume that will
         // all fail until shown otherwise
-//      subDAO = new CustomerJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
-//                + "'src/main/java/dao/schema.sql'");
+        custDAO = new CustomerJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
+                + "'src/main/java/dao/schema.sql'");
+        subDAO = new SubscriptionJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
+                + "'src/main/java/dao/schema.sql'");
         
-        Customer cust1 = new Customer();
+        cust1 = new Customer();
         cust1.setFirstName("Taine");
         cust1.setLastName("Bayly");
         cust1.setUsername("bayta267");
         cust1.setPassword("INFO310");
         cust1.setPhoneNumber("0273842");
         cust1.setEmailAddress("bayta@student.com");
-        cust1.setCustomerId(1);
+        cust1.setCustomerId(custId++);
         
-        Customer cust2 = new Customer();
+        cust2 = new Customer();
         cust2.setFirstName("Luke");
         cust2.setLastName("Tang");
         cust2.setUsername("tanlu824");
         cust2.setPassword("INFO310");
         cust2.setPhoneNumber("0276292");
         cust2.setEmailAddress("tanlu@student.com");
-        cust2.setCustomerId(2);
+        cust2.setCustomerId(custId++);
+        
+        // comment out if using collections
+        custDAO.saveCustomer(cust1);
+        custDAO.saveCustomer(cust2);
 
         sub1 = new Subscription();
         this.sub1.setName("Netflix");
@@ -101,7 +113,12 @@ public class SubscriptionsCollectionsDAOTest {
         subDAO.deleteSubscription(sub1);
         subDAO.deleteSubscription(sub2);
         subDAO.deleteSubscription(sub3);
+        
+        // comment out if using collections
+        custDAO.deleteCustomer(cust1);
+        custDAO.deleteCustomer(cust2);
     }
+    
 
     @Test
     public void testGetSubscriptionByUsername() {

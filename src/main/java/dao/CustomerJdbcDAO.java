@@ -30,7 +30,9 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void saveCustomer(Customer customer) {
-        String sql = "insert into Customer (CustomerID, Username, Password, Firstname, Lastname, phoneNumber, EmailAddress) values(null,?,?,?,?,?,?)";
+        String sql = "insert into Customer (Customer_ID, Username, "
+                + "Firstname, Lastname, Password, Phone_Number, Email_Address) "
+                + "values (null,?,?,?,?,?,?)";
 
         try (
                 Connection dbCon = DbConnection.getConnection(url);
@@ -39,9 +41,9 @@ public class CustomerJdbcDAO implements CustomerDAO {
             //ResultSet rs = stmt.getGeneratedKeys();
 
             stmt.setString(1, customer.getUsername());
-            stmt.setString(2, customer.getPassword());
-            stmt.setString(3, customer.getFirstName());
-            stmt.setString(4, customer.getLastName());
+            stmt.setString(2, customer.getFirstName());
+            stmt.setString(3, customer.getLastName());
+            stmt.setString(4, customer.getPassword());
             stmt.setString(5, customer.getPhoneNumber());
             stmt.setString(6, customer.getEmailAddress());
             
@@ -64,15 +66,15 @@ public class CustomerJdbcDAO implements CustomerDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Integer id = rs.getInt("CustomerId");
-                String user_name = rs.getString("Username");
+                Integer id = rs.getInt("Customer_ID");
+                //String user_name = rs.getString("Username");
                 String password = rs.getString("Password");
                 String firstname = rs.getString("Firstname");
                 String lastname = rs.getString("Lastname");
-                String phoneNumber = rs.getString("PhoneNumber");
-                String emailAddress = rs.getString("EmailAddress");
+                String phoneNumber = rs.getString("Phone_Number");
+                String emailAddress = rs.getString("Email_Address");
            
-                Customer cust1 = new Customer(id, user_name, firstname, lastname, password, phoneNumber, emailAddress);
+                Customer cust1 = new Customer(id, username, firstname, lastname, password, phoneNumber, emailAddress);
                 return cust1;
             }
             return null;
@@ -84,7 +86,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public Boolean validateCredentials(String username, String password) {
-         String sql = "select * from customer where Username = ? and Password = ?";
+         String sql = "select * from Customer where Username = ? and Password = ?";
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
@@ -95,7 +97,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
             if (rs.next()) {
                 return true;
             } else {
-                return null;
+                return false;
             }
 
         } catch (SQLException ex) {
@@ -105,7 +107,21 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void deleteCustomer(Customer customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String sql = "delete from Customer where Username = ?";
+        try(
+            // get a connection to the database
+            Connection dbCon = DbConnection.getConnection(url);
+
+            // create the statement
+            PreparedStatement stmt = dbCon.prepareStatement(sql);
+        ) {
+            stmt.setString(1, customer.getUsername());
+            stmt.executeUpdate();  // execute the statement
+            
+        }catch(SQLException ex){
+            throw new DAOException(ex.getMessage(), ex);
+        }
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
