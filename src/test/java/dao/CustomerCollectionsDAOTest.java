@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.util.*;
 import static junit.framework.Assert.assertNull;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 /**
@@ -29,12 +30,20 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
  */
 public class CustomerCollectionsDAOTest {
 
-    private CustomerCollectionsDAO CustDAO = new CustomerCollectionsDAO();
+    private CustomerDAO CustDAO;
+    
     private Customer cust1;
     private Customer cust2;
 
     @BeforeEach
     public void setUp() {
+//        CustDAO = new CustomerCollectionsDAO();
+        
+          // Currently, only the saveCustomer() test works with the JDBC DAO 
+          // though this requires you to comment out everything in tearDown() 
+          // and the entirety of the other test methods
+        CustDAO = new CustomerJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
+                + "'src/main/java/dao/schema.sql'");
 
         this.cust1 = new Customer();
         //This customer setup becomes redundant due to my set up
@@ -68,12 +77,12 @@ public class CustomerCollectionsDAOTest {
     @Test
     public void testSaveCustomer() {
 
-        Customer retrieved = CustDAO.getCustomer("bayta267");
-        assertEquals("check if cust1 save was succesful in setup", cust1, retrieved);
+        Customer retrieved = CustDAO.getCustomer(cust1.getUsername());
+        assertThat("check if cust1 save was succesful in setup", cust1, samePropertyValuesAs(retrieved, "customerId"));
 
         CustDAO.saveCustomer(cust2);
-        Customer retrievedNext = CustDAO.getCustomer("a267");
-        assertEquals("check if cust2 was successfully saved to dao", cust2, retrievedNext);
+        Customer retrievedNext = CustDAO.getCustomer(cust2.getUsername());
+        assertThat("check if cust2 was successfully saved to dao", cust2, samePropertyValuesAs(retrievedNext, "customerId"));
     }
 
     @Test
@@ -90,7 +99,7 @@ public class CustomerCollectionsDAOTest {
         assertEquals(cust2.getPassword(), secondRetreieved.getPassword());
         assertEquals(cust2.getPhoneNumber(), secondRetreieved.getPhoneNumber());
         assertEquals(cust2.getEmailAddress(), secondRetreieved.getEmailAddress());
-        assertEquals(cust2.getCustomerId(), secondRetreieved.getCustomerId());
+//        assertEquals(cust2.getCustomerId(), secondRetreieved.getCustomerId());
     }
 
     @Test

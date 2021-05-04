@@ -9,27 +9,31 @@
  */
 
 create table Customer(
-    CustomerID int auto_increment,
-    username varchar(50) not null,
-    password varchar(50) not null,
-    firstName varchar(50) not null,
-    lastName varchar(50) not null,
-    emailAddress varchar(50) not null,
-    constraint CustomerID primary key (CustomerID)
+    Customer_ID int auto_increment,
+    Username varchar(50) not null unique,
+    Password varchar(50) not null,
+    Firstname varchar(50) not null,
+    Lastname varchar(50) not null,
+    Phone_Number varchar(50) not null,
+    Email_Address varchar(50) not null,
+
+    constraint Customer_PK primary key (Customer_ID)
 );
 
 create table Subscription(
-    SubscriptionID int auto_increment,
-    subscriptionName varchar(50) not null,
-    subscriptionPrice decimal(10,2) not null,
-    subscriptionType varchar(50) not null,
-    category varchar(50) not null,
-    companyName varchar(100) not null,
-    description varchar(100),
-    dateIssued date,
-    dateDue date,
-    paid boolean not null,
-    customerID int,
-    constraint SubscriptionID primary key (SubscriptionID),
-    constraint CustomerID_fk foreign key (CustomerID) references Customer
+    Subscription_ID int auto_increment,
+    Name varchar(50) not null,
+    Paid boolean not null,
+    Subscription_Price decimal(10,2) not null,
+    --subscriptionType varchar(50) not null,
+    Category varchar(50) not null,
+    Company_Name varchar(100) not null,
+    Description varchar(100),
+    Issue_Date date,
+    Due_Date date,
+    
+    Customer_ID int,
+
+    constraint Subscription_PK primary key (Subscription_ID),
+    constraint Customer_FK foreign key (Customer_ID) references Customer
 );
