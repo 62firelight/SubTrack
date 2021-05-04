@@ -30,9 +30,9 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void saveCustomer(Customer customer) {
-        String sql = "insert into Customer (Customer_ID, Username, "
+        String sql = "insert into Customer (Username, "
                 + "Firstname, Lastname, Password, Phone_Number, Email_Address) "
-                + "values (null,?,?,?,?,?,?)";
+                + "values (?,?,?,?,?,?)";
 
         try (
                 Connection dbCon = DbConnection.getConnection(url);
@@ -67,7 +67,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
             while (rs.next()) {
                 Integer id = rs.getInt("Customer_ID");
-                //String user_name = rs.getString("Username");
+                String user_name = rs.getString("Username");
                 String password = rs.getString("Password");
                 String firstname = rs.getString("Firstname");
                 String lastname = rs.getString("Lastname");
