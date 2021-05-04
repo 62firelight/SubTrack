@@ -61,7 +61,7 @@ module.controller('CustomerController', function(registerAPI,$window,signInAPI, 
     // has the customer been added to the session?
         if ($sessionStorage.customer) {
             this.signedIn = true;
-            this.welcome = "Welcome " + $sessionStorage.customer.firstName;
+            this.welcome = "Welcome " + $sessionStorage.customer.firstName + ". The current date is " + (new Date()).toLocaleDateString() + ".";
         }else {
             this.signedIn = false;
         }
@@ -82,13 +82,15 @@ module.factory('subscriptionAPI', function($resource){
    return $resource('api/subscriptions/:username'); 
 });
 
-module.controller('SubscriptionController', function(addSubscriptionAPI, subscriptionAPI, $window){
+module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, subscriptionAPI, $window){
     let ctrl = this;
     
-    alert('in subscription controller');
+    console.log("Subscription controller initialized");
     
-    this.addSubscription = function(username, subscription){
-        addSubscriptionAPI.save({'username': username}, subscription,
+    this.addSubscription = function(subscription){
+        subscription.customer = $sessionStorage.customer;
+        
+        addSubscriptionAPI.save(subscription,
         
         function(){
             $window.location = 'home.html';
@@ -98,7 +100,7 @@ module.controller('SubscriptionController', function(addSubscriptionAPI, subscri
             console.log(error);
         }
         );
-        console.log(subscription + " for " + username);
+        console.log(subscription + " for " + subscription.customer);
     };
     
     this.getSubscriptions = function(username){
