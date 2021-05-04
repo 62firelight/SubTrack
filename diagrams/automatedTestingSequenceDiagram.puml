@@ -3,9 +3,26 @@ skinparam style strictuml
 
 actor "Team" as team 
 participant "GitBucket" as git <<version control>>
-participant "JUnit" as junit <<framework>>
+participant "Unit Tests" as unit <<JUnit>> #99FF99
+participant "Integration Tests" as integration <<Retrofit>> #red
+participant "Feature Tests" as feature <<Selenium>> #red
 
 team++
 team -> git++ : commit and push
+team--
+git -> git++ : initialize build
+
+git -> git : compile and assemble code
+
+git -> unit++ #99FF99: run unit tests
+return success
+
+git -> integration++ #red : run integration tests
+return success
+
+git -> feature++ #red : run feature tests
+return success
+
+return success
 
 @enduml
