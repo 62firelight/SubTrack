@@ -1,0 +1,6 @@
+@startuml
+skinparam style strictuml
+
+actor "Team" as team
+
+@enduml
