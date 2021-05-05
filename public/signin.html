@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>Sign In</title>
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="js/angular.js"></script>
         <script src="js/angular-resource.js"></script>
         <script src="js/ngStorage.js"></script>
@@ -19,9 +20,10 @@ and open the template in the editor.
         <div>
             <h1>Sign In</h1>
         </div>
-        <div ng-include="'menu.html'" align='right'>
+        <div ng-include="'menu.html'">
             
         </div>
+        <hr>
         <div>
             <!--<p>{{custCtrl.signInMessage}}</p>-->
             <form ng-submit="custCtrl.signIn(username, password)" class='form'>
@@ -36,7 +38,7 @@ and open the template in the editor.
                     <center><button type='submit'>Sign In</button></center>
                 </fieldset>
             </form>
-            <center><h4>If you don't have an account then you can <a href=register.html>create one</a></h4></center>
+            <center><h4>Don't have an account? <a href=register.html>Create one!</a></h4></center>
         </div>
     </body>
 </html>
