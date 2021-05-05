@@ -87,6 +87,10 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
     
     console.log("Subscription controller initialized");
     
+    if ($sessionStorage.customer) {
+        this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+    }
+    
     this.addSubscription = function(subscription){
         subscription.customer = $sessionStorage.customer;
         
@@ -104,6 +108,6 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
     };
     
     this.getSubscriptions = function(username){
-       this.subscriptions = subscriptionAPI.query({'username': username});
+       this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
     };
 });
