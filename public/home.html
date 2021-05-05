@@ -41,7 +41,14 @@ and open the template in the editor.
                     <td>{{subscription.description}}</td>
                     <td>{{subscription.subscriptionPrice| currency}}</td>
                     <td>{{subscription.dueDate}}</td>
-                    <td><a href="updatesub.html"><button>Update</button></td>
+                    <td>
+                        <div>
+                            <a href="updatesub.html"><button class=".button">Update</button></a>
+                            <button class=".button">Delete</button>
+                        
+                        </div>
+                    </td>
+                    
                 </tr>
             </tbody>
         </table>
