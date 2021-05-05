@@ -36,7 +36,6 @@ public class SubscriptionsCollectionsDAOTest {
 
     private Customer cust1;
     private Customer cust2;
-    private static Integer custId = 1; // simulate H2's auto increment
 
     private Subscription sub1;
     private Subscription sub2;
