@@ -1,0 +1,30 @@
+@startuml
+skinparam style strictuml
+
+actor "Team" as team 
+participant "GitBucket" as git <<version control>>
+participant "Unit Tests" as unit <<JUnit>> #99FF99
+participant "Integration Tests" as integration <<Retrofit>> #red
+participant "Feature Tests" as feature <<Selenium>> #red
+
+team++
+team -> git++ : commit and push
+git -> git : initialize build
+
+git -> git : compile and assemble code
+
+git -> unit++ #99FF99: run unit tests
+note right of git: Test Data Access Object \n(DAO) classes
+return success
+
+git -> integration++ #red : run integration tests
+note right of git: Test web server operations
+return success
+
+git -> feature++ #red : run feature tests
+note right of git: Test website presentation features
+return success
+
+return success
+
+@enduml
