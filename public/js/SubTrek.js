@@ -111,6 +111,10 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
        this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
     };
     
+    this.deleteSubscriptions = function(subscription) {
+        window.confirm("Are you sure you want to delete " + subscription.name + "?");
+    };
+    
     this.getConvertedDate = function(date) {   
         //   console.log((new Date(currentValue)).toLocaleDateString());
         return (new Date(date)).toLocaleDateString('en-NZ');
