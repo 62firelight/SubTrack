@@ -22,17 +22,17 @@ public class Subscription {
     private BigDecimal subscriptionPrice = new BigDecimal(0);
     private String description = "defaultDescription";
     private String companyName = "defaultCompanyName";
-    private LocalDate dueDate = LocalDate.now().plusDays(30);
-    private LocalDate issueDate = LocalDate.now();
+    private String dueDate = LocalDate.now().plusDays(30).toString();
+    private String issueDate = LocalDate.now().toString();
 
     private Customer customer;
 
     public Subscription() {
     }
 
-    public Subscription(Integer subscripitonId, String name, Boolean paid, String category, BigDecimal subscriptionPrice, String description, String companyName, LocalDate dueDate, LocalDate issueDate, Integer customerId) {
+    public Subscription(Integer subscriptionId, String name, Boolean paid, String category, BigDecimal subscriptionPrice, String description, String companyName, String dueDate, String issueDate, Integer customerId) {
         this.subscriptionId = subscriptionId;
-        this.name = this.name;
+        this.name = name;
         this.paid = paid;
         this.category = category;
         this.subscriptionPrice = subscriptionPrice;
@@ -51,8 +51,6 @@ public class Subscription {
     public Integer getSubscriptionId() {
         return subscriptionId;
     }
-
-    
 
     public void setSubscriptionId(Integer subscriptionId) {
         this.subscriptionId = subscriptionId;
@@ -106,19 +104,19 @@ public class Subscription {
         this.companyName = companyName;
     }
 
-    public LocalDate getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
 
-    public LocalDate getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(LocalDate issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
 
@@ -133,7 +131,7 @@ public class Subscription {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.subscriptionId);
+        hash = 61 * hash + Objects.hashCode(this.subscriptionId);
         return hash;
     }
 

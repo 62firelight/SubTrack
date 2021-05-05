@@ -19,6 +19,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 import static junit.framework.Assert.assertNull;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
@@ -31,19 +34,21 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 public class CustomerCollectionsDAOTest {
 
     private CustomerDAO CustDAO;
-    
+
     private Customer cust1;
     private Customer cust2;
+
+    private String url = "jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'";
+    private String resetCustomer = "alter table Customer alter column Customer_ID restart with 1";
 
     @BeforeEach
     public void setUp() {
 //        CustDAO = new CustomerCollectionsDAO();
-        
-          // Currently, only the saveCustomer() test works with the JDBC DAO 
-          // though this requires you to comment out everything in tearDown() 
-          // and the entirety of the other test methods
-        CustDAO = new CustomerJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
-                + "'src/main/java/dao/schema.sql'");
+
+        // Currently, only the saveCustomer() test works with the JDBC DAO 
+        // though this requires you to comment out everything in tearDown() 
+        // and the entirety of the other test methods
+        CustDAO = new CustomerJdbcDAO(url);
 
         this.cust1 = new Customer();
         //This customer setup becomes redundant due to my set up
@@ -72,6 +77,15 @@ public class CustomerCollectionsDAOTest {
     public void tearDown() {
         CustDAO.deleteCustomer(cust1);
         CustDAO.deleteCustomer(cust2);
+
+        // reset auto increment
+        try (
+                Connection dbCon = DbConnection.getConnection(url);
+                PreparedStatement stmt1 = dbCon.prepareStatement(resetCustomer);) {
+            stmt1.execute();
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
     }
 
     @Test

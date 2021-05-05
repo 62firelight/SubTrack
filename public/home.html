@@ -13,15 +13,36 @@ and open the template in the editor.
         <script src="js/angular-resource.js"></script>
         <script src="js/ngStorage.js"></script>
         <script src="js/SubTrek.js"></script>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1>WELCOME TO SUBTREK!!!!</h1>
-        <div ng-include="'menus.html'" align="right">
+        <h1>SubTrek</h1>
+        <div ng-include="'menu.html'">
             
         </div>
         <hr>
         <div align="center">
         <a href="subscription.html"><button>Add Subscription</button></a>
         </div>
+        
+        <table ng-controller="SubscriptionController as subCtrl">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Due Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="subscription in subCtrl.subscriptions">
+                    <td>{{subscription.name}}</td>
+                    <td>{{subscription.description}}</td>
+                    <td>{{subscription.subscriptionPrice| currency}}</td>
+                    <td>{{subscription.dueDate}}</td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>

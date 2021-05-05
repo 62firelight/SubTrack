@@ -36,26 +36,25 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     }
     @Override
     public void saveSubscription(Subscription subscription) {
-   String sql = "merge into subscription (Subscription_ID, Name, Paid, Category,"
-           + " Subscription_Price, Description, Company_Name, Due_Date, "
-           + "Issue_Date, Customer_ID) "
-           + "values (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into subscription (Name, Paid, Category,"
+                + " Subscription_Price, Description, Company_Name, Due_Date, "
+                + "Issue_Date, Customer_ID) "
+                + "values (?,?,?,?,?,?,?,?,?)";
 
   
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-            stmt.setString(1, subscription.getSubscriptionId().toString()); //could use set INTEGER and remove toString
-            stmt.setString(2, subscription.getName());
-            stmt.setBoolean(3, subscription.getPaid());
-            stmt.setString(4, subscription.getCategory());
-            stmt.setBigDecimal(5, subscription.getSubscriptionPrice());
-            stmt.setString(6, subscription.getDescription());
-            stmt.setString(7, subscription.getCompanyName());
-            stmt.setString(8, subscription.getDueDate().toString());
-            stmt.setString(9, subscription.getIssueDate().toString());
-            stmt.setInt(10,subscription.getCustomer().getCustomerId()); //Unsure od setObject
-            
+//            stmt.setString(1, subscription.getSubscriptionId().toString()); //could use set INTEGER and remove toString
+            stmt.setString(1, subscription.getName());
+            stmt.setBoolean(2, subscription.getPaid());
+            stmt.setString(3, subscription.getCategory());
+            stmt.setBigDecimal(4, subscription.getSubscriptionPrice());
+            stmt.setString(5, subscription.getDescription());
+            stmt.setString(6, subscription.getCompanyName());
+            stmt.setString(7, subscription.getDueDate().toString());
+            stmt.setString(8, subscription.getIssueDate().toString());
+            stmt.setInt(9,subscription.getCustomer().getCustomerId()); //Unsure od setObject
 
             stmt.executeUpdate();
 
@@ -66,16 +65,16 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 
     @Override
     public Collection<Subscription> getSubscriptionsByUsername(String username) {
-         String sql = "select * from Subscription "
-                 + "inner join Customer using (Customer_ID) "
-                 + "where Username = ?";
-         
+        String sql = "select * from Subscription "
+                + "inner join Customer using (Customer_ID) "
+                + "where Username = ?";
+
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            
+
             // Using a List to preserve the order in which the data was returned 
             // from the query.
             List<Subscription> subs = new ArrayList<>();
@@ -92,7 +91,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 LocalDate issueDate = x.toLocalDate(); // conversion line
                 Date y = rs.getDate("Due_Date");
                 LocalDate dueDate = y.toLocalDate(); //conversion line
-                
+
                 // construct a customer using details
                 Customer customer = new Customer();
                 customer.setCustomerId(rs.getInt("Customer_ID"));
@@ -102,7 +101,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 customer.setPassword(rs.getString("Password"));
                 customer.setPhoneNumber(rs.getString("Phone_Number"));
                 customer.setEmailAddress(rs.getString("Email_Address"));
-                
+
                 //commented out to keep file integrity 
                 Subscription sub = new Subscription();
                 sub.setSubscriptionId(id);
@@ -112,20 +111,20 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 sub.setSubscriptionPrice(subPrice);
                 sub.setCompanyName(companyName);
                 sub.setDescription(description);
-                sub.setIssueDate(issueDate);
-                sub.setDueDate(dueDate);
+                sub.setIssueDate(issueDate.toString());
+                sub.setDueDate(dueDate.toString());
                 sub.setCustomer(customer);
-                
+
                 subs.add(sub);
-               // return sub1;
+                // return sub1;
             }
             return subs;
 
         } catch (SQLException ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
-    
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -133,26 +132,49 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String sql = "delete from subscription where Subscription_ID = ?";
         try(
-            // get a connection to the database
-            Connection dbCon = DbConnection.getConnection(url);
+                // get a connection to the database
+                Connection dbCon = DbConnection.getConnection(url);
 
-            // create the statement
+                // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);
         ) {
             stmt.setInt(1, subscription.getSubscriptionId());
             stmt.executeUpdate();  // execute the statement
-            
+
         }catch(SQLException ex){
             throw new DAOException(ex.getMessage(), ex);
         }
-    
+
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void updateSubscription(Subscription subscription) {
-        saveSubscription(subscription); // essentially performs an update
+//        saveSubscription(subscription); // essentially performs an update
+        String sql = "update Subscription "
+                + "set Name = ?, Paid = ?, Category = ?, Subscription_Price = ?,"
+                + "Description = ?, Company_Name = ?, Due_Date = ?"
+                + "where Subscription_ID = ?";
+        try (
+                // get a connection to the database
+                Connection dbCon = DbConnection.getConnection(url);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            stmt.setString(1, subscription.getName());
+            stmt.setBoolean(2, subscription.getPaid());
+            stmt.setString(3, subscription.getCategory());
+            stmt.setBigDecimal(4, subscription.getSubscriptionPrice());
+            stmt.setString(5, subscription.getDescription());
+            stmt.setString(6, subscription.getCompanyName());
+            stmt.setString(7, subscription.getDueDate().toString());
+//            stmt.setString(8, subscription.getIssueDate().toString());
+            stmt.setInt(8, subscription.getSubscriptionId());
+            stmt.executeUpdate();  // execute the statement
+
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

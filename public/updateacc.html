@@ -10,48 +10,33 @@ and open the template in the editor.
         <script src="js/angular-resource.js"></script>
         <script src="js/ngStorage.js"></script>
         <script src="js/SubTrek.js"></script>
-        <title>Create Account</title>
+        <title>Update Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
     </head>
     
     <body>
-        
-         <h1> Create Account </h1>
-         <div ng-include="'menu.html'"></div>
-         <hr>
+        <div ng-include="'menu.html'" align="right"></div>
+         <h1> Update Account </h1>
+         
          <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)" >
             <label for=“username”>Username:</label>
             <input type="text" ng-model="customer.username" required>
-            <br>
-            
             <label for=“firstName”>First Name:</label>
             <input type="text" ng-model="customer.firstName" required>
-            <br>
-            
             <label for=“lastName”>Last Name:</label>
             <input type="text" ng-model="customer.lastName" required>
-            <br>
-            
             <label for=“password”>Password:</label>
             <input type="password" ng-model="customer.password" required>
-            <br>
-            
-            <label for=“phoneNumber”>Phone</label>
+            <label for=“phoneNumber”>phone Number:</label>
             <input type="text" ng-model="customer.phoneNumber" required>
-            <br>
-            
             <label for=“emailAddress”>Email:</label>
             <input type="email" ng-model="customer.emailAddress" required>
-            <br>
            
             
             
-            <button type="submit">Create Account</button>
+            <button type="submit">Update Account</button>
         </form>
         
     </body>
 </html>
-
-
