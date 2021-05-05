@@ -124,14 +124,12 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
         // The number of milliseconds in one day
         const ONE_DAY = 1000 * 60 * 60 * 24;
         
-        console.log(ONE_DAY);
-        
-        
+        //console.log(ONE_DAY);
 
         // Calculate the difference in milliseconds
         const differenceMs = Math.abs(date - today);
 
-        console.log(differenceMs);
+        //console.log(differenceMs);
 
         // Convert back to days and return
         return Math.round(differenceMs / ONE_DAY);
