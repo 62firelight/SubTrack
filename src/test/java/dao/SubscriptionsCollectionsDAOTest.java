@@ -38,6 +38,8 @@ public class SubscriptionsCollectionsDAOTest {
     private Subscription sub1;
     private Subscription sub2;
     private Subscription sub3;
+    
+    private String url = "jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'";
 
     @BeforeEach
     public void setUp() {
@@ -46,10 +48,8 @@ public class SubscriptionsCollectionsDAOTest {
         
         // Haven't tested the JDBC DAO with any tests yet, but assume that will
         // all fail until shown otherwise
-        custDAO = new CustomerJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
-                + "'src/main/java/dao/schema.sql'");
-        subDAO = new SubscriptionJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from "
-                + "'src/main/java/dao/schema.sql'");
+        custDAO = new CustomerJdbcDAO(url);
+        subDAO = new SubscriptionJdbcDAO(url);
         
         cust1 = new Customer();
         cust1.setFirstName("Taine");
