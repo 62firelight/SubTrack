@@ -26,7 +26,7 @@ and open the template in the editor.
         </div>
         
         <table ng-controller="SubscriptionController as subCtrl">
-            <thead>
+            <thead ng-if="custCtrl.signedIn">
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
