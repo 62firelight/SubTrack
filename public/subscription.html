@@ -13,29 +13,42 @@ and open the template in the editor.
         <title>Add Subscription</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div ng-include="'menu.html'" align="right"></div>
         <h1> Add Subscription </h1>
-
-        <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.addSubscription(customer.username, subscription)" >
+        <div ng-include="'menu.html'"></div>
+        <hr>
+        <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.addSubscription(subscription)" >
             <label for=“name”>Name:</label>
             <input type="text" ng-model="subscription.name" required>
-            <label for=“paid”>Paid?:</label>
-            <input type="text" ng-model="subscription.paid" required>
+            <br>
+            
+<!--            <label for=“paid”>Paid?:</label>
+            <input type="checkbox" ng-model="subscription.paid" required>
+            <br>-->
+            
             <label for=“category”>Category:</label>
             <input type="text" ng-model="subscription.category" required>
+            <br>
+            
             <label for=“subscriptionPrice”>Subscription Price:</label>
             <input type="text" ng-model="subscription.subscriptionPrice" required>
+            <br>
+            
             <label for=“description”>description:</label>
             <input type="text" ng-model="subscription.description" required>
+            <br>
+            
             <label for=“companyName”>Company Name:</label>
             <input type="text" ng-model="subscription.companyName" required>
+            <br>
           
-            <label for=“issueDate”>Issue Date:</label>
-            <input type="date" ng-model="subscription.issueDate" name="trip-start"
+            <label for=“dueDate”>Due Date:</label>
+            <input type="date" ng-model="subscription.dueDate" name="trip-start"
                    value="2021-07-22"
                    min="2021-01-01" max="2021-12-31">
+            <br>
 
 
 
