@@ -36,27 +36,26 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     }
     @Override
     public void saveSubscription(Subscription subscription) {
-   String sql = "merge into subscription (Subscription_ID, Name, Paid, Category,"
+   String sql = "insert into subscription (Name, Paid, Category,"
            + " Subscription_Price, Description, Company_Name, Due_Date, "
            + "Issue_Date, Customer_ID) "
-           + "values (?,?,?,?,?,?,?,?,?,?)";
+           + "values (?,?,?,?,?,?,?,?,?)";
 
   
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-            stmt.setString(1, subscription.getSubscriptionId().toString()); //could use set INTEGER and remove toString
-            stmt.setString(2, subscription.getName());
-            stmt.setBoolean(3, subscription.getPaid());
-            stmt.setString(4, subscription.getCategory());
-            stmt.setBigDecimal(5, subscription.getSubscriptionPrice());
-            stmt.setString(6, subscription.getDescription());
-            stmt.setString(7, subscription.getCompanyName());
-            stmt.setString(8, subscription.getDueDate().toString());
-            stmt.setString(9, subscription.getIssueDate().toString());
-            stmt.setInt(10,subscription.getCustomer().getCustomerId()); //Unsure od setObject
+//            stmt.setString(1, subscription.getSubscriptionId().toString()); //could use set INTEGER and remove toString
+            stmt.setString(1, subscription.getName());
+            stmt.setBoolean(2, subscription.getPaid());
+            stmt.setString(3, subscription.getCategory());
+            stmt.setBigDecimal(4, subscription.getSubscriptionPrice());
+            stmt.setString(5, subscription.getDescription());
+            stmt.setString(6, subscription.getCompanyName());
+            stmt.setString(7, subscription.getDueDate().toString());
+            stmt.setString(8, subscription.getIssueDate().toString());
+            stmt.setInt(9,subscription.getCustomer().getCustomerId()); //Unsure od setObject
             
-
             stmt.executeUpdate();
 
         } catch (SQLException ex) {

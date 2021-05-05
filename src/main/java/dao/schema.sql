@@ -21,7 +21,7 @@ create table Customer(
 );
 
 create table Subscription(
-    Subscription_ID int auto_increment,
+    Subscription_ID int auto_increment(1000),
     Name varchar(50) not null,
     Paid boolean not null,
     Subscription_Price decimal(10,2) not null,
