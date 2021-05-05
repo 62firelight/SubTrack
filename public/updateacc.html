@@ -4,13 +4,39 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="SubTrek">
     <head>
-        <title>TODO supply a title</title>
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/SubTrek.js"></script>
+        <title>Update Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    
     <body>
-        <div>TODO write content</div>
+        <div ng-include="'menu.html'" align="right"></div>
+         <h1> Update Account </h1>
+         
+         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)" >
+            <label for=“username”>Username:</label>
+            <input type="text" ng-model="customer.username" required>
+            <label for=“firstName”>First Name:</label>
+            <input type="text" ng-model="customer.firstName" required>
+            <label for=“lastName”>Last Name:</label>
+            <input type="text" ng-model="customer.lastName" required>
+            <label for=“password”>Password:</label>
+            <input type="password" ng-model="customer.password" required>
+            <label for=“phoneNumber”>phone Number:</label>
+            <input type="text" ng-model="customer.phoneNumber" required>
+            <label for=“emailAddress”>Email:</label>
+            <input type="email" ng-model="customer.emailAddress" required>
+           
+            
+            
+            <button type="submit">Update Account</button>
+        </form>
+        
     </body>
 </html>

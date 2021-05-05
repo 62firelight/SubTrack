@@ -4,13 +4,42 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="SubTrek">
     <head>
-        <title>TODO supply a title</title>
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/SubTrek.js"></script>
+        <title>Update Subscription</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div ng-include="'menu.html'" align="right"></div>
+        <h1> Update Subscription </h1>
+
+        <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.addSubscription(customer.username, subscription)" >
+            <label for=“name”>Name:</label>
+            <input type="text" ng-model="subscription.name" required>
+            <label for=“paid”>Paid?:</label>
+            <input type="text" ng-model="subscription.paid" required>
+            <label for=“category”>Category:</label>
+            <input type="text" ng-model="subscription.category" required>
+            <label for=“subscriptionPrice”>Subscription Price:</label>
+            <input type="text" ng-model="subscription.subscriptionPrice" required>
+            <label for=“description”>description:</label>
+            <input type="text" ng-model="subscription.description" required>
+            <label for=“companyName”>Company Name:</label>
+            <input type="text" ng-model="subscription.companyName" required>
+          
+            <label for=“issueDate”>Issue Date:</label>
+            <input type="date" ng-model="subscription.issueDate" name="trip-start"
+                   value="2021-07-22"
+                   min="2021-01-01" max="2021-12-31">
+
+
+
+            <button type="submit">Update Subscription</button>
+        </form>
     </body>
 </html>
