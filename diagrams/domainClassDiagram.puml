@@ -43,8 +43,8 @@ class "Subscription" as sub {
     -subscriptionPrice : BigDecimal
     -desciption: String
     -companyName: String
-    -dueDate : LocalDateTime
-    -issueDate : LocalDateTime
+    -dueDate : String
+    -issueDate : String
   --
 }
 
