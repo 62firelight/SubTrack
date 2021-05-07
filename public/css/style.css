@@ -88,9 +88,9 @@ table {
 table, th, td {
     border-bottom: 1px dotted black;
     margin: 0.5em auto;
-    padding: 0.35em;
+    padding: 0.25em;
     text-align: left;
-    width: 45%;
+    width: 35%;
 }
 
 .center {
