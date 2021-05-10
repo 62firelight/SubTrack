@@ -23,6 +23,9 @@ button {
     outline: none;
 }
 
+.button button{
+    border-radius: 50px;
+}
 #menu button {
     border-radius: 50px;
 }
