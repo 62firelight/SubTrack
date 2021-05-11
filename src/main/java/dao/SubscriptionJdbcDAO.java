@@ -128,7 +128,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     }
 
     @Override
-    public void deleteSubscription(Subscription subscription) {
+    public void deleteSubscription(Integer id) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String sql = "delete from subscription where Subscription_ID = ?";
         try(
@@ -138,7 +138,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);
         ) {
-            stmt.setInt(1, subscription.getSubscriptionId());
+            stmt.setInt(1, id);
             stmt.executeUpdate();  // execute the statement
 
         }catch(SQLException ex){
