@@ -32,6 +32,18 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     }
 
     @Override
+    public Subscription getSubscriptionById(Integer id) {
+        // loop through stored subscriptions and find the one with the right ID
+        for (Subscription sub : subscriptions.values()) {
+            if (sub.getSubscriptionId().equals(id)) {
+                return sub;
+            }
+        }
+        // ***there is probably a better way to find a matching sub***
+        return null; // if no matching sub was found
+    }
+
+    @Override
     public void deleteSubscription(Subscription subscription) {
         if (subscriptions.containsKey(subscription.getCustomer().getUsername())) {
             subscriptions.remove(subscription.getCustomer().getUsername(), subscription);

@@ -18,6 +18,8 @@ public interface SubscriptionDAO {
 
     Collection<Subscription> getSubscriptionsByUsername(String username);
     
+    Subscription getSubscriptionById(Integer id);
+    
     void deleteSubscription(Subscription subscription);
     
     void updateSubscription(Subscription subscription);
