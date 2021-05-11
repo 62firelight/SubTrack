@@ -116,7 +116,7 @@ public class Main {
         
         // Test subscription DAO's delete operation
         System.out.println("Deleting sub2 from " + sub2.getCustomer().getUsername() + "...");
-        subscriptionDao.deleteSubscription(sub2.getSubscriptionId());
+        subscriptionDao.deleteSubscription(sub2);
         
         System.out.print("Subscriptions belonging to " + sub2.getCustomer().getUsername() + ": ");
         System.out.println(subscriptionDao.getSubscriptionsByUsername(sub2.getCustomer().getUsername()));

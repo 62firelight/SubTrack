@@ -32,10 +32,10 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     }
 
     @Override
-    public void deleteSubscription(Integer id) {
-//        if (subscriptions.containsKey(subscription.getCustomer().getUsername())) {
-//            subscriptions.remove(subscription.getCustomer().getUsername(), subscription);
-//        }
+    public void deleteSubscription(Subscription subscription) {
+        if (subscriptions.containsKey(subscription.getCustomer().getUsername())) {
+            subscriptions.remove(subscription.getCustomer().getUsername(), subscription);
+        }
     }
 
     @Override
