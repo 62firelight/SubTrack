@@ -11,6 +11,7 @@ package web;
  */
 import dao.SubscriptionDAO;
 import domain.Subscription;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.jooby.Jooby;
 import org.jooby.Result;
@@ -40,6 +41,11 @@ public class SubscriptionModule extends Jooby {
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
             System.out.println(dueDate);
             subscription.setDueDate(dueDate.toString());
+            
+            // decide whether a subscription is paid or not based on price
+            if (subscription.getSubscriptionPrice().equals(BigDecimal.ZERO)) {
+                subscription.setPaid(false);
+            }
 
             subscriptionDao.saveSubscription(subscription);
             rsp.status(Status.CREATED);
