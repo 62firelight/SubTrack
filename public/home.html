@@ -40,7 +40,7 @@ and open the template in the editor.
                 <tr data-ng-repeat="subscription in subCtrl.subscriptions">
                     <td>{{subscription.name}}</td>
                     <td>{{subscription.description}}</td>
-                    <td>{{subscription.subscriptionPrice| currency}}</td>
+                    <td>{{subscription.paid ? (subscription.subscriptionPrice | currency) : 'Free' }}</td>
                     <td>{{subCtrl.getConvertedDate(subscription.dueDate)}} 
                         (in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})</td>
                     <td>
