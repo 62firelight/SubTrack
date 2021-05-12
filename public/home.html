@@ -15,7 +15,7 @@ and open the template in the editor.
         <script src="js/SubTrek.js"></script>
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body ng-controller="CustomerController as custCtrl" ng-init="custCtrl.checkSignIn()">
         <h1>SubTrek</h1>
         <div ng-include="'menu.html'">
             
@@ -25,13 +25,14 @@ and open the template in the editor.
         <a href="subscription.html"><button>Add Subscription</button></a>
         </div>
         
-        <table ng-controller="SubscriptionController as subCtrl">
-            <thead>
+        <table ng-controller="SubscriptionController as subCtrl" >
+            <thead ng-if="custCtrl.signedIn">
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Due Date</th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -39,8 +40,22 @@ and open the template in the editor.
                 <tr data-ng-repeat="subscription in subCtrl.subscriptions">
                     <td>{{subscription.name}}</td>
                     <td>{{subscription.description}}</td>
-                    <td>{{subscription.subscriptionPrice| currency}}</td>
-                    <td>{{subscription.dueDate}}</td>
+                    <td>{{subscription.paid ? (subscription.subscriptionPrice | currency) : 'Free' }}</td>
+                    <td>{{subCtrl.getConvertedDate(subscription.dueDate)}} 
+                        (in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})</td>
+                    <td>
+                        <div>
+                            <a href="updatesub.html"><button class=".button">Update</button></a>
+                            
+                        
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <button class=".button" ng-click="subCtrl.deleteSubscription(subscription)">Delete</button>
+                        </div>
+                    </td>
+                    
                 </tr>
             </tbody>
         </table>

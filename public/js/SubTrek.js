@@ -82,11 +82,11 @@ module.factory('subscriptionAPI', function($resource){
    return $resource('api/subscriptions/:username'); 
 });
 
-module.factory('categoryAPI', function($resource){
-    return $resource('api/categories/:category');
+module.factory('deleteAPI', function($resource) {
+    return $resource('api/subscriptions/:id');
 });
 
-module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, subscriptionAPI, $window, categoryAPI){
+module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, subscriptionAPI, deleteAPI, $window){
     let ctrl = this;
     
     console.log("Subscription controller initialized");
@@ -115,8 +115,41 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
        this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
     };
     
-    this.categories = categoryAPI.query();
-    this.selectCategory = function(selectedCat){
-        this.subscriptions = subscriptionAPI.query({'category': selectedCat});
+    this.deleteSubscription = function(subscription) {
+        
+        // ask the user before deleting
+        if ($window.confirm("Are you sure you want to delete " + subscription.name + "?")) {
+            deleteAPI.delete({'id' : subscription.subscriptionId}, function() {
+                // get subscriptions again so we don't have to refresh
+                ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+            });
+        }
+            
+    };
+    
+    this.getConvertedDate = function(date) {   
+        //   console.log((new Date(currentValue)).toLocaleDateString());
+        return (new Date(date)).toLocaleDateString('en-NZ');
+    };
+    
+    this.daysToToday = function(dateString) {
+        
+        var date = new Date(dateString);
+        var today = new Date();
+
+        // The number of milliseconds in one day
+        const ONE_DAY = 1000 * 60 * 60 * 24;
+        
+        //console.log(ONE_DAY);
+
+        // Calculate the difference in milliseconds
+        const differenceMs = Math.abs(date - today);
+
+        //console.log(differenceMs);
+
+        // Convert back to days and return
+        return Math.round(differenceMs / ONE_DAY);
+
     };
 });
+
