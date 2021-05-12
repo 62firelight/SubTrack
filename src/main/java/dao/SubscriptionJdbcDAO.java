@@ -42,7 +42,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 + "values (?,?,?,?,?,?,?,?,?)";
 
         try (
-                Connection dbCon = DbConnection.getConnection(url);
+                 Connection dbCon = DbConnection.getConnection(url);  
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
 //            stmt.setString(1, subscription.getSubscriptionId().toString()); //could use set INTEGER and remove toString
             stmt.setString(1, subscription.getName());
@@ -69,7 +69,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 + "where Username = ?";
 
         try (
-                Connection dbCon = DbConnection.getConnection(url);
+                 Connection dbCon = DbConnection.getConnection(url);  
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
@@ -219,9 +219,8 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 + "where Subscription_ID = ?";
         try (
                 // get a connection to the database
-                Connection dbCon = DbConnection.getConnection(url);
-                // create the statement
-                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+                 Connection dbCon = DbConnection.getConnection(url); // create the statement
+                  PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, subscription.getName());
             stmt.setBoolean(2, subscription.getPaid());
             stmt.setString(3, subscription.getCategory());
@@ -237,6 +236,74 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
             throw new DAOException(ex.getMessage(), ex);
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Collection<String> getCategories() {
+        String sql = "select distinct Category from Subscription order by Category";
+
+        try (
+                 Connection dbCon = DbConnection.getConnection(url);  
+                 PreparedStatement stmt = dbCon.prepareStatement(sql);
+                ) {
+            ResultSet rs = stmt.executeQuery();
+
+            List<String> collection = new ArrayList<>();
+
+            while (rs.next()) {
+                String cat = rs.getString("Category");
+                collection.add(cat);
+            }
+            return collection;
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+    
+    @Override
+    public Collection<Subscription> filterByCategory(String category){
+        String sql = "select * from Subscription where category = ?";
+        
+        try (
+                 Connection dbCon = DbConnection.getConnection(url);  
+                 PreparedStatement stmt = dbCon.prepareStatement(sql);
+                ) {
+            stmt.setString(1, category);
+            ResultSet rs = stmt.executeQuery();
+            
+            List<Subscription> subs = new ArrayList<>();
+            
+            while(rs.next()){
+                Integer id = rs.getInt("Subscription_ID");
+                String name = rs.getString("Name");
+                Boolean paid = rs.getBoolean("Paid");
+                String cat = rs.getString("Category");
+                BigDecimal subPrice = rs.getBigDecimal("Subscription_Price");
+                String companyName = rs.getString("Company_Name");
+                String description = rs.getString("Description");
+                Date x = rs.getDate("Issue_Date");
+                LocalDate issueDate = x.toLocalDate(); // conversion line
+                Date y = rs.getDate("Due_Date");
+                LocalDate dueDate = y.toLocalDate(); //conversion line
+                
+                Subscription sub = new Subscription();
+                sub.setSubscriptionId(id);
+                sub.setName(name);
+                sub.setPaid(paid);
+                sub.setCategory(category);
+                sub.setSubscriptionPrice(subPrice);
+                sub.setCompanyName(companyName);
+                sub.setDescription(description);
+                sub.setIssueDate(issueDate.toString());
+                sub.setDueDate(dueDate.toString());
+                //sub.setCustomer(customer);
+
+                subs.add(sub);
+            }
+            return subs;
+        }catch(SQLException ex){
+            throw new DAOException(ex.getMessage(), ex);
+        }
     }
 
 }

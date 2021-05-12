@@ -23,4 +23,8 @@ public interface SubscriptionDAO {
     void deleteSubscription(Subscription subscription);
     
     void updateSubscription(Subscription subscription);
+    
+    Collection<String> getCategories();
+    
+    Collection<Subscription> filterByCategory(String category);
 }

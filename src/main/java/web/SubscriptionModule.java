@@ -50,8 +50,13 @@ public class SubscriptionModule extends Jooby {
             subscriptionDao.saveSubscription(subscription);
             rsp.status(Status.CREATED);
         });
-
-        delete("/api/subscriptions/:id", (req, rsp) -> {
+     
+     get("api/categories", ()->subscriptionDao.getCategories());
+     get("api/categories/:cateogires",(req)->{
+         String category = req.param("category").value();
+            return subscriptionDao.filterByCategory(category);
+     });
+     delete("/api/subscriptions/:id", (req, rsp) -> {
             Integer id = Integer.valueOf(req.param("id").value());
             Subscription subscription = subscriptionDao.getSubscriptionById(id);
             
