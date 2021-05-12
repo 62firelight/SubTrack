@@ -27,10 +27,8 @@ and open the template in the editor.
         <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
             <button type="button" data-ng-repeat="category in subCtrl.categories" 
                     ng-click="subCtrl.filterCat(category)">{{category}}</button>
-        </div>
-        
-        <table ng-controller="SubscriptionController as subCtrl" >
-            <thead ng-if="custCtrl.signedIn">
+        <table >
+            <thead>
                 
                 <tr>
                     <th>Name</th>
@@ -51,18 +49,23 @@ and open the template in the editor.
                     <td>
                         <div>
                             <a href="updatesub.html"><button class=".button">Update</button></a>
-                            
-                        
                         </div>
-                    </td>
-                    <td>
                         <div>
                             <button class=".button" ng-click="subCtrl.deleteSubscription(subscription)">Delete</button>
                         </div>
                     </td>
-                    
+                        
+                </tr>
+                <tr >
+                    <td></td>
+                    <td>Total</td>
+                    <td>{{subCtrl.total}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
+        </div>
     </body>
 </html>
