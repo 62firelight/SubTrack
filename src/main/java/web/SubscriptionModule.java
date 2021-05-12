@@ -46,6 +46,12 @@ public class SubscriptionModule extends Jooby{
             subscriptionDao.saveSubscription(subscription);
             rsp.status(Status.CREATED);
         });
+     
+     get("api/categories", ()->subscriptionDao.getCategories());
+     get("api/categories/:cateogires",(req)->{
+         String category = req.param("category").value();
+            return subscriptionDao.filterByCategory(category);
+     });
 }
 }
     
