@@ -86,7 +86,16 @@ module.factory('deleteAPI', function($resource) {
     return $resource('api/subscriptions/:id');
 });
 
-module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, subscriptionAPI, deleteAPI, $window){
+module.factory('categoryAPI', function($resource){
+   return $resource('api/categories/:username'); 
+});
+
+module.factory('filterAPI', function($resource){
+    return $resource('api/categories/:category');
+});
+
+module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, 
+                  subscriptionAPI, deleteAPI, $window, categoryAPI, filterAPI){
     let ctrl = this;
     
     console.log("Subscription controller initialized");
@@ -151,5 +160,14 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
         return Math.round(differenceMs / ONE_DAY);
 
     };
+    if($sessionStorage.customer){
+        this.categories = categoryAPI.query({'username' : $sessionStorage.customer.username});
+    }else{
+        $sessionStorage.$reset();
+    }
+    this.filterCat = function(selectedCat){
+      this.subscriptions = filterAPI.query({'category': selectedCat});  
+    };
+    
 });
 

@@ -51,8 +51,15 @@ public class SubscriptionModule extends Jooby {
             rsp.status(Status.CREATED);
         });
      
-     get("api/categories", ()->subscriptionDao.getCategories());
-     get("api/categories/:cateogires",(req)->{
+     get("api/categories/:username", (req)->{
+         String username = req.param("username").value();
+         if(subscriptionDao.getCategories(username) == null){
+             return new Result().status(Status.NOT_FOUND);
+         }else{
+             return subscriptionDao.getCategories(username);
+         }
+     });
+     get("api/categories/:category",(req)->{
          String category = req.param("category").value();
             return subscriptionDao.filterByCategory(category);
      });

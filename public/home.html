@@ -24,9 +24,14 @@ and open the template in the editor.
         <div align="center">
         <a href="subscription.html"><button>Add Subscription</button></a>
         </div>
+        <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
+            <button type="button" data-ng-repeat="category in subCtrl.categories" 
+                    ng-click="subCtrl.filterCat(category)">{{category}}</button>
+        </div>
         
         <table ng-controller="SubscriptionController as subCtrl" >
             <thead ng-if="custCtrl.signedIn">
+                
                 <tr>
                     <th>Name</th>
                     <th>Description</th>

@@ -24,7 +24,7 @@ public interface SubscriptionDAO {
     
     void updateSubscription(Subscription subscription);
     
-    Collection<String> getCategories();
+    Collection<String> getCategories(String username);
     
     Collection<Subscription> filterByCategory(String category);
 }

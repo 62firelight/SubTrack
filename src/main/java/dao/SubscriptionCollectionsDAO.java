@@ -61,7 +61,8 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     }
     
     @Override
-    public Collection<String> getCategories(){
+    public Collection<String> getCategories(String username){
+        
         return categories;
     }
     
