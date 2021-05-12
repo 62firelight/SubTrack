@@ -82,7 +82,11 @@ module.factory('subscriptionAPI', function($resource){
    return $resource('api/subscriptions/:username'); 
 });
 
-module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, subscriptionAPI, $window){
+module.factory('categoryAPI', function($resource){
+    return $resource('api/categories/:category');
+});
+
+module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, subscriptionAPI, $window, categoryAPI){
     let ctrl = this;
     
     console.log("Subscription controller initialized");
@@ -109,5 +113,10 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
     
     this.getSubscriptions = function(username){
        this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+    };
+    
+    this.categories = categoryAPI.query();
+    this.selectCategory = function(selectedCat){
+        this.subscriptions = subscriptionAPI.query({'category': selectedCat});
     };
 });
