@@ -82,7 +82,11 @@ module.factory('subscriptionAPI', function($resource){
    return $resource('api/subscriptions/:username'); 
 });
 
-module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, subscriptionAPI, $window){
+module.factory('deleteAPI', function($resource) {
+    return $resource('api/subscriptions/:id');
+});
+
+module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, subscriptionAPI, deleteAPI, $window){
     let ctrl = this;
     
     console.log("Subscription controller initialized");
@@ -109,6 +113,18 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
     
     this.getSubscriptions = function(username){
        this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+    };
+    
+    this.deleteSubscription = function(subscription) {
+        
+        // ask the user before deleting
+        if ($window.confirm("Are you sure you want to delete " + subscription.name + "?")) {
+            deleteAPI.delete({'id' : subscription.subscriptionId}, function() {
+                // get subscriptions again so we don't have to refresh
+                ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+            });
+        }
+            
     };
     
     this.getConvertedDate = function(date) {   

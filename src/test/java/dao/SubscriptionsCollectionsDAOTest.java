@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNull;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,6 +25,8 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
+import org.hamcrest.beans.SamePropertyValuesAs;
 
 /**
  *
@@ -143,6 +146,13 @@ public class SubscriptionsCollectionsDAOTest {
         assertThat(collection, hasItem(sub1));
         assertThat(collection, hasItem(sub2));
         assertFalse(collection.contains(sub3));
+    }
+    
+    @Test
+    public void testGetSubscriptionById() {
+        assertThat(subDAO.getSubscriptionById(1000), samePropertyValuesAs(sub1, "subscriptionPrice"));
+        assertThat(subDAO.getSubscriptionById(1001), samePropertyValuesAs(sub2, "subscriptionPrice"));
+        assertNull(subDAO.getSubscriptionById(1002));
     }
 
     @Test
