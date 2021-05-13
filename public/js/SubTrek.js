@@ -94,8 +94,12 @@ module.factory('filterAPI', function($resource){
     return $resource('api/categories/:category');
 });
 
+module.factory('totalAPI', function($resource){
+   return $resource('api/total/:username'); 
+});
+
 module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, 
-                  subscriptionAPI, deleteAPI, $window, categoryAPI, filterAPI){
+                  subscriptionAPI, deleteAPI, $window, categoryAPI, filterAPI, totalAPI){
     let ctrl = this;
     
     console.log("Subscription controller initialized");
@@ -120,9 +124,9 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
         console.log(subscription + " for " + subscription.customer);
     };
     
-    this.getSubscriptions = function(username){
-       this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
-    };
+//    this.getSubscriptions = function(username){
+//       this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+//    };
     
     this.deleteSubscription = function(subscription) {
         
@@ -162,12 +166,12 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
     };
     if($sessionStorage.customer){
         this.categories = categoryAPI.query({'username' : $sessionStorage.customer.username});
+        this.total = totalAPI.query({'username': $sessionStorage.customer.username});
     }else{
         $sessionStorage.$reset();
     }
     this.filterCat = function(selectedCat){
       this.subscriptions = filterAPI.query({'category': selectedCat});  
     };
-    
 });
 

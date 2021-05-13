@@ -294,5 +294,16 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
+    
+    @Override
+    public BigDecimal getTotal(String username){
+        BigDecimal total = new BigDecimal(0);
+        Collection<Subscription> subs = getSubscriptionsByUsername(username);
+        
+        for(Subscription s : subs){
+            total = total.add(s.getSubscriptionPrice());
+        }
+        return total;
+    }
 
 }

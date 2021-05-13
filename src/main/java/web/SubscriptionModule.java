@@ -41,7 +41,7 @@ public class SubscriptionModule extends Jooby {
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
             System.out.println(dueDate);
             subscription.setDueDate(dueDate.toString());
-            
+
             // decide whether a subscription is paid or not based on price
             if (subscription.getSubscriptionPrice().equals(BigDecimal.ZERO)) {
                 subscription.setPaid(false);
@@ -50,25 +50,30 @@ public class SubscriptionModule extends Jooby {
             subscriptionDao.saveSubscription(subscription);
             rsp.status(Status.CREATED);
         });
-     
-     get("api/categories/:username", (req)->{
-         String username = req.param("username").value();
-         if(subscriptionDao.getCategories(username) == null){
-             return new Result().status(Status.NOT_FOUND);
-         }else{
-             return subscriptionDao.getCategories(username);
-         }
-     });
-     get("api/categories/:category",(req)->{
-         String category = req.param("category").value();
+
+        get("api/categories/:username", (req) -> {
+            String username = req.param("username").value();
+            if (subscriptionDao.getCategories(username) == null) {
+                return new Result().status(Status.NOT_FOUND);
+            } else {
+                return subscriptionDao.getCategories(username);
+            }
+        });
+        get("api/categories/:category", (req) -> {
+            String category = req.param("category").value();
             return subscriptionDao.filterByCategory(category);
-     });
-     delete("/api/subscriptions/:id", (req, rsp) -> {
+        });
+        delete("/api/subscriptions/:id", (req, rsp) -> {
             Integer id = Integer.valueOf(req.param("id").value());
             Subscription subscription = subscriptionDao.getSubscriptionById(id);
-            
+
             subscriptionDao.deleteSubscription(subscription);
             rsp.status(Status.NO_CONTENT);
+        });
+
+        get("api/total/:username", (req)->{
+            String username = req.param("username").value();
+            return subscriptionDao.getTotal(username);
         });
     }
 }
