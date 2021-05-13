@@ -239,25 +239,14 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     }
 
     @Override
-    public Collection<String> getCategories() {
-        String sql = "select distinct Category from Subscription order by Category";
-
-        try (
-                 Connection dbCon = DbConnection.getConnection(url);  
-                 PreparedStatement stmt = dbCon.prepareStatement(sql);
-                ) {
-            ResultSet rs = stmt.executeQuery();
-
-            List<String> collection = new ArrayList<>();
-
-            while (rs.next()) {
-                String cat = rs.getString("Category");
-                collection.add(cat);
-            }
-            return collection;
-        } catch (SQLException ex) {
-            throw new DAOException(ex.getMessage(), ex);
-        }
+    public Collection<String> getCategories(String username) {
+        Collection<Subscription> subs = getSubscriptionsByUsername(username);
+        
+        List<String> categories = new ArrayList<>();
+        subs.forEach((s) -> {
+            categories.add(s.getCategory());
+        });
+        return categories;
     }
     
     @Override
@@ -304,6 +293,17 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
         }catch(SQLException ex){
             throw new DAOException(ex.getMessage(), ex);
         }
+    }
+    
+    @Override
+    public BigDecimal getTotal(String username){
+        BigDecimal total = new BigDecimal(0);
+        Collection<Subscription> subs = getSubscriptionsByUsername(username);
+        
+        for(Subscription s : subs){
+            total = total.add(s.getSubscriptionPrice());
+        }
+        return total;
     }
 
 }
