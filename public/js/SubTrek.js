@@ -17,7 +17,11 @@ module.factory('signInAPI', function ($resource){
     return $resource ('api/customers/:username');
 });
 
-module.controller('CustomerController', function(registerAPI,$window,signInAPI, $sessionStorage) {
+module.factory('updateAccAPI', function ($resource){
+    return $resource ('api/customers/:id');
+});
+
+module.controller('CustomerController', function(registerAPI,$window,signInAPI, $sessionStorage,updateAccAPI) {
     this.registerCustomer = function (customer) {
         registerAPI.save(null, customer,
         
@@ -78,6 +82,10 @@ module.factory('addSubscriptionAPI', function($resource){
     return $resource('api/subscriptions');
 });
 
+module.factory('updateSubAPI', function($resource){
+    return $resource('api/subscriptions/:id');
+});
+
 module.factory('subscriptionAPI', function($resource){
    return $resource('api/subscriptions/:username'); 
 });
@@ -99,7 +107,7 @@ module.factory('totalAPI', function($resource){
 });
 
 module.controller('SubscriptionController', function($sessionStorage, addSubscriptionAPI, 
-                  subscriptionAPI, deleteAPI, $window, categoryAPI, filterAPI, totalAPI){
+                  subscriptionAPI, deleteAPI, $window, categoryAPI, filterAPI, totalAPI, updateSubAPI){
     let ctrl = this;
     
     console.log("Subscription controller initialized");
@@ -139,6 +147,10 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
         }
             
     };
+    
+    this.updateSubscription = function(subscription) {
+        
+    }
     
     this.getConvertedDate = function(date) {   
         //   console.log((new Date(currentValue)).toLocaleDateString());
