@@ -149,8 +149,10 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
     };
     
     this.updateSubscription = function(subscription) {
-        
-    }
+        updateAPI.update({'id' : subscription.subscriptionId}, function() {
+            ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+        });
+    };
     
     this.getConvertedDate = function(date) {   
         //   console.log((new Date(currentValue)).toLocaleDateString());
