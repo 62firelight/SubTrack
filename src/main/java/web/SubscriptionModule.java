@@ -79,12 +79,29 @@ public class SubscriptionModule extends Jooby {
             });
         });
 
+        get("api/categories/:username", (req) -> {
+            String username = req.param("username").value();
+            if (subscriptionDao.getCategories(username) == null) {
+                return new Result().status(Status.NOT_FOUND);
+            } else {
+                return subscriptionDao.getCategories(username);
+            }
+        });
+        get("api/categories/:category", (req) -> {
+            String category = req.param("category").value();
+            return subscriptionDao.filterByCategory(category);
+        });
         delete("/api/subscriptions/:id", (req, rsp) -> {
             Integer id = Integer.valueOf(req.param("id").value());
             Subscription subscription = subscriptionDao.getSubscriptionById(id);
 
             subscriptionDao.deleteSubscription(subscription);
             rsp.status(Status.NO_CONTENT);
+        });
+
+        get("api/total/:username", (req)->{
+            String username = req.param("username").value();
+            return subscriptionDao.getTotal(username);
         });
     }
 }

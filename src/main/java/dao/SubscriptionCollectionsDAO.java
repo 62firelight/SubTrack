@@ -8,6 +8,7 @@ package dao;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import domain.Subscription;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -61,7 +62,8 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     }
     
     @Override
-    public Collection<String> getCategories(){
+    public Collection<String> getCategories(String username){
+        
         return categories;
     }
     
@@ -69,5 +71,12 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     public Collection<Subscription> filterByCategory(String category){
         Collection<Subscription> subs = mmSub.get(category);
         return subs;
+    }
+    
+    @Override
+    public BigDecimal getTotal(String Username){
+        BigDecimal total = new BigDecimal(0);
+        
+        return total;
     }
 }
