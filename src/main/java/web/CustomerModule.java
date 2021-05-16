@@ -31,5 +31,6 @@ public class CustomerModule extends Jooby{
             customerDao.saveCustomer(customer);
             rsp.status(Status.CREATED);
         });
+        
     }
 }

@@ -17,11 +17,11 @@ module.factory('signInAPI', function ($resource){
     return $resource ('api/customers/:username');
 });
 
-module.factory('updateAccAPI', function ($resource){
-    return $resource ('api/customers/:id');
-});
+//module.factory('updateAccAPI', function ($resource){
+    //return $resource ('api/customers/:id');
+//});
 
-module.controller('CustomerController', function(registerAPI,$window,signInAPI, $sessionStorage,updateAccAPI) {
+module.controller('CustomerController', function(registerAPI,$window,signInAPI, $sessionStorage) {
     this.registerCustomer = function (customer) {
         registerAPI.save(null, customer,
         
