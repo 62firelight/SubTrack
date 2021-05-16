@@ -152,6 +152,9 @@ module.controller('SubscriptionController', function($sessionStorage, addSubscri
         updateAPI.update({'id' : subscription.subscriptionId}, function() {
             ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
         });
+        //function(){
+           // $window.location = 'home.html'; 
+       // }
     };
     
     this.getConvertedDate = function(date) {   
