@@ -32,7 +32,7 @@ import org.hamcrest.beans.SamePropertyValuesAs;
  *
  * @author trbay
  */
-public class SubscriptionsCollectionsDAOTest {
+public class SubscriptionsDAOTest {
 
     private CustomerDAO custDAO;
     private SubscriptionDAO subDAO;
