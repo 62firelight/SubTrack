@@ -9,7 +9,6 @@ package domain as "Domain\nClasses"
 package web as "Web\nApplication"
 database db as "H2 Database"
 
-
 web -> domain : creates and displays
 web --> dao : uses
 dao -> domain : manages
