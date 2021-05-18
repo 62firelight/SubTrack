@@ -19,7 +19,7 @@ and open the template in the editor.
         <div ng-include="'menu.html'" align="right"></div>
         <h1> Update Subscription </h1>
 
-        <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.addSubscription(customer.username, subscription)" >
+        <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.updateSubscription(subscription)" >
             <label for=“name”>Name:</label>
             <input type="text" ng-model="subscription.name" required>
            <!-- <label for=“paid”>Paid?:</label>
