@@ -25,15 +25,18 @@ and open the template in the editor.
         <a href="subscription.html"><button>Add Subscription</button></a>
         </div>
         <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
+            <button ng-click="subCtrl.selectAll()">All</button>
             <button type="button" data-ng-repeat="category in subCtrl.categories" 
                     ng-click="subCtrl.filterCat(category)">{{category}}</button>
-        <table >
+            <table>
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>Due Date</th>
+                    <th>Due Date
+                        <!--<button ng-click="subCtrl.sort()">Ascending</button>-->
+                    </th>
                     <th></th>
                     <th></th>
                 </tr>
