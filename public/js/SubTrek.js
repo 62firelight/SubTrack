@@ -15,9 +15,15 @@ module.factory('registerAPI', function ($resource) {
 
 module.factory('signInAPI', function ($resource) {
     return $resource('api/customers/:username');
+});  
+//module.factory('updateAccAPI', function ($resource){
+//return $resource ('api/customers/:id');
+//});
+module.factory('updateAccAPI', function ($resource) {
+        return $resource('api/customers/:username');
 });
 
-module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage) {
+module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage, updateAccAPI) { 
     this.registerCustomer = function (customer) {
         registerAPI.save(null, customer,
                 // success callback
@@ -76,6 +82,10 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             return $resource('api/subscriptions');
         });
         
+        module.factory('updateSubAPI', function ($resource) {
+            return $resource('api/subscriptions/:id', null, {update: {method: 'PUT'}});
+        });
+        
         module.factory('subscriptionAPI', function ($resource) {
             return $resource('api/subscriptions/:username'); 
         });
@@ -101,7 +111,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
         });
         
         module.controller('SubscriptionController', function ($sessionStorage, addSubscriptionAPI,
-                subscriptionAPI, deleteAPI, $window, categoryAPI, filterAPI, totalAPI, sortAPI) {
+                subscriptionAPI, deleteAPI, $window, categoryAPI, filterAPI, totalAPI, sortAPI,updateSubAPI) {
             let ctrl = this;
             
             console.log("Subscription controller initialized");
@@ -183,5 +193,9 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 this.subscriptions = sortAPI.query({'username': $sessionStorage.customer.username});
             };
             
+            this.updateSubscription = function (subscription) {
+                updateSubAPI.update({'id': subscription.subscriptionId}, function () {
+                    ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+                });
+            };
         });
-        

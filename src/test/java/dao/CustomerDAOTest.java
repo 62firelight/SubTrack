@@ -31,7 +31,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
  *
  * @author Luke Tang
  */
-public class CustomerCollectionsDAOTest {
+public class CustomerDAOTest {
 
     private CustomerDAO CustDAO;
 

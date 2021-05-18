@@ -1,0 +1,17 @@
+@startuml
+skinparam roundCorner 15
+skinparam shadowing false
+skinparam packageFontStyle regular
+skinparam packageFontName Yu Gothic UI
+
+package dao as "Data Access\nClasses"
+package domain as "Domain\nClasses"
+package web as "Web\nApplication"
+database db as "H2 Database"
+
+web -> domain : creates and displays
+web --> dao : uses
+dao -> domain : manages
+dao --> db : stores in
+
+@enduml

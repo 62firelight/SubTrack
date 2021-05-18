@@ -13,13 +13,14 @@ and open the template in the editor.
         <title>Update Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     
     <body>
         <div ng-include="'menu.html'" align="right"></div>
          <h1> Update Account </h1>
          
-         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)" >
+         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.updateCustomer(customer)" >
             <label for=“username”>Username:</label>
             <input type="text" ng-model="customer.username" required>
             <label for=“firstName”>First Name:</label>
