@@ -27,7 +27,9 @@ public interface SubscriptionDAO {
     
     Collection<String> getCategories(String username);
     
-    Collection<Subscription> filterByCategory(String category);
+    Collection<Subscription> filterByCategory(String category, String username);
+    
+    Collection<Subscription> sortAscending(String username);
     
     BigDecimal getTotal(String username);
 }

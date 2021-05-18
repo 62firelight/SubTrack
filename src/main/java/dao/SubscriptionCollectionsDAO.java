@@ -68,7 +68,7 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     }
     
     @Override
-    public Collection<Subscription> filterByCategory(String category){
+    public Collection<Subscription> filterByCategory(String category, String username){
         Collection<Subscription> subs = mmSub.get(category);
         return subs;
     }
@@ -78,5 +78,12 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
         BigDecimal total = new BigDecimal(0);
         
         return total;
+    }
+    
+    @Override
+    public Collection<Subscription> sortAscending(String username){
+        
+        
+        return subscriptions.values();
     }
 }

@@ -66,7 +66,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     public Collection<Subscription> getSubscriptionsByUsername(String username) {
         String sql = "select * from Subscription "
                 + "inner join Customer using (Customer_ID) "
-                + "where Username = ?";
+                + "where Username = ? order by due_date asc";
 
         try (
                  Connection dbCon = DbConnection.getConnection(url);  
@@ -240,24 +240,41 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 
     @Override
     public Collection<String> getCategories(String username) {
-        Collection<Subscription> subs = getSubscriptionsByUsername(username);
+        String sql = "select distinct Category from Subscription " + 
+                "inner join Customer using (Customer_ID) where username = ?";
         
-        List<String> categories = new ArrayList<>();
-        subs.forEach((s) -> {
-            categories.add(s.getCategory());
-        });
-        return categories;
+        try(
+				Connection dbCon = DbConnection.getConnection(url);
+				PreparedStatement stmt = dbCon.prepareStatement(sql);
+				  ){
+            stmt.setString(1, username);
+		ResultSet rs = stmt.executeQuery();
+		
+		List<String> collection = new ArrayList<>();
+		
+		while(rs.next()){
+			String cat = rs.getString("Category");
+			collection.add(cat);
+			}
+		return collection;
+		}catch(SQLException ex){
+			throw new DAOException(ex.getMessage(), ex);
+		}
     }
     
     @Override
-    public Collection<Subscription> filterByCategory(String category){
-        String sql = "select * from Subscription where category = ?";
+    public Collection<Subscription> filterByCategory(String category, String username){
+        String sql = "select * from Subscription" + 
+                " inner join Customer using (Customer_ID)" + 
+                "where category = ? and username = ?";
         
         try (
                  Connection dbCon = DbConnection.getConnection(url);  
                  PreparedStatement stmt = dbCon.prepareStatement(sql);
                 ) {
             stmt.setString(1, category);
+            stmt.setString(2, username);
+            //stmt.setString(2, username);
             ResultSet rs = stmt.executeQuery();
             
             List<Subscription> subs = new ArrayList<>();
@@ -275,17 +292,27 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
                 Date y = rs.getDate("Due_Date");
                 LocalDate dueDate = y.toLocalDate(); //conversion line
                 
+                // construct a customer using details
+                Customer customer = new Customer();
+                customer.setCustomerId(rs.getInt("Customer_ID"));
+                customer.setUsername(rs.getString("Username"));
+                customer.setFirstName(rs.getString("Firstname"));
+                customer.setLastName(rs.getString("Lastname"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setPhoneNumber(rs.getString("Phone_Number"));
+                customer.setEmailAddress(rs.getString("Email_Address"));
+                
                 Subscription sub = new Subscription();
                 sub.setSubscriptionId(id);
                 sub.setName(name);
                 sub.setPaid(paid);
-                sub.setCategory(category);
+                sub.setCategory(cat);
                 sub.setSubscriptionPrice(subPrice);
                 sub.setCompanyName(companyName);
                 sub.setDescription(description);
                 sub.setIssueDate(issueDate.toString());
                 sub.setDueDate(dueDate.toString());
-                //sub.setCustomer(customer);
+                sub.setCustomer(customer);
 
                 subs.add(sub);
             }
@@ -297,13 +324,84 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     
     @Override
     public BigDecimal getTotal(String username){
-        BigDecimal total = new BigDecimal(0);
-        Collection<Subscription> subs = getSubscriptionsByUsername(username);
-        
-        for(Subscription s : subs){
-            total = total.add(s.getSubscriptionPrice());
+        String sql = "SELECT subscription_price FROM SUBSCRIPTION " + 
+                "inner join Customer using (customer_ID) where username = ?";
+        try (
+                 Connection dbCon = DbConnection.getConnection(url);  
+                 PreparedStatement stmt = dbCon.prepareStatement(sql);
+                ) {
+            stmt.setString(1, username);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            BigDecimal total = new BigDecimal(0);
+            
+            while(rs.next()){
+                BigDecimal subPrice = rs.getBigDecimal("Subscription_Price");
+                total = total.add(subPrice);
+            }
+            return total;
+        }catch(SQLException ex){
+            throw new DAOException(ex.getMessage(), ex);
         }
-        return total;
+    }
+    
+    @Override
+    public Collection<Subscription> sortAscending(String username){
+        String sql = "select * from Subscription inner join Customer using (Customer_ID) where username = ?" + 
+                "order by due_date asc";
+        
+        try (
+                 Connection dbCon = DbConnection.getConnection(url);  
+                 PreparedStatement stmt = dbCon.prepareStatement(sql);
+                ) {
+            stmt.setString(1, username);
+            //stmt.setString(2, username);
+            ResultSet rs = stmt.executeQuery();
+            
+            List<Subscription> subs = new ArrayList<>();
+            
+            while(rs.next()){
+                Integer id = rs.getInt("Subscription_ID");
+                String name = rs.getString("Name");
+                Boolean paid = rs.getBoolean("Paid");
+                String cat = rs.getString("Category");
+                BigDecimal subPrice = rs.getBigDecimal("Subscription_Price");
+                String companyName = rs.getString("Company_Name");
+                String description = rs.getString("Description");
+                Date x = rs.getDate("Issue_Date");
+                LocalDate issueDate = x.toLocalDate(); // conversion line
+                Date y = rs.getDate("Due_Date");
+                LocalDate dueDate = y.toLocalDate(); //conversion line
+                
+                // construct a customer using details
+                Customer customer = new Customer();
+                customer.setCustomerId(rs.getInt("Customer_ID"));
+                customer.setUsername(rs.getString("Username"));
+                customer.setFirstName(rs.getString("Firstname"));
+                customer.setLastName(rs.getString("Lastname"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setPhoneNumber(rs.getString("Phone_Number"));
+                customer.setEmailAddress(rs.getString("Email_Address"));
+                
+                Subscription sub = new Subscription();
+                sub.setSubscriptionId(id);
+                sub.setName(name);
+                sub.setPaid(paid);
+                sub.setCategory(cat);
+                sub.setSubscriptionPrice(subPrice);
+                sub.setCompanyName(companyName);
+                sub.setDescription(description);
+                sub.setIssueDate(issueDate.toString());
+                sub.setDueDate(dueDate.toString());
+                sub.setCustomer(customer);
+
+                subs.add(sub);
+            }
+            return subs;
+        }catch(SQLException ex){
+            throw new DAOException(ex.getMessage(), ex);
+        }
     }
 
 }

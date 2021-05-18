@@ -59,9 +59,10 @@ public class SubscriptionModule extends Jooby {
                 return subscriptionDao.getCategories(username);
             }
         });
-        get("api/categories/:category", (req) -> {
+        get("api/categories/:category/:username", (req) -> {
+            String username = req.param("username").value();
             String category = req.param("category").value();
-            return subscriptionDao.filterByCategory(category);
+            return subscriptionDao.filterByCategory(category,username);
         });
         delete("/api/subscriptions/:id", (req, rsp) -> {
             Integer id = Integer.valueOf(req.param("id").value());
@@ -74,6 +75,11 @@ public class SubscriptionModule extends Jooby {
         get("api/total/:username", (req)->{
             String username = req.param("username").value();
             return subscriptionDao.getTotal(username);
+        });
+        
+        get("api/sort/:username", (req)->{
+            String username = req.param("username").value();
+            return subscriptionDao.sortAscending(username);
         });
     }
 }

@@ -70,6 +70,17 @@ public class Main {
         // issue date and due dates are set to default values
         sub2.setCustomer(cust1);
         
+        Subscription sub3 = new Subscription();
+        sub2.setName("hbo");
+        sub2.setSubscriptionId(1235);
+        sub2.setPaid(false);
+        sub2.setCategory("Lei");
+        sub2.setSubscriptionPrice(BigDecimal.TEN);
+        sub2.setDescription("TV");
+        sub2.setCompanyName("flix Inc.");
+        // issue date and due dates are set to default values
+        sub2.setCustomer(cust1);
+        
         // Create DAOs
         CustomerDAO customerDao = new CustomerJdbcDAO();
         SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO();
@@ -120,6 +131,10 @@ public class Main {
         
         System.out.print("Subscriptions belonging to " + sub2.getCustomer().getUsername() + ": ");
         System.out.println(subscriptionDao.getSubscriptionsByUsername(sub2.getCustomer().getUsername()));
+        System.out.println();
+        
+        System.out.print("Subscriptions based on category: " + sub3.getCategory() + " from customer: " + sub3.getCustomer().getUsername());
+        System.out.println(subscriptionDao.filterByCategory(sub3.getCategory(), sub3.getCustomer().getUsername()));
         System.out.println();
     }
     
