@@ -71,12 +71,12 @@ public class SubscriptionModule extends Jooby {
             rsp.status(Status.NO_CONTENT);
         });
 
-        get("api/total/:username", (req)->{
+        get("api/total/:username", (req) -> {
             String username = req.param("username").value();
             return subscriptionDao.getTotal(username);
         });
-        
-      put("/api/subscriptions/:id", (req, rsp) -> {
+
+        put("/api/subscriptions/:id", (req, rsp) -> {
             Integer id = Integer.valueOf(req.param("id").value());
             Subscription subscription = subscriptionDao.getSubscriptionById(id);
 
