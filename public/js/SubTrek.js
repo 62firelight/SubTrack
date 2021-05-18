@@ -154,7 +154,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             };
 
             this.updateSubscription = function (subscription) {
-                updateSubAPI.put({'id': subscription.subscriptionId}, function () {
+                updateSubAPI.update({'id': subscription.subscriptionId}, function () {
                     ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
                 });
                 //function(){
