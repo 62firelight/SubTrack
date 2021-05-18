@@ -32,5 +32,11 @@ public class CustomerModule extends Jooby{
             rsp.status(Status.CREATED);
         });
         
+//        put("/api/subscriptions/:id", (req, rsp) -> 
+//            Customer customer = customerDao.getCustomer(username);
+//
+//            customerDao.saveCustomer(customer);
+//            rsp.status(Status.NO_CONTENT);
+//        });
     }
 }
