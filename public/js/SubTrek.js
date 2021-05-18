@@ -90,7 +90,8 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
         });
 
         module.factory('updateSubAPI', function ($resource) {
-            return $resource('api/subscriptions/:id');
+  
+            return $resource('api/subscriptions/:id', null, {update: {method: 'PUT'}});
         });
 
         module.factory('subscriptionAPI', function ($resource) {
