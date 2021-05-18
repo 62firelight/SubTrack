@@ -582,6 +582,7 @@ angular.module('ngResource', ['ng']).
         'query': {method: 'GET', isArray: true},
         'remove': {method: 'DELETE'},
         'delete': {method: 'DELETE'}
+        
       }
     };
 
