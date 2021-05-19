@@ -7,9 +7,12 @@ and open the template in the editor.
 <!--<link rel="stylesheet" href="css/style.css">-->
 <div id="menu" ng-controller="CustomerController as custCtrl" ng-init="custCtrl.checkSignIn()">
     <div id='welcome'>{{custCtrl.welcome}}</div>
-  <a href="home.html"><button>Home</button></a>
-  <a href="updateacc.html" ng-if="custCtrl.signedIn"><button>Update Account</button></a>
-     <a href="home.html" ng-if="custCtrl.signedIn" ng-click="custCtrl.signOut()"><button>Sign Out</button></a>
-    <a href="signin.html" ng-if="!custCtrl.signedIn"><button>Sign In</button></a>
-   
+
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="updateacc.html" ng-if="custCtrl.signedIn">Update Account</a></li>
+        <li><a href="home.html" ng-if="custCtrl.signedIn" ng-click="custCtrl.signOut()">Sign Out</a></li>
+        <li> <a href="signin.html" ng-if="!custCtrl.signedIn">Sign In</a></li>
+    </ul>
+
 </div>

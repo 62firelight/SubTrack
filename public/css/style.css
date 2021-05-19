@@ -23,7 +23,9 @@ button {
     outline: none;
 }
 
-button1{width:10px}
+.button button{
+    border-radius: 50px;
+}
 #menu button {
     border-radius: 50px;
 }
@@ -100,4 +102,39 @@ table, th, td {
 
 .right {
     text-align: right;
+}
+
+ul {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #3b5998;
+    position: relative;
+}
+
+li {
+  float: left;
+  border-right: 1px solid #bbb;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1d2c4c;
+}
+
+li a:active {
+    transform: translateY(4px);
+}
+
+li:last-child {
+  border-right: none;
 }
