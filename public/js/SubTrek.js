@@ -114,11 +114,24 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 subscriptionAPI, deleteAPI, $window, categoryAPI, filterAPI, totalAPI, sortAPI,updateSubAPI) {
             let ctrl = this;
             
+            this.total = totalAPI.get({'username': $sessionStorage.customer.username});
+            
+            
             console.log("Subscription controller initialized");
             
             if ($sessionStorage.customer) {
                 this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
             }
+            
+             if ($sessionStorage.updatingSub) {
+                ctrl.subscription = $sessionStorage.updatingSub;
+             }
+            
+            this.update = function(subby) {
+
+                $sessionStorage.updatingSub = subby;
+                $window.location = 'updatesub.html';
+            };
             
             this.addSubscription = function (subscription) {
                 subscription.customer = $sessionStorage.customer;
@@ -175,7 +188,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 
             };
             
-            this.total = totalAPI.get({'username': $sessionStorage.customer.username});
+            
             
             if ($sessionStorage.customer) {
                 this.categories = categoryAPI.query({'username': $sessionStorage.customer.username});
@@ -183,7 +196,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 $sessionStorage.$reset();
             }
             this.filterCat = function (selectedCat, username) {
-                this.subscriptions = filterAPI.query({'category': selectedCat}, {'username' : $sessionStorage.customer.username});  
+                this.subscriptions = filterAPI.query({'category': selectedCat,'username' : $sessionStorage.customer.username});  
             };
             this.selectAll = function(){
                 this.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
@@ -194,7 +207,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             };
             
             this.updateSubscription = function (subscription) {
-                updateSubAPI.update({'id': subscription.subscriptionId}, function () {
+                updateSubAPI.update({'id': subscription.subscriptionId}, subscription ,function () {
                     ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
                 });
             };

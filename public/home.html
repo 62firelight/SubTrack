@@ -50,7 +50,7 @@ and open the template in the editor.
                         (in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})</td>
                     <td>
                         <div>
-                            <a href="updatesub.html"><button class=".button">Update</button></a>
+                            <button ng-click="subCtrl.update(subscription)">Update</button></a>
                         </div>
                         <div>
                             <button class=".button" ng-click="subCtrl.deleteSubscription(subscription)">Delete</button>
@@ -61,7 +61,7 @@ and open the template in the editor.
                 <tr >
                     <td></td>
                     <td>Total</td>
-                    <td>{{subCtrl.total}}</td>
+                    <td>{{subCtrl.total.value | currency}}</td>
                 </tr>
             </tbody>
         </table>

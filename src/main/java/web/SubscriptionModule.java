@@ -7,11 +7,9 @@ package web;
 import dao.SubscriptionDAO;
 import domain.Customer;
 import domain.Subscription;
+import domain.Total;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import static java.time.LocalDate.parse;
-import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,14 +98,15 @@ public class SubscriptionModule extends Jooby {
             rsp.status(Status.NO_CONTENT);
         });
 
-        get("api/total/:username", (req) -> {
+        get("/api/total/:username", (req) -> {
             String username = req.param("username").value();
-            return subscriptionDao.getTotal(username);
+            return new Total(subscriptionDao.getTotal(username));
         });
 
         put("/api/subscriptions/:id", (req, rsp) -> {
             Integer id = Integer.valueOf(req.param("id").value());
-            Subscription subscription = subscriptionDao.getSubscriptionById(id);
+//            Subscription subscription = subscriptionDao.getSubscriptionById(id);
+            Subscription subscription = req.body().to(Subscription.class);
 
             subscriptionDao.updateSubscription(subscription);
             rsp.status(Status.NO_CONTENT);
