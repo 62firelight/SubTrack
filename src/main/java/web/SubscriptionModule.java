@@ -64,7 +64,7 @@ public class SubscriptionModule extends Jooby {
                     Email email = new SimpleEmail();
                     email.setHostName("localhost");
                     email.setSmtpPort(2525);
-                    email.setFrom("trbayly145@gmail.com");
+                    email.setFrom("SubTrack@gmail.com");
                     email.setSubject("Subscription Renewal Warning");
                     email.setMsg("Customer: " + fName + " " + lName + "\n" + " This is an email to warn you that your subscription expires Date: " + date);
                     //email.setMsg("hey");
