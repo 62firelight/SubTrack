@@ -16,28 +16,37 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div ng-include="'menu.html'" align="right"></div>
         <h1> Update Subscription </h1>
-
+        <div ng-include="'menu.html'" align="center"></div>
+        <hr>
+        
         <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.updateSubscription(subCtrl.subscription)" >
           <input type="hidden" ng-model="subCtrl.subscription.subscriptionId" required>
             <label for=“name”>Name:</label>
             <input type="text" ng-model="subCtrl.subscription.name" required>
-           <!-- <label for=“paid”>Paid?:</label>
-            <input type="text" ng-model="subscription.paid" required> -->
+            <br>
+            
             <label for=“category”>Category:</label>
             <input type="text" ng-model="subCtrl.subscription.category" required>
+            <br>
+            
             <label for=“subscriptionPrice”>Subscription Price:</label>
             <input type="text" ng-model="subCtrl.subscription.subscriptionPrice" required>
+            <br>
+            
             <label for=“description”>Description:</label>
             <input type="text" ng-model="subCtrl.subscription.description" required>
+            <br>
+            
             <label for=“companyName”>Company Name:</label>
             <input type="text" ng-model="subCtrl.subscription.companyName" required>
+            <br>
           
             <label for=“issueDate”>Issue Date:</label>
             <input type="date" ng-model="subCtrl.subscription.issueDate" name="trip-start"
                    value="2021-07-22"
                    min="2021-01-01" max="2021-12-31">
+            <br>
 
 
 
