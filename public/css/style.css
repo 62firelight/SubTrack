@@ -15,6 +15,7 @@ html {
 
 button {
     background-color: #3b5998;
+    border-radius: 50px;
     border: none;
     color: white;
     cursor: pointer;
