@@ -135,7 +135,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             
             this.addSubscription = function (subscription) {
                 subscription.customer = $sessionStorage.customer;
-                
+                   
                 addSubscriptionAPI.save(subscription,
                         function () {
                             $window.location = 'home.html';
@@ -174,12 +174,20 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 // declare and initialize status variables
                 var status = "error";
                 var statusElement = document.getElementById("sub-" + subscription.subscriptionId);
+                var renewElement = document.getElementById("renew-" + subscription.subscriptionId);
                 
                 // 3 days before reminder
                 var reminderThreshold = 3;
                 
                 if (numberOfDays > 0) {
                     status = "(in " + numberOfDays + " day" + plurality + ")";
+                    
+                    // check for null to avoid errors
+                    if (renewElement != null) {
+                        // hide the Renew button for non-expired subs
+                        renewElement.style.display = "none";
+                    }
+                    
                     if (numberOfDays > reminderThreshold) {
                         //statusElement.style.color = "green";
                     } else {
@@ -239,5 +247,22 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                     ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
                     $window.location = 'home.html';
                 });
+            };
+            
+            this.renewSubscription = function (subscription) {
+                var newDueDate = new Date(subscription.dueDate);
+                var today = new Date();
+                
+                while (newDueDate < today) {
+                    newDueDate.setMonth(newDueDate.getMonth() + 1);
+                }
+                
+                var newDueDateString = newDueDate.toISOString();
+                
+                subscription.dueDate = newDueDateString;
+                
+                this.updateSubscription(subscription);
+                
+//                console.log(newDueDateString);
             };
         });

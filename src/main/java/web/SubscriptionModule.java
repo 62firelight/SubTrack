@@ -41,6 +41,7 @@ public class SubscriptionModule extends Jooby {
         post("/api/subscriptions", (req, rsp) -> {
             Subscription subscription = req.body().to(Subscription.class);
 
+            // perform date conversion to avoid errors when storing in database
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
             System.out.println(dueDate);
             subscription.setDueDate(dueDate.toString());
@@ -116,6 +117,11 @@ public class SubscriptionModule extends Jooby {
             Integer id = Integer.valueOf(req.param("id").value());
 //            Subscription subscription = subscriptionDao.getSubscriptionById(id);
             Subscription subscription = req.body().to(Subscription.class);
+            
+            // perform date conversion to avoid errors when storing in database
+            LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
+            System.out.println(dueDate);
+            subscription.setDueDate(dueDate.toString());
 
             subscriptionDao.updateSubscription(subscription);
             rsp.status(Status.NO_CONTENT);
