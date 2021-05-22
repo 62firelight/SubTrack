@@ -46,8 +46,9 @@ and open the template in the editor.
                     <td>{{subscription.name}}</td>
                     <td>{{subscription.description}}</td>
                     <td>{{subscription.paid ? (subscription.subscriptionPrice | currency) : 'Free' }}</td>
-                    <td>{{subCtrl.getConvertedDate(subscription.dueDate)}} 
-                        (in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})</td>
+                    <td ng-attr-id="{{ 'sub-' + subscription.subscriptionId }}">{{subCtrl.getConvertedDate(subscription.dueDate)}} 
+                        {{subCtrl.getSubscriptionStatus(subscription)}}</td>
+                        <!--(in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})</td>-->
                     <td>
                         <div>
                             <button ng-click="subCtrl.update(subscription)">Update</button></a>
