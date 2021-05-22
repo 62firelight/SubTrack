@@ -209,6 +209,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             this.updateSubscription = function (subscription) {
                 updateSubAPI.update({'id': subscription.subscriptionId}, subscription ,function () {
                     ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+                    $window.location = 'home.html';
                 });
             };
         });
