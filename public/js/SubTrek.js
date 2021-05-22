@@ -156,8 +156,9 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 // ask the user before deleting
                 if ($window.confirm("Are you sure you want to delete " + subscription.name + "?")) {
                     deleteAPI.delete({'id': subscription.subscriptionId}, function () {
-                        // get subscriptions again so we don't have to refresh
+                        // get subscriptions and categories again so we don't have to refresh
                         ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+                        ctrl.categories = categoryAPI.query({'username': $sessionStorage.customer.username});
                     });
                 }
                 
@@ -223,8 +224,6 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 return numberOfDays;
                 
             };
-            
-            
             
             if ($sessionStorage.customer) {
                 this.categories = categoryAPI.query({'username': $sessionStorage.customer.username});
