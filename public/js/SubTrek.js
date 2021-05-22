@@ -237,7 +237,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             } else {
                 $sessionStorage.$reset();
             }
-            this.filterCat = function (selectedCat, username) {
+            this.filterCat = function (selectedCat) {
                 this.subscriptions = filterAPI.query({'category': selectedCat,'username' : $sessionStorage.customer.username});  
             };
             this.selectAll = function(){
@@ -249,7 +249,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             };
             
             this.updateSubscription = function (subscription) {
-                updateSubAPI.update({'id': subscription.subscriptionId}, subscription ,function () {
+                updateSubAPI.update({'id': subscription.subscriptionId}, subscription, function () {
                     ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
                     $window.location = 'home.html';
                 });
@@ -268,7 +268,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 subscription.dueDate = newDueDateString;
                 
                 this.updateSubscription(subscription);
-                
+                        
 //                console.log(newDueDateString);
             };
         });
