@@ -135,13 +135,6 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             
             this.addSubscription = function (subscription) {
                 subscription.customer = $sessionStorage.customer;
-                
-                // update due date to show exact amount set (instead of storing
-                // as an inaccurate date that has been offset by one)
-                var newDueDate = new Date(subscription.dueDate);
-                newDueDate.setDate(newDueDate.getDate() + 1);
-                var newDueDateString = newDueDate.toISOString();
-                subscription.dueDate = newDueDateString;
                    
                 addSubscriptionAPI.save(subscription,
                         function () {
