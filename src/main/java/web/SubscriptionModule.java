@@ -57,6 +57,7 @@ public class SubscriptionModule extends Jooby {
             String customerEmail = c.getEmailAddress();
             String fName = c.getFirstName();
             String lName = c.getLastName();
+            String subName = subscription.getName();
             String date = subscription.getDueDate();
 
             CompletableFuture.runAsync(() -> {
@@ -66,7 +67,15 @@ public class SubscriptionModule extends Jooby {
                     email.setSmtpPort(2525);
                     email.setFrom("SubTrack@gmail.com");
                     email.setSubject("Subscription Renewal Warning");
-                    email.setMsg("Customer: " + fName + " " + lName + "\n" + " This is an email to warn you that your subscription expires Date: " + date);
+                    email.setMsg("Hi " + fName + ", \n\nThis is an email to "
+                            + "warn you that your " + subName + " subscription "
+                                    + "expires soon on " 
+                            + date + ".\n\nRemember to renew or delete your "
+                                    + "subscription before it's too late!\n\n"
+                                    + "This message was automatically generated "
+                                    + "by SubTrack. Change your account settings "
+                                    + "if you wish to receive notifications at a "
+                                    + "different time.");
                     //email.setMsg("hey");
                     email.addTo(customerEmail);
                     //email.addTo("foo@bar.com");
