@@ -31,7 +31,7 @@ run {
    standardInput = System.in
 }
 
-mainClassName = 'INFO310.Main'
+mainClassName = 'web.Server'
 
 task createMissingSourceDirs {
    group = "Source Directories"
