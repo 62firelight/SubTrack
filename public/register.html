@@ -21,6 +21,7 @@ and open the template in the editor.
          <h1> Create Account </h1>
          <div align="center" ng-include="'menu.html'"></div>
          <hr>
+    <center>
          <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)" >
             <label for=“username”>Username:</label>
             <input type="text" ng-model="customer.username" required>
@@ -50,7 +51,7 @@ and open the template in the editor.
             
             <center><button type="submit">Create Account</button></center>
         </form>
-        
+    </center>
     </body>
     <br><br>
     <div align="center" ng-include="'footer.html'">   
