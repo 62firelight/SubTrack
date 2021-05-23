@@ -21,6 +21,7 @@ dependencies {
     implementation group: 'org.jooby', name: 'jooby-netty', version: joobyVer
     implementation group: 'org.jooby', name: 'jooby-gson', version: joobyVer
     implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+    implementation group:'org.bouncycastle', name:'bcprov-jdk15on', version:'1.66'
 }
 
 test {

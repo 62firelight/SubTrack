@@ -6,13 +6,13 @@
 package dao;
 
 import domain.Customer;
+import helpers.ScryptHelper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import org.h2.jdbc.JdbcConnection;
 ///**
 // *
 // * @author trbay
@@ -43,7 +43,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
             stmt.setString(1, customer.getUsername());
             stmt.setString(2, customer.getFirstName());
             stmt.setString(3, customer.getLastName());
-            stmt.setString(4, customer.getPassword());
+            stmt.setString(4, ScryptHelper.hash(customer.getPassword()).toString());
             stmt.setString(5, customer.getPhoneNumber());
             stmt.setString(6, customer.getEmailAddress());
             
@@ -86,17 +86,22 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public Boolean validateCredentials(String username, String password) {
-         String sql = "select * from Customer where Username = ? and Password = ?";
+         String sql = "select Password from Customer where Username = ?";
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, username);
-            stmt.setString(2, password);
+            
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return true;
+                String hash = rs.getString("password");
+
+                // check that the password matches the hash
+                return ScryptHelper.check(hash, password);
+//                return true;
             } else {
+                // no matching username
                 return false;
             }
 
