@@ -9,14 +9,14 @@ and open the template in the editor.
 */
 /* change the background fade */
 html {
-    
   width: 100vw;
   height: 100vh;
   background: #2C3E50; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #2C3E50 , #FD746C); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #98B4D4 , #98B4D4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  font-family: 'Trebuchet MS', 'Helvetica', 'sans-serif';
 }
+
 footer {
   text-align: center;
   padding: 50px;
