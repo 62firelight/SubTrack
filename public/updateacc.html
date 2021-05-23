@@ -18,34 +18,41 @@ and open the template in the editor.
     
     <body>
         
-         <h1> Update Account </h1>
-         <div align="center" ng-include="'menu.html'" align="right"></div>
+         <h1> My Account </h1>
+         <div align="center" ng-include="'menu.html'"></div>
          <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.updateCustomer(customer)" >
+            <center>
+            
+             <input type="hidden" ng-model="$sessionStorage.customer.customerId" required>
             <label for=“username”>Username:</label>
-            <input type="text" ng-model="customer.username" required>
+            {{custCtrl.customer.username}}
             <br>
             
             <label for=“firstName”>First Name:</label>
-            <input type="text" ng-model="customer.firstName" required>
+            <input type="text" ng-model="custCtrl.customer.firstName" required>
             <br>
             
             <label for=“lastName”>Last Name:</label>
-            <input type="text" ng-model="customer.lastName" required>
+            <input type="text" ng-model="custCtrl.customer.lastName" required>
             <br>
-            <label for=“password”>Password:</label>
-            <input type="password" ng-model="customer.password" required>
-            <br>
+            <!--<label for=“password”>Password:</label>-->
+            <!--<input type="hidden" ng-model="custCtrl.customer.password" required>-->
+            <!--<br>-->
             
-            <label for=“phoneNumber”>Phone Number:</label>
-            <input type="text" ng-model="customer.phoneNumber" required>
+            <label for=“phoneNumber”>Phone:</label>
+            <input type="text" ng-model="custCtrl.customer.phoneNumber" required>
             <br>
             <label for=“emailAddress”>Email:</label>
-            <input type="email" ng-model="customer.emailAddress" required>
+            <input type="email" ng-model="custCtrl.customer.emailAddress" required>
             <br>
             <br>
             
-            <center><button type="submit">Update Account</button></center>
+            <button type="submit">Update Account</button></center> </center>
+            <br>
+            
         </form>
+         
+         <center><button class="delete" type="submit" ng-click="subCtrl.deleteAccount(account)">Delete Account</button></center>
         
     </body>
      <footer>
