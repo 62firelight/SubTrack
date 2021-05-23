@@ -26,9 +26,14 @@ import org.jooby.json.Gzon;
  * @author yeah2
  */
 public class Server extends Jooby {
-
+    
+    // use H2 database server (default)
     CustomerDAO customerDao = new CustomerJdbcDAO();
     SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO();
+    
+    // use embedded database file (SubTrack.mv.db in project root directory)
+//    CustomerDAO customerDao = new CustomerJdbcDAO("jdbc:h2:./SubTrack");
+//    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO("jdbc:h2:./SubTrack");
 
     public Server() {
         port(8081);
