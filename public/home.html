@@ -22,18 +22,14 @@ and open the template in the editor.
         </div>
         <hr>
         <div align="center">
-            <a href="subscription.html"><button>Add Subscription</button></a>
+            <a href="subscription.html" ng-if="custCtrl.signedIn"><button>Add Subscription</button></a>
         </div><br>
     <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
+        <div>
         <center><button class="c"ng-click="subCtrl.selectAll()">All</button>
             <button class="c" type="button" data-ng-repeat="category in subCtrl.categories" 
-                    ng-click="subCtrl.filterCat(category)">{{category}}</button><center/>
-        <a href="subscription.html" ng-if="custCtrl.signedIn"><button>Add Subscription</button></a>
+                    ng-click="subCtrl.filterCat(category)">{{category}}</button></center>
         </div>
-        <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
-            <button ng-click="subCtrl.selectAll()">All</button>
-            <button type="button" data-ng-repeat="category in subCtrl.categories" 
-                    ng-click="subCtrl.filterCat(category)">{{category}}</button>
             <table>
             <thead>
                 <tr>
@@ -76,7 +72,6 @@ and open the template in the editor.
                 </tr>
             </tbody>
         </table>
-        </div>
     </body>
       <br><br>
     <footer>
