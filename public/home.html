@@ -28,6 +28,12 @@ and open the template in the editor.
         <center><button class="c"ng-click="subCtrl.selectAll()">All</button>
             <button class="c" type="button" data-ng-repeat="category in subCtrl.categories" 
                     ng-click="subCtrl.filterCat(category)">{{category}}</button><center/>
+        <a href="subscription.html" ng-if="custCtrl.signedIn"><button>Add Subscription</button></a>
+        </div>
+        <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
+            <button ng-click="subCtrl.selectAll()">All</button>
+            <button type="button" data-ng-repeat="category in subCtrl.categories" 
+                    ng-click="subCtrl.filterCat(category)">{{category}}</button>
             <table>
             <thead>
                 <tr>
@@ -46,11 +52,15 @@ and open the template in the editor.
                     <td>{{subscription.name}}</td>
                     <td>{{subscription.description}}</td>
                     <td>{{subscription.paid ? (subscription.subscriptionPrice | currency) : 'Free' }}</td>
-                    <td>{{subCtrl.getConvertedDate(subscription.dueDate)}} 
-                        (in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})</td>
+                    <td ng-attr-id="{{ 'sub-' + subscription.subscriptionId }}">{{subCtrl.getConvertedDate(subscription.dueDate)}} 
+                        {{subCtrl.getSubscriptionStatus(subscription)}}
+                        <button ng-attr-id="{{ 'renew-' + subscription.subscriptionId }}" ng-click="subCtrl.renewSubscription(subscription)">Renew</button>
+                    </td>
+                        <!--(in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})
+                    </td>-->
                     <td>
                         <div>
-                            <button ng-click="subCtrl.update(subscription)">Update</button></a>
+                            <a> <button ng-click="subCtrl.update(subscription)">Update</button></a>
                         </div>
                         <br>
                         <div>

@@ -7,6 +7,7 @@ package dao;
 
 import domain.Customer;
 import domain.Subscription;
+import helpers.ScryptHelper;
 import java.math.BigDecimal;
 import java.util.Collection;
 import static junit.framework.Assert.assertEquals;
@@ -92,11 +93,18 @@ public class CustomerDAOTest {
     public void testSaveCustomer() {
 
         Customer retrieved = CustDAO.getCustomer(cust1.getUsername());
-        assertThat("check if cust1 save was succesful in setup", cust1, samePropertyValuesAs(retrieved, "customerId"));
+        assertThat("check if cust1 save was succesful in setup", cust1, samePropertyValuesAs(retrieved, "customerId", "password"));
 
         CustDAO.saveCustomer(cust2);
         Customer retrievedNext = CustDAO.getCustomer(cust2.getUsername());
-        assertThat("check if cust2 was successfully saved to dao", cust2, samePropertyValuesAs(retrievedNext, "customerId"));
+        assertThat("check if cust2 was successfully saved to dao", cust2, samePropertyValuesAs(retrievedNext, "customerId", "password"));
+        
+        // check that hashed passwords are the same
+        String hash = retrieved.getPassword();
+        assertTrue(ScryptHelper.check(hash, cust1.getPassword()));
+        
+        String hashNext = retrievedNext.getPassword();
+        assertTrue(ScryptHelper.check(hashNext, cust2.getPassword()));
     }
 
     @Test
@@ -110,10 +118,14 @@ public class CustomerDAOTest {
         assertEquals(cust2.getFirstName(), secondRetreieved.getFirstName());
         assertEquals(cust2.getLastName(), secondRetreieved.getLastName());
         assertEquals(cust2.getUsername(), secondRetreieved.getUsername());
-        assertEquals(cust2.getPassword(), secondRetreieved.getPassword());
+//        assertEquals(cust2.getPassword(), secondRetreieved.getPassword());
         assertEquals(cust2.getPhoneNumber(), secondRetreieved.getPhoneNumber());
         assertEquals(cust2.getEmailAddress(), secondRetreieved.getEmailAddress());
 //        assertEquals(cust2.getCustomerId(), secondRetreieved.getCustomerId());
+
+        // Check that hashed password is the same
+        String hash = secondRetreieved.getPassword();
+        assertTrue(ScryptHelper.check(hash, cust2.getPassword()));
     }
 
     @Test

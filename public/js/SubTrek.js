@@ -9,6 +9,17 @@
 // create a new module, and load the other pluggable modules
 var module = angular.module('SubTrek', ['ngResource', 'ngStorage']);
 
+module.config(function ($sessionStorageProvider, $httpProvider) {
+   // get the auth token from the session storage
+   let authToken = $sessionStorageProvider.get('authToken');
+
+   // does the auth token actually exist?
+   if (authToken) {
+      // add the token to all HTTP requests
+      $httpProvider.defaults.headers.common.Authorization = 'Basic ' + authToken;
+   }
+});
+
 module.factory('registerAPI', function ($resource) {
     return $resource('api/register');
 });
@@ -23,7 +34,7 @@ module.factory('updateAccAPI', function ($resource) {
         return $resource('api/customers/:username');
 });
 
-module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage, updateAccAPI) { 
+module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage, updateAccAPI, $http) { 
     this.registerCustomer = function (customer) {
         registerAPI.save(null, customer,
                 // success callback
@@ -42,6 +53,15 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             let ctrl = this;
             
             this.signIn = function (username, password) {
+                
+                // generate authentication token
+                let authToken = $window.btoa(username + ":" + password);
+
+                // store token
+                $sessionStorage.authToken = authToken;
+
+                // add token to the HTTP request headers
+                $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
                 
                 // get customer from web service
                 signInAPI.get({'username': username},
@@ -135,7 +155,7 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             
             this.addSubscription = function (subscription) {
                 subscription.customer = $sessionStorage.customer;
-                
+                   
                 addSubscriptionAPI.save(subscription,
                         function () {
                             $window.location = 'home.html';
@@ -156,11 +176,50 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 // ask the user before deleting
                 if ($window.confirm("Are you sure you want to delete " + subscription.name + "?")) {
                     deleteAPI.delete({'id': subscription.subscriptionId}, function () {
-                        // get subscriptions again so we don't have to refresh
+                        // get subscriptions and categories again so we don't have to refresh
                         ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+                        ctrl.categories = categoryAPI.query({'username': $sessionStorage.customer.username});
                     });
                 }
                 
+            };
+            
+            this.getSubscriptionStatus = function (subscription) {
+                
+                // calculate number of days remaining
+                var numberOfDays = this.daysToToday(subscription.dueDate);
+             
+                // decide whether to add an 's' or not
+                var plurality = numberOfDays > 1 ? 's' : '';
+                
+                // declare and initialize status variables
+                var status = "error";
+                var statusElement = document.getElementById("sub-" + subscription.subscriptionId);
+                var renewElement = document.getElementById("renew-" + subscription.subscriptionId);
+                
+                // 3 days before reminder
+                var reminderThreshold = 3;
+                
+                if (numberOfDays > 0) {
+                    status = "(in " + numberOfDays + " day" + plurality + ")";
+                    
+                    // check for null to avoid errors
+                    if (renewElement != null) {
+                        // hide the Renew button for non-expired subs
+                        renewElement.style.display = "none";
+                    }
+                    
+                    if (numberOfDays > reminderThreshold) {
+                        //statusElement.style.color = "green";
+                    } else {
+                        statusElement.style.color = "#FF8C00"; // dark orange
+                    }
+                } else {
+                    status = "(expired)";
+                    statusElement.style.color = "red";
+                }
+                
+                return status;
             };
             
             this.getConvertedDate = function (date) {   
@@ -174,28 +233,24 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 var today = new Date();
                 
                 // The number of milliseconds in one day
-                const ONE_DAY = 1000 * 60 * 60 * 24;
-                
-                //console.log(ONE_DAY);
+                const ONE_DAY = 1000 * 60 * 60 * 24;              
                 
                 // Calculate the difference in milliseconds
-                const differenceMs = Math.abs(date - today);
+                const differenceMs = date - today;
                 
-                //console.log(differenceMs);
+                // Convert to days
+                const numberOfDays = Math.round(differenceMs / ONE_DAY)
                 
-                // Convert back to days and return
-                return Math.round(differenceMs / ONE_DAY);
+                return numberOfDays;
                 
             };
-            
-            
             
             if ($sessionStorage.customer) {
                 this.categories = categoryAPI.query({'username': $sessionStorage.customer.username});
             } else {
                 $sessionStorage.$reset();
             }
-            this.filterCat = function (selectedCat, username) {
+            this.filterCat = function (selectedCat) {
                 this.subscriptions = filterAPI.query({'category': selectedCat,'username' : $sessionStorage.customer.username});  
             };
             this.selectAll = function(){
@@ -207,8 +262,28 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             };
             
             this.updateSubscription = function (subscription) {
-                updateSubAPI.update({'id': subscription.subscriptionId}, subscription ,function () {
+                updateSubAPI.update({'id': subscription.subscriptionId}, subscription, function () {
                     ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+                    $window.location = 'home.html';
                 });
+            };
+            
+            this.renewSubscription = function (subscription) {
+                var newDueDate = new Date(subscription.dueDate);
+                var today = new Date();
+                
+                newDueDate.setDate(newDueDate.getDate() - 1);
+                
+                // update the due date so that it is no longer expired
+                while (newDueDate < today) {
+                    newDueDate.setMonth(newDueDate.getMonth() + 1);
+                }
+                
+                var newDueDateString = newDueDate.toISOString();
+                subscription.dueDate = newDueDateString;
+                
+                this.updateSubscription(subscription);
+                        
+//                console.log(newDueDateString);
             };
         });

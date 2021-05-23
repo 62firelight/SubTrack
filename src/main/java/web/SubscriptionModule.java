@@ -41,7 +41,9 @@ public class SubscriptionModule extends Jooby {
         post("/api/subscriptions", (req, rsp) -> {
             Subscription subscription = req.body().to(Subscription.class);
 
+            // perform date conversion to avoid errors when storing in database
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
+            dueDate = dueDate.plusDays(1); // for accurate date
             System.out.println(dueDate);
             subscription.setDueDate(dueDate.toString());
 
@@ -57,6 +59,7 @@ public class SubscriptionModule extends Jooby {
             String customerEmail = c.getEmailAddress();
             String fName = c.getFirstName();
             String lName = c.getLastName();
+            String subName = subscription.getName();
             String date = subscription.getDueDate();
 
             CompletableFuture.runAsync(() -> {
@@ -66,13 +69,24 @@ public class SubscriptionModule extends Jooby {
                     email.setSmtpPort(2525);
                     email.setFrom("SubTrack@gmail.com");
                     email.setSubject("Subscription Renewal Warning");
-                    email.setMsg("Customer: " + fName + " " + lName + "\n" + " This is an email to warn you that your subscription expires Date: " + date);
+                    email.setMsg("Hi " + fName + ", \n\nThis is an email to "
+                            + "warn you that your " + subName + " subscription "
+                                    + "expires soon on " 
+                            + date + ".\n\nRemember to renew or delete your "
+                                    + "subscription before it's too late!\n\n"
+                                    + "This message was automatically generated "
+                                    + "by SubTrack. Change your account settings "
+                                    + "if you wish to receive notifications at a "
+                                    + "different time.");
                     //email.setMsg("hey");
                     email.addTo(customerEmail);
                     //email.addTo("foo@bar.com");
                     email.send();
                 } catch (EmailException ex) {
-                    Logger.getLogger(SubscriptionModule.class.getName()).log(Level.SEVERE, null, ex);
+//                    Logger.getLogger(SubscriptionModule.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
+                    System.out.println("Couldn't send an email to the FakeSMTP server. Make sure that the FakeSMTP server is active and listening on port 2525.");
+                    System.out.println("Don't have FakeSMTP? Download it from http://nilhcem.com/FakeSMTP/");
                 }
             });
         });
@@ -107,6 +121,12 @@ public class SubscriptionModule extends Jooby {
             Integer id = Integer.valueOf(req.param("id").value());
 //            Subscription subscription = subscriptionDao.getSubscriptionById(id);
             Subscription subscription = req.body().to(Subscription.class);
+            
+            // perform date conversion to avoid errors when storing in database
+            LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
+            dueDate = dueDate.plusDays(1); // for accurate date
+            System.out.println(dueDate);
+            subscription.setDueDate(dueDate.toString());
 
             subscriptionDao.updateSubscription(subscription);
             rsp.status(Status.NO_CONTENT);

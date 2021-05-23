@@ -11,7 +11,7 @@
 create table Customer(
     Customer_ID int auto_increment,
     Username varchar(50) not null unique,
-    Password varchar(50) not null,
+    Password varchar(200) not null,
     Firstname varchar(50) not null,
     Lastname varchar(50) not null,
     Phone_Number varchar(50) not null,
