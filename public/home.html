@@ -22,7 +22,7 @@ and open the template in the editor.
         </div>
         <hr>
         <div align="center">
-        <a href="subscription.html"><button>Add Subscription</button></a>
+        <a href="subscription.html" ng-if="custCtrl.signedIn"><button>Add Subscription</button></a>
         </div>
         <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
             <button ng-click="subCtrl.selectAll()">All</button>
