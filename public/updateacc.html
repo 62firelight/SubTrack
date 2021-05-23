@@ -17,27 +17,42 @@ and open the template in the editor.
     </head>
     
     <body>
-        <div ng-include="'menu.html'" align="right"></div>
+        
          <h1> Update Account </h1>
-         
+         <div align="center" ng-include="'menu.html'" align="right"></div>
          <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.updateCustomer(customer)" >
             <label for=“username”>Username:</label>
             <input type="text" ng-model="customer.username" required>
+            <br>
+            
             <label for=“firstName”>First Name:</label>
             <input type="text" ng-model="customer.firstName" required>
+            <br>
+            
             <label for=“lastName”>Last Name:</label>
             <input type="text" ng-model="customer.lastName" required>
+            <br>
             <label for=“password”>Password:</label>
             <input type="password" ng-model="customer.password" required>
-            <label for=“phoneNumber”>phone Number:</label>
+            <br>
+            
+            <label for=“phoneNumber”>Phone Number:</label>
             <input type="text" ng-model="customer.phoneNumber" required>
+            <br>
             <label for=“emailAddress”>Email:</label>
             <input type="email" ng-model="customer.emailAddress" required>
-           
+            <br>
+            <br>
             
-            
-            <button type="submit">Update Account</button>
+            <center><button type="submit">Update Account</button></center>
         </form>
         
     </body>
+     <footer>
+        <text>Thankyou for choosing SubTrek to store all your subscription data.</text>
+        <br><br>
+        <text>For any Questions, please contact customersupport@subtrek.com</text>
+        
+  
+</footer>
 </html>

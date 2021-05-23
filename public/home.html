@@ -17,11 +17,17 @@ and open the template in the editor.
     </head>
     <body ng-controller="CustomerController as custCtrl" ng-init="custCtrl.checkSignIn()">
         <h1>SubTrek</h1>
-        <div ng-include="'menu.html'">
+        <div align="center"ng-include="'menu.html'">
             
         </div>
         <hr>
         <div align="center">
+            <a href="subscription.html"><button>Add Subscription</button></a>
+        </div><br>
+    <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
+        <center><button class="c"ng-click="subCtrl.selectAll()">All</button>
+            <button class="c" type="button" data-ng-repeat="category in subCtrl.categories" 
+                    ng-click="subCtrl.filterCat(category)">{{category}}</button><center/>
         <a href="subscription.html" ng-if="custCtrl.signedIn"><button>Add Subscription</button></a>
         </div>
         <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
@@ -54,10 +60,11 @@ and open the template in the editor.
                     </td>-->
                     <td>
                         <div>
-                            <button ng-click="subCtrl.update(subscription)">Update</button></a>
+                            <a> <button ng-click="subCtrl.update(subscription)">Update</button></a>
                         </div>
+                        <br>
                         <div>
-                            <button class=".button" ng-click="subCtrl.deleteSubscription(subscription)">Delete</button>
+                            <button class="delete" ng-click="subCtrl.deleteSubscription(subscription)">Delete</button>
                         </div>
                     </td>
                         
@@ -71,4 +78,12 @@ and open the template in the editor.
         </table>
         </div>
     </body>
+      <br><br>
+    <footer>
+        <text>Thankyou for choosing SubTrek to store all your subscription data.</text>
+        <br><br>
+        <text>For any Questions, please contact customersupport@subtrek.com</text>
+        
+  
+</footer>
 </html>
