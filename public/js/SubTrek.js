@@ -9,6 +9,17 @@
 // create a new module, and load the other pluggable modules
 var module = angular.module('SubTrek', ['ngResource', 'ngStorage']);
 
+module.config(function ($sessionStorageProvider, $httpProvider) {
+   // get the auth token from the session storage
+   let authToken = $sessionStorageProvider.get('authToken');
+
+   // does the auth token actually exist?
+   if (authToken) {
+      // add the token to all HTTP requests
+      $httpProvider.defaults.headers.common.Authorization = 'Basic ' + authToken;
+   }
+});
+
 module.factory('registerAPI', function ($resource) {
     return $resource('api/register');
 });
@@ -23,7 +34,7 @@ module.factory('updateAccAPI', function ($resource) {
         return $resource('api/customers/:username');
 });
 
-module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage, updateAccAPI) { 
+module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage, updateAccAPI, $http) { 
     this.registerCustomer = function (customer) {
         registerAPI.save(null, customer,
                 // success callback
@@ -42,6 +53,15 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
             let ctrl = this;
             
             this.signIn = function (username, password) {
+                
+                // generate authentication token
+                let authToken = $window.btoa(username + ":" + password);
+
+                // store token
+                $sessionStorage.authToken = authToken;
+
+                // add token to the HTTP request headers
+                $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
                 
                 // get customer from web service
                 signInAPI.get({'username': username},
