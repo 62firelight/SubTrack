@@ -272,6 +272,8 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 var newDueDate = new Date(subscription.dueDate);
                 var today = new Date();
                 
+                newDueDate.setDate(newDueDate.getDate() - 1);
+                
                 // update the due date so that it is no longer expired
                 while (newDueDate < today) {
                     newDueDate.setMonth(newDueDate.getMonth() + 1);
