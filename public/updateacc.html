@@ -23,7 +23,7 @@ and open the template in the editor.
          <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.updateCustomer(customer)" >
             <center>
             
-             <input type="hidden" ng-model="$sessionStorage.customer.customerId" required>
+             <input type="hidden" ng-model="custCtrl.customer.customerId" required>
             <label for=“username”>Username:</label>
             {{custCtrl.customer.username}}
             <br>
@@ -49,10 +49,10 @@ and open the template in the editor.
             
             <button type="submit">Update Account</button></center> </center>
             <br>
-            
+            <center><button class="delete" type="submit" ng-click="custCtrl.deleteCustomer(custCtrl.customer)">Delete Account</button></center>
         </form>
          
-         <center><button class="delete" type="submit" ng-click="subCtrl.deleteAccount(account)">Delete Account</button></center>
+         
         
     </body>
      <div align="center" ng-include="'footer.html'">   

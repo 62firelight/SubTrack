@@ -40,5 +40,13 @@ public class CustomerModule extends Jooby{
             customerDao.updateCustomer(customer);
             rsp.status(Status.NO_CONTENT);
         });
+        
+        delete("/api/customers/:username", (req, rsp) -> {
+            String username = req.param("username").value();
+            Customer customer = customerDao.getCustomer(username);
+
+            customerDao.deleteCustomer(customer);
+            rsp.status(Status.NO_CONTENT);
+        });
     }
 }

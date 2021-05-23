@@ -34,7 +34,11 @@ module.factory('updateAccAPI', function ($resource) {
         return $resource('api/customers/:username');
 });
 
-module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage, updateAccAPI, $http) { 
+module.factory('deleteAccAPI', function ($resource) {
+        return $resource('api/customers/:username');
+});
+
+module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage, updateAccAPI, $http, deleteAccAPI) { 
     this.signInMessage = "Please sign in to continue.";
     // alias 'this' so that we can access it inside callback functions
     let ctrl = this;
@@ -99,6 +103,19 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
         this.signOut = function () {
             $sessionStorage.$reset();
             $window.location = 'home.html';
+        }
+        
+        this.deleteCustomer = function (customer) {
+        
+            if ($window.confirm("Are you sure you want to delete your account?")) {
+                console.log(customer.username);
+                deleteAccAPI.delete({'username': customer.username}, function () {
+                    $window.location = 'home.html';
+                    // get subscriptions and categories again so we don't have to refresh
+//                    ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+//                    ctrl.categories = categoryAPI.query({'username': $sessionStorage.customer.username});
+                });
+            }
         }
     });
 
