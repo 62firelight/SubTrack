@@ -21,4 +21,6 @@ public interface CustomerDAO extends CredentialsValidator {
 //    Boolean validateCredentials(String username, String password);
     
     void deleteCustomer(Customer customer);
+    
+    void updateCustomer(Customer customer);
 }
