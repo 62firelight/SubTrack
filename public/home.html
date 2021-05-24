@@ -22,7 +22,7 @@ and open the template in the editor.
         <div align="center" ng-include="'menu.html'"></div>
         <hr>
         <div align="center" >
-        <a href="subscription.html" ng-if="custCtrl.signedIn"><button class="raise button2">Add Subscription</button></a>
+        <a href="subscription.html" ng-if="custCtrl.signedIn"><button class="butgreen up">Add Subscription</button></a>
         </div>
         <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
             <button class="raise" ng-click="subCtrl.selectAll()">All</button>
@@ -57,7 +57,7 @@ and open the template in the editor.
                         </div>
                         <br>
                         <div>
-                            <button class="raise" ng-click="subCtrl.deleteSubscription(subscription)">Delete   </button>
+                            <button class="del" ng-click="subCtrl.deleteSubscription(subscription)">Delete   </button>
                         </div>
                     </td>
                         
