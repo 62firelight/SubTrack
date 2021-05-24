@@ -55,4 +55,10 @@ public final class CustomerCollectionsDAO implements CustomerDAO {
         System.out.println("Deleting customer: " + customer);
         customers.remove(customer.getUsername());
     }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        customers.put(customer.getUsername(), customer);
+    }
+    
 }

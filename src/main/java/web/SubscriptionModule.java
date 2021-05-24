@@ -83,7 +83,10 @@ public class SubscriptionModule extends Jooby {
                     //email.addTo("foo@bar.com");
                     email.send();
                 } catch (EmailException ex) {
-                    Logger.getLogger(SubscriptionModule.class.getName()).log(Level.SEVERE, null, ex);
+//                    Logger.getLogger(SubscriptionModule.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
+                    System.out.println("Couldn't send an email to the FakeSMTP server. Make sure that the FakeSMTP server is active and listening on port 2525.");
+                    System.out.println("Don't have FakeSMTP? Download it from http://nilhcem.com/FakeSMTP/");
                 }
             });
         });
@@ -121,6 +124,7 @@ public class SubscriptionModule extends Jooby {
             
             // perform date conversion to avoid errors when storing in database
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
+            dueDate = dueDate.plusDays(1); // for accurate date
             System.out.println(dueDate);
             subscription.setDueDate(dueDate.toString());
 

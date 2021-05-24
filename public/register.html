@@ -19,7 +19,7 @@ and open the template in the editor.
     <body>
         
          <h1> Create Account </h1>
-         <div ng-include="'menu.html'"></div>
+         <div align="center" ng-include="'menu.html'"></div>
          <hr>
          <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)"  class="login-form">
             <label for=“username”>Username:</label>
@@ -44,13 +44,13 @@ and open the template in the editor.
             
             <label for=“emailAddress”>Email:</label>
             <input type="email" ng-model="customer.emailAddress" required>
-            <br>
+            <br><br>
            
             
             
-            <button type="submit">Create Account</button>
+            <center><button type="submit">Create Account</button></center>
         </form>
-        
+    </center>
     </body>
 </html>
 

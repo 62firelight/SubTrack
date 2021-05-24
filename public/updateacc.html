@@ -13,31 +13,43 @@ and open the template in the editor.
         <title>Update Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/SubTrack.css.css">
     </head>
     
     <body>
-        <div ng-include="'menu.html'" align="right"></div>
-         <h1> Update Account </h1>
-         
-         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.updateCustomer(customer)" >
+        
+         <h1> My Account </h1>
+         <div align="center" ng-include="'menu.html'"></div>
+         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.updateCustomer(customer)" class="login-form">
+            <center>
+            
+             <input type="hidden" ng-model="custCtrl.customer.customerId" required>
             <label for=“username”>Username:</label>
-            <input type="text" ng-model="customer.username" required>
+            {{custCtrl.customer.username}}
+            <br>
+            
             <label for=“firstName”>First Name:</label>
-            <input type="text" ng-model="customer.firstName" required>
+            <input type="text" ng-model="custCtrl.customer.firstName" required>
+            <br>
+            
             <label for=“lastName”>Last Name:</label>
-            <input type="text" ng-model="customer.lastName" required>
-            <label for=“password”>Password:</label>
-            <input type="password" ng-model="customer.password" required>
-            <label for=“phoneNumber”>phone Number:</label>
-            <input type="text" ng-model="customer.phoneNumber" required>
+            <input type="text" ng-model="custCtrl.customer.lastName" required>
+            <br>
+            
+            <label for=“phoneNumber”>Phone:</label>
+            <input type="text" ng-model="custCtrl.customer.phoneNumber" required>
+            <br>
             <label for=“emailAddress”>Email:</label>
-            <input type="email" ng-model="customer.emailAddress" required>
-           
+            <input type="email" ng-model="custCtrl.customer.emailAddress" required>
+            <br>
+            <br>
             
-            
-            <button type="submit">Update Account</button>
+            <button type="submit">Update Account</button></center> </center>
+            <br>
+            <center><button class="delete" type="submit" ng-click="custCtrl.deleteCustomer(custCtrl.customer)">Delete Account</button></center>
         </form>
+         
+         
         
     </body>
 </html>
