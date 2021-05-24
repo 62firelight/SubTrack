@@ -210,6 +210,7 @@ module.controller('SubscriptionController', function ($sessionStorage, addSubscr
                 // get subscriptions and categories again so we don't have to refresh
                 ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
                 ctrl.categories = categoryAPI.query({'username': $sessionStorage.customer.username});
+                ctrl.total = totalAPI.get({'username': $sessionStorage.customer.username});
             });
         }
 
@@ -243,7 +244,7 @@ module.controller('SubscriptionController', function ($sessionStorage, addSubscr
             if (numberOfDays > reminderThreshold) {
                 //statusElement.style.color = "green";
             } else {
-                statusElement.style.color = "#CCCC00"; // dark orange
+                statusElement.style.color = "orange"; // dark orange
             }
         } else {
             status = "(expired)";

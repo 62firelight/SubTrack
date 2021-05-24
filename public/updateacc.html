@@ -13,14 +13,14 @@ and open the template in the editor.
         <title>Update Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/SubTrack.css.css">
     </head>
     
     <body>
         
          <h1> My Account </h1>
          <div align="center" ng-include="'menu.html'"></div>
-         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.updateCustomer(custCtrl.customer)" >
+         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.updateCustomer(customer)" class="login-form">
             <center>
             
              <input type="hidden" ng-model="custCtrl.customer.customerId" required>
@@ -35,10 +35,6 @@ and open the template in the editor.
             <label for=“lastName”>Last Name:</label>
             <label>{{custCtrl.customer.lastName}}</label>
             <br>
-            
-<!--            <label for=“password”>Password:</label>
-            <input type="text" ng-model="custCtrl.customer.password" required>
-            <br>-->
             
             <label for=“phoneNumber”>Phone:</label>
             <label>{{custCtrl.customer.phoneNumber}}</label>
@@ -59,6 +55,4 @@ and open the template in the editor.
          
         
     </body>
-     <div align="center" ng-include="'footer.html'">   
-    </div>
 </html>
