@@ -13,14 +13,14 @@ and open the template in the editor.
         <title>Update Subscription</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/SubTrack.css">
     </head>
     <body>
         <h1> Update Subscription </h1>
         <div ng-include="'menu.html'" align="center"></div>
         <hr>
         
-        <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.updateSubscription(subCtrl.subscription)" >
+        <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.updateSubscription(subCtrl.subscription)" class="login-form">
           <input type="hidden" ng-model="subCtrl.subscription.subscriptionId" required>
             <label for=“name”>Name:</label>
             <input type="text" ng-model="subCtrl.subscription.name" required>

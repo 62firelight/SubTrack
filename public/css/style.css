@@ -91,11 +91,13 @@ table {
 
 table, th, td {
     border-bottom: 1px dotted black;
-    margin: 0.5em auto;
+    margin: 0.8em auto;
     padding: 0.25em;
     text-align: left;
-    width: 35%;
+    width:50%;
+    table-layout: fixed;
 }
+
 
 .center {
     text-align: center;
