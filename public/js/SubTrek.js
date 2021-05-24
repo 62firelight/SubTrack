@@ -31,7 +31,7 @@ module.factory('signInAPI', function ($resource) {
 //return $resource ('api/customers/:id');
 //});
 module.factory('updateAccAPI', function ($resource) {
-        return $resource('api/customers/:username');
+        return $resource('api/customers/:username', null, {update: {method: 'PUT'}});
 });
 
 module.factory('deleteAccAPI', function ($resource) {
@@ -40,6 +40,7 @@ module.factory('deleteAccAPI', function ($resource) {
 
 module.controller('CustomerController', function (registerAPI, $window, signInAPI, $sessionStorage, updateAccAPI, $http, deleteAccAPI) { 
     this.signInMessage = "Please sign in to continue.";
+    this.updateMessage = "";
     // alias 'this' so that we can access it inside callback functions
     let ctrl = this;
     
@@ -117,6 +118,14 @@ module.controller('CustomerController', function (registerAPI, $window, signInAP
                 });
             }
         }
+        
+        this.updateCustomer = function (customer) {
+            updateAccAPI.update({'username': customer.username}, customer, function () {
+    //            ctrl.subscriptions = subscriptionAPI.query({'username': $sessionStorage.customer.username});
+    //            $window.location = 'home.html';
+                ctrl.updateMessage = "Account updated";
+            });
+        };
     });
 
 
