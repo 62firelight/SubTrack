@@ -13,7 +13,7 @@ and open the template in the editor.
         <title>Create Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/SubTrack.css">
     </head>
     
     <body>
@@ -21,8 +21,7 @@ and open the template in the editor.
          <h1> Create Account </h1>
          <div align="center" ng-include="'menu.html'"></div>
          <hr>
-    <center>
-         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)" >
+         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)"  class="login-form">
             <label for=“username”>Username:</label>
             <input type="text" ng-model="customer.username" required>
             <br>
@@ -53,9 +52,6 @@ and open the template in the editor.
         </form>
     </center>
     </body>
-    <br><br>
-    <div align="center" ng-include="'footer.html'">   
-    </div>
 </html>
 
 

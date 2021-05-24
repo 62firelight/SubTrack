@@ -234,7 +234,7 @@ module.controller('SubscriptionController', function ($sessionStorage, addSubscr
             if (numberOfDays > reminderThreshold) {
                 //statusElement.style.color = "green";
             } else {
-                statusElement.style.color = "#CCCC00"; // dark orange
+                statusElement.style.color = "orange"; // dark orange
             }
         } else {
             status = "(expired)";
