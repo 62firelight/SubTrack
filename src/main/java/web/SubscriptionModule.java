@@ -127,6 +127,13 @@ public class SubscriptionModule extends Jooby {
             dueDate = dueDate.plusDays(1); // for accurate date
             System.out.println(dueDate);
             subscription.setDueDate(dueDate.toString());
+            
+            // decide whether a subscription is paid or not based on price
+            if (subscription.getSubscriptionPrice().equals(BigDecimal.ZERO)) {
+                subscription.setPaid(false);
+            } else {
+                subscription.setPaid(true);
+            }
 
             subscriptionDao.updateSubscription(subscription);
             rsp.status(Status.NO_CONTENT);
