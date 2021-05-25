@@ -48,6 +48,10 @@ class "Subscription" as sub {
   --
 }
 
+class "Total" as total {
+    -value : BigDecimal
+}
+
 sub --> "-customer\n1" customer
 
 @enduml
