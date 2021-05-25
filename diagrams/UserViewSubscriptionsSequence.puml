@@ -11,9 +11,9 @@ database "Database\nH2" as db
 note right of customer : signed in customer goes to homepage
 products++
 
-products -> products : include navigation menu
-note right of products : the nav menu will check if signed in
-note right of products : display "Welcome [user's first name]"
+'products -> products : include navigation menu
+'note right of products : the nav menu will check if signed in
+'note right of products : display "Welcome [user's first name]"
 
 create controller
 products -> controller++ : <<construct>>
