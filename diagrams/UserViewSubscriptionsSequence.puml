@@ -1,0 +1,57 @@
+@startuml
+skinparam style strictuml
+
+actor "User" as customer
+participant "Website\n:Homepage" as products <<web page>>
+participant "AJAX Client\n:SubscriptionController" as controller <<controller>>
+participant "Server\n:SubscriptionModule" as module <<Jooby module>>
+participant "Data Access Object\n:SubscriptionJdbcDAO" as dao <<SubscriptionDAO>>
+database "Database\nH2" as db
+
+note right of customer : signed in customer goes to homepage
+products++
+
+products -> products : include navigation menu
+note right of products : the nav menu will check if signed in
+note right of products : display "Welcome [user's first name]"
+
+create controller
+products -> controller++ : <<construct>>
+
+controller -> controller++ : subscriptionAPI.query()
+note right of controller: GET: /api/subscriptions/[username]
+controller -> module++ 
+module -> dao++ : getSubscriptionsByUsername(username)
+dao -> db++ : select * from subscription...\nwhere username = ?\norder by due_date asc
+return ResultSet
+return subscriptions
+module -> module : convert subscriptions to JSON
+return subscriptions
+controller--
+
+'controller -> controller++ : categoryAPI.query()
+'note right of controller: GET: /api/categories
+'controller -> module++ 
+'module -> dao++ : getCategories()
+'dao -> db++ : select distinct category from product
+'return ResultSet
+'return categories
+'module -> module : convert categories to JSON
+'return categories
+'controller--
+
+group For each sub in subscriptions
+    controller -> products : update templates with corresponding product fields
+end
+
+controller --> products
+controller--
+
+note right of products :similar process for categories
+
+products --> customer : show dynamic web page
+
+customer -> products : close tab
+destroy products
+
+@enduml
