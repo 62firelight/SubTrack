@@ -24,7 +24,8 @@ const app = Vue.createApp({
     data() {
         return {
             welcome: `Welcome. The current date is ${(new Date()).toLocaleDateString()}.`,
-            subscriptions: new Array()
+            subscriptions: new Array(),
+            subscription: new Object()
         }
     },
 
@@ -45,8 +46,17 @@ const app = Vue.createApp({
 
     methods: {
 
-        addSub(subscription) {
-
+        addSub() {
+            this.subscription.customer = this.customer;
+            
+            axios.post(addSubApi, this.subscription)
+                    .then(response => {
+                        window.location = 'home.html';
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    })
         },
 
         getSubs() {
