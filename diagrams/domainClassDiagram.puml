@@ -23,35 +23,36 @@ skinparam {
     }
 }
  
-class "Customer" as customer {
-    -customerId : Integer <<unique>> <<generated>>
-    -username : String <<unique>>
-    -firstName : String
-    -lastName : String
-    -password : String
-    -phoneNumber : String
-    -emailAddress : String
-    '-card_details? 
+class "Workflow" as workflow {
+    -name: string;
+    -manualTasks: number;
+    -arn: string;
+    -definition: string;
+    -queueUrl: string;
   --
 }
 
-class "Subscription" as sub {
-    -subscriptionId : Integer <<unique>> <<generated>>
-    -name : String
-    -paid : Boolean
-    -category : String
-    -subscriptionPrice : BigDecimal
-    -desciption: String
-    -companyName: String
-    -dueDate : String
-    -issueDate : String
+class "Execution" as execution {
+    -name: string;
+    -arn: string;
+    -status: string;
+    -output: string;
+    -queueUrl: string;
+    -manualTasksLeft: number;
   --
 }
 
-class "Total" as total {
-    -value : BigDecimal
+class "Task" as task {
+    -name: string;
+    -assignedTo: string;
+    -due: string;
+    -dependentOn: string;
+    -input: string;
+    -message: string;
+    -ReceiptHandle: string;
 }
 
-sub --> "-customer\n1" customer
+workflow --> task : tasks
+execution --> workflow : workflow
 
 @enduml

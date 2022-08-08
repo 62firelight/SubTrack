@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import org.jooby.Jooby;
+import org.jooby.handlers.Cors;
+import org.jooby.handlers.CorsHandler;
 import org.jooby.json.Gzon;
 import web.auth.BasicHttpAuthenticator;
 
@@ -29,12 +31,12 @@ import web.auth.BasicHttpAuthenticator;
 public class Server extends Jooby {
     
     // use H2 database server (default)
-//    CustomerDAO customerDao = new CustomerJdbcDAO();
-//    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO();
+    CustomerDAO customerDao = new CustomerJdbcDAO();
+    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO();
     
     // use embedded database file (SubTrack.mv.db in project root directory)
-    CustomerDAO customerDao = new CustomerJdbcDAO("jdbc:h2:./SubTrackDatabase");
-    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO("jdbc:h2:./SubTrackDatabase");
+//    CustomerDAO customerDao = new CustomerJdbcDAO("jdbc:h2:./SubTrackDatabase");
+//    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO("jdbc:h2:./SubTrackDatabase");
 
     public Server() {
         port(8081);
@@ -42,6 +44,7 @@ public class Server extends Jooby {
         use(new AssetModule());
         List<String> noAuth = Arrays.asList("/api/register");
         use(new BasicHttpAuthenticator(customerDao, noAuth));
+        use("*", new CorsHandler(new Cors().withMethods("*")));
         use(new CustomerModule(customerDao));
         use(new SubscriptionModule(subscriptionDao));
     }
@@ -50,7 +53,7 @@ public class Server extends Jooby {
         System.out.println("\nStarting Server.");
 
         Server server = new Server();
-
+        
         CompletableFuture.runAsync(() -> {
             server.start();
         });
