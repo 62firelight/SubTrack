@@ -20,16 +20,15 @@ and open the template in the editor.
         <main id="content">
             <h1>SubTrek</h1>
             <navigation></navigation>
-            <div id='welcome' align="center" class=""><h3>{{ welcome }}</h3></div>
-<!--            <div align="center" ng-include="'menu.html'"></div>
+            <div id='welcome' align="center" class="" v-if='signedIn'><h3>{{ welcome }}</h3></div>
             <hr>
             <div align="center" >
-                <a href="subscription.html" ng-if="custCtrl.signedIn"><button class="butgreen up">Add Subscription</button></a>
+                <a href="subscription.html" v-if="signedIn"><button class="butgreen up">Add Subscription</button></a>
             </div>
-            <div ng-controller="SubscriptionController as subCtrl" ng-if="custCtrl.signedIn">
-                <button class="raise" ng-click="subCtrl.selectAll()">All</button>
-                <button class="raise" type="button" class="pink-button" data-ng-repeat="category in subCtrl.categories" 
-                        ng-click="subCtrl.filterCat(category)">{{category}}</button>
+            <div v-if="signedIn">
+                <!--                <button class="raise" @click.prevent="subCtrl.selectAll()">All</button>
+                                <button class="raise" type="button" class="pink-button" data-ng-repeat="category in subCtrl.categories" 
+                                        ng-click="subCtrl.filterCat(category)">{{category}}</button>-->
                 <table>
 
                     <tr>
@@ -42,40 +41,41 @@ and open the template in the editor.
                     </tr>
 
                     <tbody>
-                        <tr data-ng-repeat="subscription in subCtrl.subscriptions">
+                        <tr v-for="subscription in subscriptions">
                             <td>{{subscription.name}}</td>
                             <td>{{subscription.description}}</td>
                             <td>{{subscription.paid ? (subscription.subscriptionPrice | currency) : 'Free'}}</td>
                             <td>{{subscription.companyName}}</td>
-                            <td ng-attr-id="{{ 'sub-' + subscription.subscriptionId}}">{{subCtrl.getConvertedDate(subscription.dueDate)}} 
+<!--                            <td v-bind:id="{{ 'sub-' + subscription.subscriptionId}}">{{subCtrl.getConvertedDate(subscription.dueDate)}} 
                                 {{subCtrl.getSubscriptionStatus(subscription)}}
-                                <button class="raise" ng-attr-id="{{ 'renew-' + subscription.subscriptionId}}" ng-click="subCtrl.renewSubscription(subscription)">Renew</button>
+                                <button class="raise" v-bind:id="{{ 'renew-' + subscription.subscriptionId}}" @click.prevent="renewSubscription(subscription)">Renew</button>
                             </td>
+                            <td>
                             (in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})
-                        </td>
+                            </td>-->
                             <td>
                                 <div>
-                                    <button class="raise" ng-click="subCtrl.update(subscription)">Update</button>
+                                    <button class="raise" @click.prevent="updateSub(subscription)">Update</button>
                                 </div>
                                 <br>
                                 <div>
-                                    <button class="del" ng-click="subCtrl.deleteSubscription(subscription)">Delete   </button>
+                                    <button class="del" @click.prevent="deleteSub(subscription)">Delete</button>
                                 </div>
                             </td>
 
                         </tr>
-                        <tr >
+                        <tr>
                             <td></td>
                             <td>Total</td>
-                            <td>{{subCtrl.total.value| currency}}</td>
+                            <!--<td>{{subCtrl.total.value| currency}}</td>-->
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
                     </tbody>
-                </table>-->
+                </table>
         </main>
-        
+
         <!--<script type="module" src="js/customer.js"></script>-->
         <script type="module" src="js/subscription.js"></script>
     </body>
