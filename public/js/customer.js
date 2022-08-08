@@ -29,7 +29,7 @@ const app = Vue.createApp({
         registerCustomer(customer) {
             axios.post(registerApi, customer)
                     .then(response => {
-                        dataStore.commit('signIn', customer);
+                        dataStore.commit('signIn', this.customer);
                         window.location = 'home.html';
                         alert('Customer registered');
                     })
