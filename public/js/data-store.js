@@ -11,6 +11,9 @@ export const dataStore = Vuex.createStore({
         // signed in customer
         customer: null;
         
+        // subscription to update
+        subToUpdate: null;
+        
         // basic access authentication token
         authToken: null;
     },
@@ -20,6 +23,11 @@ export const dataStore = Vuex.createStore({
         // user signs in
         signIn(state, customer) {
             state.customer = customer;
+        },
+        
+        // user updates a subscription
+        updateSub(state, subscription) {
+            state.subToUpdate = subscription;
         },
         
         // store basic access token 

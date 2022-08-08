@@ -101,6 +101,11 @@ const app = Vue.createApp({
                         alert('An error has occurred - check the console for details');
                     });
         },
+        
+        redirectToUpdate(subscription) {
+            dataStore.commit('updateSub', subscription);
+            window.location = 'updatesub.html';
+        },
 
         renewSub(subscription) {
             var newDueDate = new Date(subscription.dueDate);

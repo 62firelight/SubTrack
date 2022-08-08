@@ -16,41 +16,45 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/SubTrack.css">
     </head>
     <body>
-        <h1> Update Subscription </h1>
-        <div ng-include="'menu.html'" align="center"></div>
-        <hr>
-        
-        <form ng-controller="SubscriptionController as subCtrl" ng-submit="subCtrl.updateSubscription(subCtrl.subscription)" class="login-form">
-          <input type="hidden" ng-model="subCtrl.subscription.subscriptionId" required>
-            <label for=“name”>Name:</label>
-            <input type="text" ng-model="subCtrl.subscription.name" required>
-            <br>
-            
-            <label for=“category”>Category:</label>
-            <input type="text" ng-model="subCtrl.subscription.category" required>
-            <br>
-            
-            <label for=“subscriptionPrice”>Price:</label>
-            <input type="text" ng-model="subCtrl.subscription.subscriptionPrice" required>
-            <br>
-            
-            <label for=“description”>Description:</label>
-            <input type="text" ng-model="subCtrl.subscription.description" required>
-            <br>
-            
-            <label for=“companyName”>Company:</label>
-            <input type="text" ng-model="subCtrl.subscription.companyName" required>
-            <br>
-          
-            <label for=“dueDate”>Due Date:</label>
-            <input type="date" ng-model="subCtrl.subscription.dueDate" name="trip-start"
-                   min="2021-01-01" max="2021-12-31">
-            <br><br>
+        <main id='content'>
+            <h1> Update Subscription </h1>
+            <navigation></navigation>
+            <hr>
+
+            <form @submit.prevent="updateSubscription()" class="login-form">
+                <input type="hidden" v-model="subToUpdate.subscriptionId" required>
+                <label for=“name”>Name:</label>
+                <input type="text" v-model="subToUpdate.name" required>
+                <br>
+
+                <label for=“category”>Category:</label>
+                <input type="text" v-model="subToUpdate.category" required>
+                <br>
+
+                <label for=“subscriptionPrice”>Price:</label>
+                <input type="text" v-model="subToUpdate.subscriptionPrice" required>
+                <br>
+
+                <label for=“description”>Description:</label>
+                <input type="text" v-model="subToUpdate.description" required>
+                <br>
+
+                <label for=“companyName”>Company:</label>
+                <input type="text" v-model="subToUpdate.companyName" required>
+                <br>
+
+                <label for=“dueDate”>Due Date:</label>
+                <input type="date" v-model="subToUpdate.dueDate" name="trip-start"
+                       min="2021-01-01" max="2021-12-31">
+                <br><br>
 
 
 
-            <button type="submit" class="raise">Update Subscription</button>
-           <!-- <a href="home.html"><button class=".button">Update Subscription</button></a> -->
-        </form>
+                <button type="submit" class="raise">Update Subscription</button>
+                <!-- <a href="home.html"><button class=".button">Update Subscription</button></a> -->
+            </form>
+        </main>
+
+        <script type='module' src='js/subscription.js'></script>
     </body>
 </html>
