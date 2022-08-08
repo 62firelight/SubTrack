@@ -23,7 +23,7 @@ const app = Vue.createApp({
    
     data() {
         return {
-            
+            welcome: `Welcome. The current date is ${(new Date()).toLocaleDateString()}.`
         }
     },
     
@@ -80,6 +80,12 @@ const app = Vue.createApp({
     }
     
 });
+
+import { dataStore } from './data-store.js';
+app.use(dataStore);
+
+import { NavigationMenu } from './navigation.js';
+app.component('navigation', NavigationMenu);
 
 app.mount("#content");
 
