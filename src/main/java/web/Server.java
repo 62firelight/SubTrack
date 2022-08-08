@@ -40,8 +40,8 @@ public class Server extends Jooby {
         port(8081);
         use(new Gzon());
         use(new AssetModule());
-        List<String> noAuth = Arrays.asList("/api/register");
-        use(new BasicHttpAuthenticator(customerDao, noAuth));
+//        List<String> noAuth = Arrays.asList("/api/register");
+//        use(new BasicHttpAuthenticator(customerDao, noAuth));
         use(new CustomerModule(customerDao));
         use(new SubscriptionModule(subscriptionDao));
     }

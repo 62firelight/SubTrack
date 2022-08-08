@@ -19,13 +19,13 @@ const app = Vue.createApp({
     },
     
     mounted() {
-        
+//        alert('loaded');
     },
     
     methods: {
         
         registerCustomer(customer) {
-            
+            alert('customer registered');
         },
         
         signIn() {
