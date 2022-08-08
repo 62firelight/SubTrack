@@ -130,10 +130,6 @@ const app = Vue.createApp({
                     });
         },
 
-        selectAll() {
-
-        },
-
         sort() {
 
         }
