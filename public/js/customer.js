@@ -10,46 +10,57 @@ var signInApi = ({username}) => `/api/customers/${username}`;
 var updateAccApi = ({username}) => `/api/customers/${username}`;
 var deleteAccApi = ({username}) => `/api/customers/${username}`;
 
+import { dataStore } from './data-store.js';
+
 const app = Vue.createApp({
-   
+
     data() {
         return {
-            
+            customer: new Object()
         }
     },
-    
+
     mounted() {
 //        alert('loaded');
     },
-    
+
     methods: {
-        
+
         registerCustomer(customer) {
-            alert('customer registered');
+            axios.post(registerApi, customer)
+                    .then(response => {
+                        dataStore.commit('signIn', customer);
+                        window.location = 'home.html';
+                        alert('Customer registered');
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    });
         },
-        
+
         signIn() {
-            
+
         },
-        
+
         checkSignIn() {
-            
+
         },
-        
+
         signOut() {
-            
+
         },
-        
+
         deleteCustomer(customer) {
-            
+
         },
-        
+
         updateCustomer(customer) {
-            
+
         }
-        
+
     }
-    
+
 });
 
 import { NavigationMenu } from './navigation.js';

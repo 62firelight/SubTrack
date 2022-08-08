@@ -29,12 +29,12 @@ import web.auth.BasicHttpAuthenticator;
 public class Server extends Jooby {
     
     // use H2 database server (default)
-//    CustomerDAO customerDao = new CustomerJdbcDAO();
-//    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO();
+    CustomerDAO customerDao = new CustomerJdbcDAO();
+    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO();
     
     // use embedded database file (SubTrack.mv.db in project root directory)
-    CustomerDAO customerDao = new CustomerJdbcDAO("jdbc:h2:./SubTrackDatabase");
-    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO("jdbc:h2:./SubTrackDatabase");
+//    CustomerDAO customerDao = new CustomerJdbcDAO("jdbc:h2:./SubTrackDatabase");
+//    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO("jdbc:h2:./SubTrackDatabase");
 
     public Server() {
         port(8081);
