@@ -24,6 +24,30 @@ const app = Vue.createApp({
     
     methods: {
         
+        registerCustomer(customer) {
+            
+        },
+        
+        signIn() {
+            
+        },
+        
+        checkSignIn() {
+            
+        },
+        
+        signOut() {
+            
+        },
+        
+        deleteCustomer(customer) {
+            
+        },
+        
+        updateCustomer(customer) {
+            
+        }
+        
     }
     
 });
