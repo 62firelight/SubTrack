@@ -200,7 +200,14 @@ const app = Vue.createApp({
         },
 
         sort() {
-
+            axios.get(sortApi({'username': this.customer.username}))
+                    .then(response => {
+                        this.subscriptions = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    });
         }
 
     }
