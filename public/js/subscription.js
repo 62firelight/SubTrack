@@ -26,7 +26,8 @@ const app = Vue.createApp({
             welcome: `Welcome. The current date is ${(new Date()).toLocaleDateString()}.`,
             categories: new Array(),
             subscriptions: new Array(),
-            subscription: new Object()
+            subscription: new Object(),
+            total: new Object()
         }
     },
 
@@ -43,6 +44,7 @@ const app = Vue.createApp({
         if (this.signedIn) {
             this.getSubs();
             this.getCategories();
+            this.getTotal();
         }
     },
 
@@ -78,7 +80,7 @@ const app = Vue.createApp({
                         .then(response => {
                             this.getSubs();
                             this.getCategories();
-                            // TODO: refresh total
+                            this.getTotal();
                         })
                         .catch(error => {
                             console.log(error);
@@ -174,7 +176,7 @@ const app = Vue.createApp({
             // Convert to days
             const numberOfDays = Math.round(differenceMs / ONE_DAY)
 
-            return Math.abs(numberOfDays);
+            return numberOfDays;
         },
 
         getCategories() {
@@ -198,6 +200,17 @@ const app = Vue.createApp({
                         alert('An error has occurred - check the console for details');
                     });
         },
+        
+        getTotal() {
+            axios.get(totalApi({'username': this.customer.username}))
+                    .then(response => {
+                        this.total = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    });
+        },
 
         sort() {
             axios.get(sortApi({'username': this.customer.username}))
@@ -210,8 +223,9 @@ const app = Vue.createApp({
                     });
         }
 
-    }
-
+    },
+    
+    mixins: [ NumberFormatter ]
 });
 
 import { dataStore } from './data-store.js';
@@ -220,6 +234,6 @@ app.use(dataStore);
 import { NavigationMenu } from './navigation.js';
 app.component('navigation', NavigationMenu);
 
+import { NumberFormatter } from './number-formatter.js';
+
 app.mount("#content");
-
-
