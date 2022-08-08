@@ -5,6 +5,11 @@
  */
 "use strict"
 
+var registerApi = '/api/register';
+var signInApi = ({username}) => `/api/customers/${username}`;
+var updateAccApi = ({username}) => `/api/customers/${username}`;
+var deleteAccApi = ({username}) => `/api/customers/${username}`;
+
 const app = Vue.createApp({
    
     data() {
@@ -14,7 +19,7 @@ const app = Vue.createApp({
     },
     
     mounted() {
-        alert("Hello there");
+        
     },
     
     methods: {
