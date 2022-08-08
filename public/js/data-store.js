@@ -28,7 +28,6 @@ export const dataStore = Vuex.createStore({
         }
     },
     
-    plugins: [window.createPersistedState({storage: window.sessionStorage})]
-    
+    plugins: [window.createPersistedState({storage: window.sessionStorage})] 
 });
 

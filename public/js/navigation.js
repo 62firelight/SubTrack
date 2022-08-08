@@ -5,26 +5,37 @@
  */
 "use strict"
 
+import { dataStore } from './data-store.js';
+
 export const NavigationMenu = {
-    computed: {
-        
-    },
     
-    template : `
+    computed: {
+        signedIn() {
+            return this.customer != null;
+        },
+        ...Vuex.mapState({
+                customer: 'customer'
+        })
+    },
+
+    template: `
 <div class="dropdown" id="menu">
     <button class="dropbtn">Menu</button>
     <div class="dropdown-content">
         <a href="home.html">Home</a>
-        
-        <a href="signin.html">Sign In</a>
+        <a href="updateacc.html" v-if="signedIn">My Account</a>
+        <a href="home.html" v-if="signedIn" @click="signOut()">Sign Out</a>
+        <a href="signin.html" v-if="!signedIn">Sign In</a>
     </div>
 </div>
 `,
-    
+
     methods: {
-        
+        signOut() {
+            sessionStorage.clear();
+            window.location = ".";
+        }
     }
 };
 
-//<a href="updateacc.html" v-if="signedIn">My Account</a>
-//        <a href="home.html" v-if="signedIn" @click.prevent="signOut()//">Sign Out</a>
+

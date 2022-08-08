@@ -10,8 +10,6 @@ var signInApi = ({username}) => `/api/customers/${username}`;
 var updateAccApi = ({username}) => `/api/customers/${username}`;
 var deleteAccApi = ({username}) => `/api/customers/${username}`;
 
-import { dataStore } from './data-store.js';
-
 const app = Vue.createApp({
 
     data() {
@@ -40,7 +38,16 @@ const app = Vue.createApp({
         },
 
         signIn() {
-
+            axios.get(signInApi({'username': this.customer.username}))
+                    .then(response => {
+                        this.customer = response.data;
+                        dataStore.commit('signIn', this.customer);
+                        window.location = 'home.html';
+                    })
+                    .catch(error => {
+//                        console.log(error);
+                        alert('Wrong username and/or password');
+                    })
         },
 
         checkSignIn() {
@@ -62,6 +69,9 @@ const app = Vue.createApp({
     }
 
 });
+
+import { dataStore } from './data-store.js';
+app.use(dataStore);
 
 import { NavigationMenu } from './navigation.js';
 app.component('navigation', NavigationMenu);
