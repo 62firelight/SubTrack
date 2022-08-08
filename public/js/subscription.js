@@ -48,7 +48,7 @@ const app = Vue.createApp({
 
         addSub() {
             this.subscription.customer = this.customer;
-            
+
             axios.post(addSubApi, this.subscription)
                     .then(response => {
                         window.location = 'home.html';
@@ -71,6 +71,18 @@ const app = Vue.createApp({
         },
 
         deleteSub(subscription) {
+            if (window.confirm("Are you sure you want to delete " + subscription.name + "?")) {
+                axios.delete(deleteSubApi({'id': subscription.subscriptionId}))
+                        .then(response => {
+                            this.getSubs();
+                            // TODO: refresh categories
+                            // TODO: refresh total
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            alert('An error has occurred - check the console for details');
+                        })
+            }
 
         },
 
