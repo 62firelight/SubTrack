@@ -48,7 +48,7 @@ and open the template in the editor.
                             <td>{{subscription.companyName}}</td>
                             <td v-bind:id="'sub-' + subscription.subscriptionId">{{getConvertedDate(subscription.dueDate)}} 
                                 {{getSubStatus(subscription)}}
-                                <button class="raise" v-bind:id="'renew-' + subscription.subscriptionId" @click.prevent="renewSub(subscription)">Renew</button>
+                                <button class="raise" v-if='daysToToday(subscription.dueDate) <= 3' v-bind:id="'renew-' + subscription.subscriptionId" @click.prevent="renewSub(subscription)">Renew</button>
                             </td>
 <!--                            (in {{daysToToday(subscription.dueDate)}} day{{daysToToday(subscription.dueDate) > 1 || daysToToday(subscription.dueDate) < 1 ? 's' : ''}})
                             </td>-->
