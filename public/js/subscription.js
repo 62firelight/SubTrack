@@ -174,7 +174,7 @@ const app = Vue.createApp({
             // Convert to days
             const numberOfDays = Math.round(differenceMs / ONE_DAY)
 
-            return numberOfDays;
+            return Math.abs(numberOfDays);
         },
 
         getCategories() {
