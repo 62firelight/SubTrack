@@ -16,7 +16,7 @@ var subApi = ({username}) => `api/subscriptions/${username}`;
 var deleteSubApi = ({id}) => `api/subscriptions/${id}`;
 var categoryApi = ({username}) => `api/categories/${username}`;
 var sortApi = ({username}) => `api/sort/${username}`;
-var filterApi = ({category}, {username}) => `api/categories/${category}/${username}`;
+var filterByCategoryApi = ({category, username}) => `api/categories/${category}/${username}`;
 var totalApi = ({username}) => `api/total/${username}`;
 
 const app = Vue.createApp({
@@ -24,6 +24,7 @@ const app = Vue.createApp({
     data() {
         return {
             welcome: `Welcome. The current date is ${(new Date()).toLocaleDateString()}.`,
+            categories: new Array(),
             subscriptions: new Array(),
             subscription: new Object()
         }
@@ -41,6 +42,7 @@ const app = Vue.createApp({
     mounted() {
         if (this.signedIn) {
             this.getSubs();
+            this.getCategories();
         }
     },
 
@@ -56,7 +58,7 @@ const app = Vue.createApp({
                     .catch(error => {
                         console.log(error);
                         alert('An error has occurred - check the console for details');
-                    })
+                    });
         },
 
         getSubs() {
@@ -67,7 +69,7 @@ const app = Vue.createApp({
                     .catch(error => {
                         console.log(error);
                         alert('An error has occurred - check the console for details');
-                    })
+                    });
         },
 
         deleteSub(subscription) {
@@ -75,13 +77,13 @@ const app = Vue.createApp({
                 axios.delete(deleteSubApi({'id': subscription.subscriptionId}))
                         .then(response => {
                             this.getSubs();
-                            // TODO: refresh categories
+                            this.getCategories();
                             // TODO: refresh total
                         })
                         .catch(error => {
                             console.log(error);
                             alert('An error has occurred - check the console for details');
-                        })
+                        });
             }
 
         },
@@ -106,8 +108,26 @@ const app = Vue.createApp({
 
         },
 
-        filterCat(selectedCat) {
+        getCategories() {
+            axios.get(categoryApi({'username': this.customer.username}))
+                    .then(response => {
+                        this.categories = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    });
+        },
 
+        filterByCat(selectedCat) {
+            axios.get(filterByCategoryApi({'category': selectedCat, 'username': this.customer.username}))
+                    .then(response => {
+                        this.subscriptions = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    });
         },
 
         selectAll() {

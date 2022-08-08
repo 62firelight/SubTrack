@@ -26,9 +26,9 @@ and open the template in the editor.
                 <a href="subscription.html" v-if="signedIn"><button class="butgreen up">Add Subscription</button></a>
             </div>
             <div v-if="signedIn">
-                <!--                <button class="raise" @click.prevent="subCtrl.selectAll()">All</button>
-                                <button class="raise" type="button" class="pink-button" data-ng-repeat="category in subCtrl.categories" 
-                                        ng-click="subCtrl.filterCat(category)">{{category}}</button>-->
+                                <button class="raise" @click.prevent="getSubs()">All</button>
+                                <button class="raise" type="button" class="pink-button" v-for="category in categories" 
+                                        @click.prevent="filterByCat(category)">{{category}}</button>
                 <table>
 
                     <tr>
