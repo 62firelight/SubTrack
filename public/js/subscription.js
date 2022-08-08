@@ -93,19 +93,67 @@ const app = Vue.createApp({
         },
 
         renewSub(subscription) {
-
+            alert('renew sub');
         },
 
         getSubStatus(subscription) {
+            // calculate number of days remaining
+            var numberOfDays = this.daysToToday(subscription.dueDate);
 
+            // decide whether to add an 's' or not
+            var plurality = numberOfDays > 1 ? 's' : '';
+
+            // declare and initialize status variables
+            var status = "error";
+            var statusElement = document.getElementById("sub-" + subscription.subscriptionId);
+            var renewElement = document.getElementById("renew-" + subscription.subscriptionId);
+
+            // 3 days before reminder
+            var reminderThreshold = 3;
+
+            if (numberOfDays > 0) {
+                status = "(in " + numberOfDays + " day" + plurality + ")";
+
+                // check for null to avoid errors
+                if (renewElement != null) {
+                    // hide the Renew button for non-expired subs
+                    renewElement.style.display = "none";
+                }
+
+                if (numberOfDays > reminderThreshold) {
+                    //statusElement.style.color = "green";
+                } else {
+                    statusElement.style.color = "orange"; // dark orange
+                }
+            } else {
+                status = "(expired)";
+                
+                if (statusElement != null) {
+                    statusElement.style.color = "red";
+                }
+            }
+
+            return status;
         },
 
         getConvertedDate(date) {
-
+            return (new Date(date)).toLocaleDateString('en-NZ');
         },
 
         daysToToday(dateString) {
+            var date = new Date(dateString);
+            var today = new Date();
 
+            // The number of milliseconds in one day
+            const ONE_DAY = 1000 * 60 * 60 * 24;
+
+            // Calculate the difference in milliseconds
+            const differenceMs = date - today;
+
+            // Convert to days
+            const numberOfDays = Math.round(differenceMs / ONE_DAY)
+
+            return numberOfDays;
         },
 
         getCategories() {

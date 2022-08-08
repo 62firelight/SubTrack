@@ -46,12 +46,11 @@ and open the template in the editor.
                             <td>{{subscription.description}}</td>
                             <td>{{subscription.paid ? (subscription.subscriptionPrice | currency) : 'Free'}}</td>
                             <td>{{subscription.companyName}}</td>
-<!--                            <td v-bind:id="{{ 'sub-' + subscription.subscriptionId}}">{{subCtrl.getConvertedDate(subscription.dueDate)}} 
-                                {{subCtrl.getSubscriptionStatus(subscription)}}
-                                <button class="raise" v-bind:id="{{ 'renew-' + subscription.subscriptionId}}" @click.prevent="renewSubscription(subscription)">Renew</button>
+                            <td v-bind:id="'sub-' + subscription.subscriptionId">{{getConvertedDate(subscription.dueDate)}} 
+                                {{getSubStatus(subscription)}}
+                                <button class="raise" v-bind:id="'renew-' + subscription.subscriptionId" @click.prevent="renewSub(subscription)">Renew</button>
                             </td>
-                            <td>
-                            (in {{subCtrl.daysToToday(subscription.dueDate)}} day{{subCtrl.daysToToday(subscription.dueDate) > 1 ? 's' : ''}})
+<!--                            (in {{daysToToday(subscription.dueDate)}} day{{daysToToday(subscription.dueDate) > 1 || daysToToday(subscription.dueDate) < 1 ? 's' : ''}})
                             </td>-->
                             <td>
                                 <div>
