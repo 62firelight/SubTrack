@@ -89,11 +89,32 @@ const app = Vue.createApp({
         },
 
         updateSub(subscription) {
-
+            axios.put(updateSubApi({'id': subscription.subscriptionId}), subscription)
+                    .then(response => {
+                        this.getSubs();
+                        window.location = 'home.html';
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    });
         },
 
         renewSub(subscription) {
-            alert('renew sub');
+            var newDueDate = new Date(subscription.dueDate);
+            var today = new Date();
+
+            newDueDate.setDate(newDueDate.getDate() - 1);
+
+            // update the due date so that it is no longer expired
+            while (newDueDate < today) {
+                newDueDate.setMonth(newDueDate.getMonth() + 1);
+            }
+
+            var newDueDateString = newDueDate.toISOString();
+            subscription.dueDate = newDueDateString;
+
+            this.updateSub(subscription);
         },
 
         getSubStatus(subscription) {
@@ -127,7 +148,7 @@ const app = Vue.createApp({
                 }
             } else {
                 status = "(expired)";
-                
+
                 if (statusElement != null) {
                     statusElement.style.color = "red";
                 }
