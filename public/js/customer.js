@@ -52,4 +52,7 @@ const app = Vue.createApp({
     
 });
 
+import { NavigationMenu } from './navigation.js';
+app.component('navigation', NavigationMenu);
+
 app.mount("#content");
