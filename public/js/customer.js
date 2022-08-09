@@ -14,12 +14,17 @@ const app = Vue.createApp({
 
     data() {
         return {
-            customer: new Object()
+            customer: new Object(),
+            updateMessage: new String()
         }
     },
 
+    computed: Vuex.mapState({
+        customerToUpdate: 'customer'
+    }),
+
     mounted() {
-//        alert('loaded');
+
     },
 
     methods: {
@@ -48,14 +53,6 @@ const app = Vue.createApp({
 //                        console.log(error);
                         alert('Wrong username and/or password');
                     })
-        },
-
-        checkSignIn() {
-
-        },
-
-        signOut() {
-
         },
 
         deleteCustomer(customer) {
