@@ -4,53 +4,53 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html ng-app="SubTrek">
+<html>
     <head>
-        <script src="js/angular.js"></script>
-        <script src="js/angular-resource.js"></script>
-        <script src="js/ngStorage.js"></script>
-        <script src="js/SubTrek.js"></script>
+        <script src="js/external/vue.global.js"></script>
+        <script src="js/external/vuex.global.js"></script>
+        <script src="js/external/vuex-persistedstate.umd.js"></script>
+        <script src="js/external/axios.js"></script>
         <title>Create Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/SubTrack.css">
     </head>
-    
+
     <body>
-        
-         <h1> Create Account </h1>
-         <div align="center" ng-include="'menu.html'"></div>
-         <hr>
-         <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)"  class="login-form">
-            <label for=“username”>Username:</label>
-            <input type="text" ng-model="customer.username" required>
-            <br>
-            
-            <label for=“firstName”>First Name:</label>
-            <input type="text" ng-model="customer.firstName" required>
-            <br>
-            
-            <label for=“lastName”>Last Name:</label>
-            <input type="text" ng-model="customer.lastName" required>
-            <br>
-            
-            <label for=“password”>Password:</label>
-            <input type="password" ng-model="customer.password" required>
-            <br>
-            
-            <label for=“phoneNumber”>Phone</label>
-            <input type="text" ng-model="customer.phoneNumber" required>
-            <br>
-            
-            <label for=“emailAddress”>Email:</label>
-            <input type="email" ng-model="customer.emailAddress" required>
-            <br><br>
-           
-            
-            
-            <center><button type="submit" class="raise">Create Account</button></center>
-        </form>
-    </center>
+        <main id="content">
+            <h1> Create Account </h1>
+            <navigation></navigation>
+            <hr>
+            <form @submit.prevent="registerCustomer(customer)" class="login-form">
+                <label for=“username”>Username:</label>
+                <input type="text" v-model="customer.username" required>
+                <br>
+
+                <label for=“firstName”>First Name:</label>
+                <input type="text" v-model="customer.firstName" required>
+                <br>
+
+                <label for=“lastName”>Last Name:</label>
+                <input type="text" v-model="customer.lastName" required>
+                <br>
+
+                <label for=“password”>Password:</label>
+                <input type="password" v-model="customer.password" required>
+                <br>
+
+                <label for=“phoneNumber”>Phone</label>
+                <input type="text" v-model="customer.phoneNumber" required>
+                <br>
+
+                <label for=“emailAddress”>Email:</label>
+                <input type="email" v-model="customer.emailAddress" required>
+                <br><br>
+
+                <center><button type="submit" class="raise">Create Account</button></center>
+            </form>
+        </main>
+
+        <script type="module" src="js/customer.js"></script>
     </body>
 </html>
 

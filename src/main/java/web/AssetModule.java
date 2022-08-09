@@ -17,6 +17,7 @@ public class AssetModule extends Jooby{
         assets("/*.html");
         assets("/css/*.css");
         assets("/js/*.js");
+        assets("/js/external/*.js");
         assets("/images/*.png");
         assets("/images/*.jpg");
 
