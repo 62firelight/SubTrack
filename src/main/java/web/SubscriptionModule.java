@@ -120,7 +120,9 @@ public class SubscriptionModule extends Jooby {
 
         get("/api/total/{username}", ctx -> {
             String username = ctx.path("username").value();
-            return new Total(subscriptionDao.getTotal(username));
+            Total total = subscriptionDao.getTotal(username); 
+            
+            return total;
         });
 
         put("/api/subscriptions/{id}", ctx -> {

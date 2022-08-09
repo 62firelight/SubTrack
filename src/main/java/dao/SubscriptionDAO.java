@@ -6,7 +6,7 @@
 package dao;
 
 import domain.Subscription;
-import java.math.BigDecimal;
+import domain.Total;
 import java.util.Collection;
 
 /**
@@ -31,5 +31,5 @@ public interface SubscriptionDAO {
     
     Collection<Subscription> sortAscending(String username);
     
-    BigDecimal getTotal(String username);
+    Total getTotal(String username);
 }

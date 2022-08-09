@@ -7,6 +7,7 @@ package dao;
 
 import domain.Customer;
 import domain.Subscription;
+import domain.Total;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
@@ -323,7 +324,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     }
     
     @Override
-    public BigDecimal getTotal(String username){
+    public Total getTotal(String username){
         String sql = "SELECT subscription_price FROM SUBSCRIPTION " + 
                 "inner join Customer using (customer_ID) where username = ?";
         try (
@@ -334,12 +335,15 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
             
             ResultSet rs = stmt.executeQuery();
             
-            BigDecimal total = new BigDecimal(0);
+            BigDecimal totalValue = new BigDecimal(0);
             
-            while(rs.next()){
+            while (rs.next()) {
                 BigDecimal subPrice = rs.getBigDecimal("Subscription_Price");
-                total = total.add(subPrice);
+                totalValue = totalValue.add(subPrice);
             }
+            
+            Total total = new Total(totalValue);
+            
             return total;
         }catch(SQLException ex){
             throw new DAOException(ex.getMessage(), ex);
