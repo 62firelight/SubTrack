@@ -10,6 +10,7 @@ package dao;
  * @author trbay
  */
 public class DAOException extends RuntimeException {
+
     public DAOException(String reason) {
         super(reason);
     }
@@ -18,4 +19,3 @@ public class DAOException extends RuntimeException {
         super(reason, cause);
     }
 }
-

@@ -60,5 +60,5 @@ public final class CustomerCollectionsDAO implements CustomerDAO {
     public void updateCustomer(Customer customer) {
         customers.put(customer.getUsername(), customer);
     }
-    
+
 }

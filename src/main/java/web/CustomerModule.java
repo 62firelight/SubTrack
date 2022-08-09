@@ -7,46 +7,47 @@ package web;
 
 import dao.CustomerDAO;
 import domain.Customer;
-import org.jooby.Jooby;
-import org.jooby.Result;
-import org.jooby.Status;
+import io.jooby.Jooby;
+import io.jooby.StatusCode;
 
 /**
  *
  * @author yeah2
  */
-public class CustomerModule extends Jooby{
-    public CustomerModule(CustomerDAO customerDao){
-        /*get("/api/customers/:username", () -> customerDao.getCustomer(username));
-        */get("/api/customers/:username", (req) -> {
-            String username = req.param("username").value();
-            if(customerDao.getCustomer(username) == null){
-                return new Result().status(Status.NOT_FOUND);
-            }else{
+public class CustomerModule extends Jooby {
+
+    public CustomerModule(CustomerDAO customerDao) {
+
+        get("/api/customers/{username}", ctx -> {
+            String username = ctx.path("username").value();
+            if (customerDao.getCustomer(username) == null) {
+                return ctx.send(StatusCode.NOT_FOUND);
+            } else {
                 return customerDao.getCustomer(username);
             }
         });
-        post("/api/register", (req, rsp) -> {
-            Customer customer = req.body().to(Customer.class);
+
+        post("/api/register", ctx -> {
+            Customer customer = ctx.body().to(Customer.class);
             customerDao.saveCustomer(customer);
-            rsp.status(Status.CREATED);
+            return ctx.send(StatusCode.CREATED);
         });
-        
-        put("/api/customers/:username", (req, rsp) -> {
-            String username = req.param("username").value();
-            Customer customer = req.body().to(Customer.class);
+
+        put("/api/customers/{username}", ctx -> {
+            String username = ctx.path("username").value();
+            Customer customer = ctx.body().to(Customer.class);
 //            Customer customer = customerDao.getCustomer(username);
 
             customerDao.updateCustomer(customer);
-            rsp.status(Status.NO_CONTENT);
+            return ctx.send(StatusCode.NO_CONTENT);
         });
-        
-        delete("/api/customers/:username", (req, rsp) -> {
-            String username = req.param("username").value();
+
+        delete("/api/customers/{username}", ctx -> {
+            String username = ctx.path("username").value();
             Customer customer = customerDao.getCustomer(username);
 
             customerDao.deleteCustomer(customer);
-            rsp.status(Status.NO_CONTENT);
+            return ctx.send(StatusCode.NO_CONTENT);
         });
     }
 }

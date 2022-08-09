@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @author Sayyed
  */
 public class Total {
-    
+
     private BigDecimal value;
 
     public Total(BigDecimal value) {
@@ -30,5 +30,4 @@ public class Total {
         this.value = value;
     }
 
-    
 }

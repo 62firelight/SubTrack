@@ -41,10 +41,11 @@ public class Subscription {
         this.dueDate = dueDate;
         this.issueDate = issueDate;
         customerId = customer.getCustomerId();
-    
-}
-@Override
-        public String toString() {
+
+    }
+
+    @Override
+    public String toString() {
         return "Subscription{" + "subscriptionId=" + subscriptionId + ", name=" + name + ", paid=" + paid + ", category=" + category + ", subscriptionPrice=" + subscriptionPrice + ", description=" + description + ", companyName=" + companyName + ", dueDate=" + dueDate + ", issueDate=" + issueDate + ", customer=" + customer + '}';
     }
 
