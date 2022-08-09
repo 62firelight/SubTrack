@@ -44,7 +44,7 @@ and open the template in the editor.
                         <tr v-for="subscription in subscriptions">
                             <td>{{subscription.name}}</td>
                             <td>{{subscription.description}}</td>
-                            <td>{{subscription.paid ? (subscription.subscriptionPrice | currency) : 'Free'}}</td>
+                            <td>{{subscription.paid ? formatCurrency(subscription.subscriptionPrice) : 'Free'}}</td>
                             <td>{{subscription.companyName}}</td>
                             <td v-bind:id="'sub-' + subscription.subscriptionId">{{getConvertedDate(subscription.dueDate)}} 
                                 {{getSubStatus(subscription)}}
