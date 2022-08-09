@@ -26,8 +26,8 @@ const app = Vue.createApp({
             welcome: `Welcome. The current date is ${(new Date()).toLocaleDateString()}.`,
             categories: new Array(),
             subscriptions: new Array(),
-            subscription: new Object(),
-
+            subscription: new Object(),            
+            reminderThreshold: 3,
             total: new Object()
         }
     },
@@ -130,42 +130,26 @@ const app = Vue.createApp({
 
         getSubStatus(subscription) {
             // calculate number of days remaining
-            var numberOfDays = this.daysToToday(subscription.dueDate);
+            let numberOfDays = this.daysToToday(subscription.dueDate);
 
             // decide whether to add an 's' or not
-            var plurality = numberOfDays > 1 ? 's' : '';
+            let plurality = numberOfDays > 1 ? 's' : '';
 
-            // declare and initialize status variables
-            var status = "error";
-            var statusElement = document.getElementById("sub-" + subscription.subscriptionId);
-            var renewElement = document.getElementById("renew-" + subscription.subscriptionId);
-
-            // 3 days before reminder
-            var reminderThreshold = 3;
+            // initialize status string
+            let status = "error";
 
             if (numberOfDays > 0) {
                 status = "(in " + numberOfDays + " day" + plurality + ")";
-
-                // check for null to avoid errors
-                if (renewElement != null) {
-                    // hide the Renew button for non-expired subs
-                    renewElement.style.display = "none";
-                }
-
-                if (numberOfDays > reminderThreshold) {
-                    //statusElement.style.color = "green";
-                } else {
-                    statusElement.style.color = "orange"; // dark orange
-                }
             } else {
                 status = "(expired)";
-
-                if (statusElement != null) {
-                    statusElement.style.color = "red";
-                }
             }
 
             return status;
+        },
+        
+        getDateColor(subscription) {
+            let numberOfDays = this.daysToToday(subscription.dueDate);
+            return ((numberOfDays <= this.reminderThreshold) ? (numberOfDays <= 0 ? 'red' : 'orange') : 'white');
         },
 
         getConvertedDate(date) {
