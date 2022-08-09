@@ -27,7 +27,7 @@ const app = Vue.createApp({
             welcome: new String(),
             categories: new Array(),
             subscriptions: new Array(),
-            subscription: new Object(),            
+            subscription: new Object(),
             reminderThreshold: 3,
             total: new Object()
         }
@@ -44,13 +44,15 @@ const app = Vue.createApp({
     },
 
     mounted() {
-        // set current date
-        this.welcome = `Welcome. The current date is ${this.currentDate.toLocaleDateString()}.`;
-       
         if (this.signedIn) {
+            // set current date
+            this.welcome = `Welcome ${this.customer.username}. The current date is ${this.currentDate.toLocaleDateString()}.`;
+
             this.getSubs();
             this.getCategories();
             this.getTotal();
+        } else {
+            this.welcome = 'Welcome. Hover over the Menu and click "Sign In" to get started.';
         }
     },
 
@@ -107,7 +109,7 @@ const app = Vue.createApp({
                         alert('An error has occurred - check the console for details');
                     });
         },
-        
+
         redirectToUpdate(subscription) {
             dataStore.commit('updateSub', subscription);
             window.location = 'updatesub.html';
@@ -148,7 +150,7 @@ const app = Vue.createApp({
 
             return status;
         },
-        
+
         getDateColor(subscription) {
             let numberOfDays = this.daysToToday(subscription.dueDate);
             return ((numberOfDays <= this.reminderThreshold) ? (numberOfDays <= 0 ? 'red' : 'orange') : 'white');
@@ -195,7 +197,7 @@ const app = Vue.createApp({
                         alert('An error has occurred - check the console for details');
                     });
         },
-        
+
         getTotal() {
             axios.get(totalApi({'username': this.customer.username}))
                     .then(response => {
@@ -219,8 +221,8 @@ const app = Vue.createApp({
         }
 
     },
-    
-    mixins: [ NumberFormatter ]
+
+    mixins: [NumberFormatter]
 });
 
 import { dataStore } from './data-store.js';
