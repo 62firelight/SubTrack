@@ -31,10 +31,11 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
     }
-    
-    public Customer(){
-    
+
+    public Customer() {
+
     }
+
     @Override
     public String toString() {
         return "Customer{" + "customerId=" + customerId + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", phoneNumber=" + phoneNumber + ", emailAddress=" + emailAddress + '}';

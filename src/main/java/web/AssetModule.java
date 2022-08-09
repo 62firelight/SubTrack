@@ -5,26 +5,28 @@
  */
 package web;
 
-import org.jooby.Jooby;
-import org.jooby.Results;
+import io.jooby.Jooby;
+import io.jooby.Route;
+import java.nio.file.Paths;
 
 /**
  *
  * @author yeah2
  */
-public class AssetModule extends Jooby{
-      public AssetModule() {
-        assets("/*.html");
-        assets("/css/*.css");
-        assets("/js/*.js");
-        assets("/js/external/*.js");
-        assets("/images/*.png");
-        assets("/images/*.jpg");
+public class AssetModule extends Jooby {
+
+    public AssetModule() {
+        // prevent 404 errors due to browsers requesting favicons
+        get("/favicon.ico", Route.FAVICON);
 
         // make index.html the default page
-        assets("/", "home.html");
+        assets("/", Paths.get("public/home.html"));
 
-        // prevent 404 errors due to browsers requesting favicons
-        get("/favicon.ico", () -> Results.noContent());
+        assets("/*", Paths.get("public"));
+        assets("/css/*.css", Paths.get("public/css"));
+        assets("/js/*.js", Paths.get("public/js"));
+        assets("/js/external/*.js", Paths.get("public/js/external"));
+//        assets("/images/*.png", Paths.get("public/images"));
+//        assets("/images/*.jpg", Paths.get("public/images"));
     }
 }

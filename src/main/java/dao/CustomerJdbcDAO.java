@@ -17,14 +17,15 @@ import java.sql.Statement;
 // *
 // * @author trbay
 // */
+
 public class CustomerJdbcDAO implements CustomerDAO {
-     private String url = "jdbc:h2:tcp://localhost/info310proj";
+
+    private String url = "jdbc:h2:tcp://localhost/info310proj";
 
     public CustomerJdbcDAO() {
     }
 
     public CustomerJdbcDAO(String url) {
-
         this.url = url;
     }
 
@@ -39,14 +40,12 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 PreparedStatement stmt = dbCon.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 
             //ResultSet rs = stmt.getGeneratedKeys();
-
             stmt.setString(1, customer.getUsername());
             stmt.setString(2, customer.getFirstName());
             stmt.setString(3, customer.getLastName());
             stmt.setString(4, ScryptHelper.hash(customer.getPassword()).toString());
             stmt.setString(5, customer.getPhoneNumber());
             stmt.setString(6, customer.getEmailAddress());
-            
 
             stmt.executeUpdate();
             System.out.println("Saving customer: " + customer);
@@ -58,7 +57,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public Customer getCustomer(String username) {
-         String sql = "select * from Customer where Username = ?";
+        String sql = "select * from Customer where Username = ?";
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
@@ -73,7 +72,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 String lastname = rs.getString("Lastname");
                 String phoneNumber = rs.getString("Phone_Number");
                 String emailAddress = rs.getString("Email_Address");
-           
+
                 Customer cust1 = new Customer(id, username, firstname, lastname, password, phoneNumber, emailAddress);
                 return cust1;
             }
@@ -86,12 +85,12 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public Boolean validateCredentials(String username, String password) {
-         String sql = "select Password from Customer where Username = ?";
+        String sql = "select Password from Customer where Username = ?";
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, username);
-            
+
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -112,21 +111,18 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void deleteCustomer(Customer customer) {
-         String sql = "delete from Customer where Username = ?";
-        try(
-            // get a connection to the database
-            Connection dbCon = DbConnection.getConnection(url);
-
-            // create the statement
-            PreparedStatement stmt = dbCon.prepareStatement(sql);
-        ) {
+        String sql = "delete from Customer where Username = ?";
+        try (
+                // get a connection to the database
+                Connection dbCon = DbConnection.getConnection(url);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, customer.getUsername());
             stmt.executeUpdate();  // execute the statement
-            
-        }catch(SQLException ex){
+
+        } catch (SQLException ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -137,8 +133,8 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 + "where Customer_ID = ?";
         try (
                 // get a connection to the database
-                 Connection dbCon = DbConnection.getConnection(url); // create the statement
-                  PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+                Connection dbCon = DbConnection.getConnection(url); // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, customer.getFirstName());
             stmt.setString(2, customer.getLastName());
             stmt.setString(3, ScryptHelper.hash(customer.getPassword()).toString());

@@ -98,11 +98,11 @@ public class CustomerDAOTest {
         CustDAO.saveCustomer(cust2);
         Customer retrievedNext = CustDAO.getCustomer(cust2.getUsername());
         assertThat("check if cust2 was successfully saved to dao", cust2, samePropertyValuesAs(retrievedNext, "customerId", "password"));
-        
+
         // check that hashed passwords are the same
         String hash = retrieved.getPassword();
         assertTrue(ScryptHelper.check(hash, cust1.getPassword()));
-        
+
         String hashNext = retrievedNext.getPassword();
         assertTrue(ScryptHelper.check(hashNext, cust2.getPassword()));
     }

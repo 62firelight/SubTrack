@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 import domain.Customer;
 import domain.Subscription;
 import java.math.BigDecimal;
@@ -28,12 +27,12 @@ public class TestClass {
 
     @BeforeEach
     public void setUp() {
-        
+
     }
 
     @AfterEach
     public void tearDown() {
-       
+
     }
 
     @Test

@@ -6,7 +6,7 @@
 package dao;
 
 import domain.Subscription;
-import java.math.BigDecimal;
+import domain.Total;
 import java.util.Collection;
 
 /**
@@ -18,18 +18,18 @@ public interface SubscriptionDAO {
     void saveSubscription(Subscription subscription);
 
     Collection<Subscription> getSubscriptionsByUsername(String username);
-    
+
     Subscription getSubscriptionById(Integer id);
-    
+
     void deleteSubscription(Subscription subscription);
-    
+
     void updateSubscription(Subscription subscription);
-    
+
     Collection<String> getCategories(String username);
-    
+
     Collection<Subscription> filterByCategory(String category, String username);
-    
+
     Collection<Subscription> sortAscending(String username);
-    
-    BigDecimal getTotal(String username);
+
+    Total getTotal(String username);
 }
