@@ -56,11 +56,25 @@ const app = Vue.createApp({
         },
 
         deleteCustomer(customer) {
-
+            axios.delete(deleteAccApi({'username': this.customer.username}))
+                    .then(response => {
+                        window.location = 'home.html';
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    })
         },
 
         updateCustomer(customer) {
+            axios.update(updateAccApi({'username': this.customer.username}), customer)
+                    .then(response => {
 
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    })
         }
 
     }

@@ -128,7 +128,7 @@ const app = Vue.createApp({
 
             var newDueDateString = newDueDate.toISOString();
             subscription.dueDate = newDueDateString;
-
+            
             this.updateSub(subscription);
         },
 
