@@ -8,38 +8,38 @@ import dao.SubscriptionDAO;
 import domain.Customer;
 import domain.Subscription;
 import domain.Total;
+import io.jooby.Jooby;
+import io.jooby.StatusCode;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
-import org.jooby.Jooby;
-import org.jooby.Result;
-import org.jooby.Status;
 
 /**
  *
  * @author emmabrothers
  */
 public class SubscriptionModule extends Jooby {
-    // saveSubscription
-    // getSubscriptionsByUsername
 
     public SubscriptionModule(SubscriptionDAO subscriptionDao) {
-        get("/api/subscriptions/:username", (req) -> {
-            String username = req.param("username").value();
-            if (subscriptionDao.getSubscriptionsByUsername(username) == null) {
-                return new Result().status(Status.NOT_FOUND);
+        get("/api/subscriptions/{username}", ctx -> {
+            String username = ctx.path("username").value();
+            Collection<Subscription> subs = subscriptionDao.getSubscriptionsByUsername(username);
+            
+            if (subs == null) {
+                return ctx.send(StatusCode.NOT_FOUND);
             } else {
-                return subscriptionDao.getSubscriptionsByUsername(username);
+                return subs;
             }
         });
 
-        post("/api/subscriptions", (req, rsp) -> {
-            Subscription subscription = req.body().to(Subscription.class);
+        post("/api/subscriptions", ctx -> {
+            Subscription subscription = ctx.body().to(Subscription.class);
 
             // perform date conversion to avoid errors when storing in database
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
@@ -53,15 +53,13 @@ public class SubscriptionModule extends Jooby {
             }
 
             subscriptionDao.saveSubscription(subscription);
-            rsp.status(Status.CREATED);
-
+          
             Customer c = subscription.getCustomer();
             String customerEmail = c.getEmailAddress();
             String fName = c.getFirstName();
             String lName = c.getLastName();
             String subName = subscription.getName();
             String date = subscription.getDueDate();
-
             CompletableFuture.runAsync(() -> {
                 try {
                     Email email = new SimpleEmail();
@@ -89,38 +87,44 @@ public class SubscriptionModule extends Jooby {
                     System.out.println("Don't have FakeSMTP? Download it from http://nilhcem.com/FakeSMTP/");
                 }
             });
+            
+            return ctx.send(StatusCode.CREATED);
         });
 
-        get("api/categories/:username", (req) -> {
-            String username = req.param("username").value();
-            if (subscriptionDao.getCategories(username) == null) {
-                return new Result().status(Status.NOT_FOUND);
+        get("/api/categories/{username}", ctx -> {
+            String username = ctx.path("username").value();
+            Collection<String> subs = subscriptionDao.getCategories(username);
+            
+            if (subs == null) {
+                return ctx.send(StatusCode.NOT_FOUND);
             } else {
                 return subscriptionDao.getCategories(username);
             }
         });
-        get("api/categories/:category/:username", (req) -> {
-            String username = req.param("username").value();
-            String category = req.param("category").value();
-            return subscriptionDao.filterByCategory(category,username);
+        
+        get("/api/categories/{category}/{username}", ctx -> {
+            String category = ctx.path("category").value();
+            String username = ctx.path("username").value();
+            Collection<Subscription> subs = subscriptionDao.filterByCategory(category, username);
+            
+            return subs;
         });
-        delete("/api/subscriptions/:id", (req, rsp) -> {
-            Integer id = Integer.valueOf(req.param("id").value());
+        
+        delete("/api/subscriptions/{id}", ctx -> {
+            Integer id = Integer.valueOf(ctx.path("id").value());
             Subscription subscription = subscriptionDao.getSubscriptionById(id);
-
             subscriptionDao.deleteSubscription(subscription);
-            rsp.status(Status.NO_CONTENT);
+            
+            return ctx.send(StatusCode.NO_CONTENT);
         });
 
-        get("/api/total/:username", (req) -> {
-            String username = req.param("username").value();
+        get("/api/total/{username}", ctx -> {
+            String username = ctx.path("username").value();
             return new Total(subscriptionDao.getTotal(username));
         });
 
-        put("/api/subscriptions/:id", (req, rsp) -> {
-//            Integer id = Integer.valueOf(req.param("id").value());
-//            Subscription subscription = subscriptionDao.getSubscriptionById(id);
-            Subscription subscription = req.body().to(Subscription.class);
+        put("/api/subscriptions/{id}", ctx -> {
+            Subscription subscription = ctx.body().to(Subscription.class);
             
             // perform date conversion to avoid errors when storing in database
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
@@ -136,11 +140,11 @@ public class SubscriptionModule extends Jooby {
             }
 
             subscriptionDao.updateSubscription(subscription);
-            rsp.status(Status.NO_CONTENT);
+            return ctx.send(StatusCode.NO_CONTENT);
         });
         
-        get("api/sort/:username", (req)->{
-            String username = req.param("username").value();
+        get("/api/sort/{username}", ctx -> {
+            String username = ctx.path("username").value();
             return subscriptionDao.sortAscending(username);
         });
     }
