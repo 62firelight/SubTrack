@@ -52,7 +52,6 @@ public class SubscriptionsDAOTest {
     public void setUp() {
 
 //        subDAO = new SubscriptionCollectionsDAO();
-        
         // Haven't tested the JDBC DAO with any tests yet, but assume that will
         // all fail until shown otherwise
         custDAO = new CustomerJdbcDAO(url);
@@ -140,14 +139,14 @@ public class SubscriptionsDAOTest {
     @Test
     public void testGetSubscriptionByUsername() {
 
-        Collection<Subscription> collection = 
-                subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
+        Collection<Subscription> collection
+                = subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
         //assertThat(subDAO.hasItem(1));
         assertThat(collection, hasItem(sub1));
         assertThat(collection, hasItem(sub2));
         assertFalse(collection.contains(sub3));
     }
-    
+
     @Test
     public void testGetSubscriptionById() {
         assertThat(subDAO.getSubscriptionById(1000), samePropertyValuesAs(sub1, "subscriptionPrice"));
@@ -159,16 +158,16 @@ public class SubscriptionsDAOTest {
     public void testSaveSubscription() {
         //Testing a new user saving subscription, whilst another user exists already. Test of user Independence
         subDAO.saveSubscription(sub3);
-        Collection<Subscription> collection = 
-                subDAO.getSubscriptionsByUsername(sub3.getCustomer().getUsername());
+        Collection<Subscription> collection
+                = subDAO.getSubscriptionsByUsername(sub3.getCustomer().getUsername());
         assertTrue(collection.contains(sub3));
         assertFalse(collection.contains(sub2));
         assertFalse(collection.contains(sub1));
         System.out.println(sub3);
 
         //Testing the other independent user has saved items from setup
-        Collection<Subscription> collection2 = 
-                subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
+        Collection<Subscription> collection2
+                = subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
         assertThat(collection2, hasItem(sub1));
         assertThat(collection2, hasItem(sub2));
         assertFalse(collection2.contains(sub3));
@@ -178,8 +177,8 @@ public class SubscriptionsDAOTest {
     @Test
     public void testDeleteSubscription() {
         subDAO.deleteSubscription(sub1);
-        Collection<Subscription> collection = 
-                subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
+        Collection<Subscription> collection
+                = subDAO.getSubscriptionsByUsername(sub1.getCustomer().getUsername());
         assertTrue(collection.contains(sub2));
         assertFalse(collection.contains(sub1));
         //assertNull(CustDAO.getCustomer("bayta267"));
