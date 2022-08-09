@@ -66,7 +66,7 @@ button {
 }
 
 table{
-    border-bottom: 1px dotted black;
+    border-bottom: 1px solid white;
     margin: 0.8em auto;
     padding: 0.25em;
     text-align: left;
@@ -199,10 +199,10 @@ h3{
     color: #009B77;
 }
 
-hr{
+/*hr{
     padding: 5px;
     background-color: black;
-}
+}*/
 
 a{
     text-decoration: none;
@@ -259,11 +259,11 @@ a{
     color: white;
     background: #1f262e;
     border-radius: 10px;
-    box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109),
+/*    box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109),
         0 1px 1px rgba(128, 128, 128, 0.155),
         0 2.1px 2.1px rgba(128, 128, 128, 0.195),
         0 4.4px 4.4px rgba(128, 128, 128, 0.241),
-        0 12px 12px rgba(128, 128, 128, 0.35);
+        0 12px 12px rgba(128, 128, 128, 0.35);*/
 
     h1 {
         margin: 0 0 24px 0;
