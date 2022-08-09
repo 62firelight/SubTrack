@@ -23,7 +23,8 @@ const app = Vue.createApp({
 
     data() {
         return {
-            welcome: `Welcome. The current date is ${(new Date()).toLocaleDateString()}.`,
+            currentDate: new Date(),
+            welcome: new String(),
             categories: new Array(),
             subscriptions: new Array(),
             subscription: new Object(),            
@@ -43,13 +44,14 @@ const app = Vue.createApp({
     },
 
     mounted() {
+        // set current date
+        this.welcome = `Welcome. The current date is ${this.currentDate.toLocaleDateString()}.`;
+       
         if (this.signedIn) {
             this.getSubs();
             this.getCategories();
             this.getTotal();
         }
-        
-        console.log(this.subToUpdate);
     },
 
     methods: {
