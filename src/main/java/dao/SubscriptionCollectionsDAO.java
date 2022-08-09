@@ -26,7 +26,7 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
 
     @Override
     public void saveSubscription(Subscription subscription) {
-        subscriptions.put(subscription.getCustomer().getUsername(), 
+        subscriptions.put(subscription.getCustomer().getUsername(),
                 subscription);
         categories.add(subscription.getCategory());
         mmSub.put(subscription.getCategory(), subscription);
@@ -61,31 +61,29 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     public void updateSubscription(Subscription subscription) {
         subscriptions.put(subscription.getCustomer().getUsername(), subscription);
     }
-    
+
     @Override
-    public Collection<String> getCategories(String username){
-        
+    public Collection<String> getCategories(String username) {
         return categories;
     }
-    
+
     @Override
-    public Collection<Subscription> filterByCategory(String category, String username){
+    public Collection<Subscription> filterByCategory(String category, String username) {
         Collection<Subscription> subs = mmSub.get(category);
         return subs;
     }
-    
+
     @Override
-    public Total getTotal(String Username){
+    public Total getTotal(String Username) {
         BigDecimal totalValue = new BigDecimal(0);
         Total total = new Total(totalValue);
-        
+
         return total;
     }
-    
+
     @Override
-    public Collection<Subscription> sortAscending(String username){
-        
-        
+    public Collection<Subscription> sortAscending(String username) {
+
         return subscriptions.values();
     }
 }

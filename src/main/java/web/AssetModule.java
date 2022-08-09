@@ -9,8 +9,6 @@ import io.jooby.Jooby;
 import io.jooby.Route;
 import java.nio.file.Paths;
 
-
-
 /**
  *
  * @author yeah2
@@ -20,7 +18,7 @@ public class AssetModule extends Jooby {
     public AssetModule() {
         // prevent 404 errors due to browsers requesting favicons
         get("/favicon.ico", Route.FAVICON);
-        
+
         // make index.html the default page
         assets("/", Paths.get("public/home.html"));
 
