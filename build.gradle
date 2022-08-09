@@ -17,11 +17,16 @@ dependencies {
         implementation group: 'net.sf.oval', name: 'oval', version: '2.1.6'
         testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.+'
     testImplementation group: 'org.assertj', name: 'assertj-swing-junit', version: '3.+'
+    
     def joobyVer = '1.6.8'
     implementation group: 'org.jooby', name: 'jooby-netty', version: joobyVer
     implementation group: 'org.jooby', name: 'jooby-gson', version: joobyVer
     implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5'
     implementation group:'org.bouncycastle', name:'bcprov-jdk15on', version:'1.66'
+    
+    def jooby2Ver = '2.10.0'
+    implementation group: 'io.jooby', name: 'jooby-netty', version: jooby2Ver
+    implementation group: 'io.jooby', name: 'jooby-gson', version: jooby2Ver     
 }
 
 test {
