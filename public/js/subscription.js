@@ -27,6 +27,7 @@ const app = Vue.createApp({
             categories: new Array(),
             subscriptions: new Array(),
             subscription: new Object(),
+
             total: new Object()
         }
     },
@@ -36,7 +37,8 @@ const app = Vue.createApp({
             return this.customer != null;
         },
         ...Vuex.mapState({
-                customer: 'customer'
+                customer: 'customer',
+                subToUpdate: 'subToUpdate'
         })
     },
 
@@ -46,6 +48,8 @@ const app = Vue.createApp({
             this.getCategories();
             this.getTotal();
         }
+        
+        console.log(this.subToUpdate);
     },
 
     methods: {

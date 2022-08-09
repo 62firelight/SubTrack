@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html ng-app="SubTrek">
+<html>
     <head>
         <script src="js/external/vue.global.js"></script>
         <script src="js/external/vuex.global.js"></script>
@@ -21,8 +21,9 @@ and open the template in the editor.
             <navigation></navigation>
             <hr>
 
-            <form @submit.prevent="updateSubscription()" class="login-form">
+            <form @submit.prevent="updateSub(subToUpdate)" class="login-form">
                 <input type="hidden" v-model="subToUpdate.subscriptionId" required>
+                
                 <label for=“name”>Name:</label>
                 <input type="text" v-model="subToUpdate.name" required>
                 <br>
@@ -45,10 +46,8 @@ and open the template in the editor.
 
                 <label for=“dueDate”>Due Date:</label>
                 <input type="date" v-model="subToUpdate.dueDate" name="trip-start"
-                       min="2021-01-01" max="2021-12-31">
+                       min="2020-01-01" max="2030-12-31">
                 <br><br>
-
-
 
                 <button type="submit" class="raise">Update Subscription</button>
                 <!-- <a href="home.html"><button class=".button">Update Subscription</button></a> -->
