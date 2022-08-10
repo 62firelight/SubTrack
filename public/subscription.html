@@ -26,7 +26,10 @@ and open the template in the editor.
                 <br>
 
                 <label for=“category”>Category:</label>
-                <input type="text" v-model="subscription.category" required>
+                <input type="text" v-model="subscription.category" list="categoryList" required>
+                <datalist id="categoryList">
+                    <option v-for="category in categories">{{category}}</option>
+                </datalist>
                 <br>
 
                 <label for=“subscriptionPrice”>Price:</label>
@@ -48,7 +51,7 @@ and open the template in the editor.
                 <button class="raise" type="submit">Add Subscription</button>
             </form>
         </main>
-        
+
         <script type='module' src='js/subscription.js'></script>
     </body>
 </html>
