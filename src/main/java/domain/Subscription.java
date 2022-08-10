@@ -16,12 +16,12 @@ import java.util.Objects;
 public class Subscription {
 
     private Integer subscriptionId = 0;
-    private String name = "defaultName";
+    private String name = "Subscription";
     private Boolean paid = true; // rename this to paid?
-    private String category = "defaultCategory";
+    private String category = "General";
     private BigDecimal subscriptionPrice = new BigDecimal(0);
-    private String description = "defaultDescription";
-    private String companyName = "defaultCompanyName";
+    private String description = "No description provided.";
+    private String companyName = "No company provided.";
     private String dueDate = LocalDate.now().plusDays(30).toString();
     private String issueDate = LocalDate.now().toString();
 

@@ -27,7 +27,7 @@ create table Subscription(
     Subscription_Price decimal(10,2) not null,
     --subscriptionType varchar(50) not null,
     Category varchar(50) not null,
-    Company_Name varchar(100) not null,
+    Company_Name varchar(100),
     Description varchar(100),
     Issue_Date date,
     Due_Date date,

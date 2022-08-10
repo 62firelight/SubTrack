@@ -21,42 +21,42 @@ and open the template in the editor.
             <navigation></navigation>
             <hr>
             <form @submit.prevent="addSub()" class="login-form">
-                <label for=“name”>Name:</label>
+                <label for=“name”>Name</label>
                 <input type="text" v-model="subscription.name" list="nameList" required>
                 <datalist id="nameList">
                     <option v-for="subscription in subscriptions">{{subscription.name}}</option>
                 </datalist>
                 <br>
 
-                <label for=“category”>Category:</label>
+                <label for=“category”>Category</label>
                 <input type="text" v-model="subscription.category" list="categoryList" required>
                 <datalist id="categoryList">
                     <option v-for="category in categories">{{category}}</option>
                 </datalist>
                 <br>
 
-                <label for=“subscriptionPrice”>Price:</label>
-                <input type="text" v-model="subscription.subscriptionPrice" list="priceList" required>
+                <label for=“subscriptionPrice”>Price</label>
+                <input type="number" v-model="subscription.subscriptionPrice" list="priceList" required>
                 <datalist id="priceList">
                     <option v-for="subscription in subscriptions">{{subscription.subscriptionPrice}}</option>
                 </datalist>
                 <br>
 
-                <label for=“description”>Description:</label>
-                <input type="text" v-model="subscription.description" list="descriptionList" required>
+                <label for=“description”>Description <em>(optional)</em> </label>
+                <input type="text" v-model="subscription.description" list="descriptionList">
                 <datalist id="descriptionList">
                     <option v-for="subscription in subscriptions">{{subscription.description}}</option>
                 </datalist>
                 <br>
 
-                <label for=“companyName”>Company:</label>
-                <input type="text" v-model="subscription.companyName" list="companyList" required>
+                <label for=“companyName”>Company <em>(optional)</em></label> 
+                <input type="text" v-model="subscription.companyName" list="companyList">
                 <datalist id="companyList">
                     <option v-for="subscription in subscriptions">{{subscription.companyName}}</option>
                 </datalist>
                 <br>
 
-                <label for=“dueDate”>Due Date:</label>
+                <label for=“dueDate”>Due Date</label>
                 <input type="date" v-model="subscription.dueDate" name="trip-start"
                        min="2020-01-01" max="2030-12-31" list="dateList" required>
                 <datalist id="dateList">
