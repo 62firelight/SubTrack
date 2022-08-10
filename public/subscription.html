@@ -43,11 +43,17 @@ and open the template in the editor.
                 <br>
 
                 <label for=“description”>Description:</label>
-                <input type="text" v-model="subscription.description" required>
+                <input type="text" v-model="subscription.description" list="descriptionList" required>
+                <datalist id="descriptionList">
+                    <option v-for="subscription in subscriptions">{{subscription.description}}</option>
+                </datalist>
                 <br>
 
                 <label for=“companyName”>Company:</label>
-                <input type="text" v-model="subscription.companyName" required>
+                <input type="text" v-model="subscription.companyName" list="companyList" required>
+                <datalist id="companyList">
+                    <option v-for="subscription in subscriptions">{{subscription.companyName}}</option>
+                </datalist>
                 <br>
 
                 <label for=“dueDate”>Due Date:</label>
