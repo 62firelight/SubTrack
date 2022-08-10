@@ -29,7 +29,11 @@ const app = Vue.createApp({
             subscriptions: new Array(),
             subscription: new Object(),
             reminderThreshold: 3,
-            total: new Object()
+            total: new Object(),
+            
+            minDate: `${new Date().getFullYear()}-01-01`,
+            defaultDate: new Date().toISOString().slice(0, 10),
+            maxDate: `${new Date().getFullYear()}-12-31`
         }
     },
 
@@ -47,6 +51,7 @@ const app = Vue.createApp({
         if (this.signedIn) {
             // set current date
             this.welcome = `Welcome ${this.customer.username}. The current date is ${this.currentDate.toLocaleDateString()}.`;
+            this.subscription.dueDate = this.defaultDate;
 
             this.getSubs();
             this.getCategories();
@@ -101,6 +106,7 @@ const app = Vue.createApp({
         updateSub(subscription) {
             axios.put(updateSubApi({'id': subscription.subscriptionId}), subscription)
                     .then(response => {
+                        dataStore.commit("clearSubToUpdate");
                         this.getSubs();
                         window.location = 'home.html';
                     })
@@ -113,6 +119,7 @@ const app = Vue.createApp({
         redirectToUpdate(subscription) {
             dataStore.commit('updateSub', subscription);
             window.location = 'updatesub.html';
+//            window.location = 'subscription.html';
         },
 
         renewSub(subscription) {
