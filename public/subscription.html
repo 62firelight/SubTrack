@@ -22,7 +22,10 @@ and open the template in the editor.
             <hr>
             <form @submit.prevent="addSub()" class="login-form">
                 <label for=“name”>Name:</label>
-                <input type="text" v-model="subscription.name" required>
+                <input type="text" v-model="subscription.name" list="nameList" required>
+                <datalist id="nameList">
+                    <option v-for="subscription in subscriptions">{{subscription.name}}</option>
+                </datalist>
                 <br>
 
                 <label for=“category”>Category:</label>
@@ -33,7 +36,10 @@ and open the template in the editor.
                 <br>
 
                 <label for=“subscriptionPrice”>Price:</label>
-                <input type="text" v-model="subscription.subscriptionPrice" required>
+                <input type="text" v-model="subscription.subscriptionPrice" list="priceList" required>
+                <datalist id="priceList">
+                    <option v-for="subscription in subscriptions">{{subscription.subscriptionPrice}}</option>
+                </datalist>
                 <br>
 
                 <label for=“description”>Description:</label>
