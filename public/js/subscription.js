@@ -51,11 +51,15 @@ const app = Vue.createApp({
         if (this.signedIn) {
             // set current date
             this.welcome = `Welcome ${this.customer.username}. The current date is ${this.currentDate.toLocaleDateString()}.`;
-            this.subscription.dueDate = this.defaultDate;
-
+            
             this.getSubs();
             this.getCategories();
             this.getTotal();
+            
+            // set a default date when adding subscription
+            if (this.subscription.dueDate === undefined) {
+                this.subscription.dueDate = this.defaultDate;
+            }
         } else {
             this.welcome = 'Welcome. Hover over the Menu and click "Sign In" to get started.';
         }
