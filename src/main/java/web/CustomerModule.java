@@ -36,7 +36,6 @@ public class CustomerModule extends Jooby {
         put("/api/customers/{username}", ctx -> {
             String username = ctx.path("username").value();
             Customer customer = ctx.body().to(Customer.class);
-//            Customer customer = customerDao.getCustomer(username);
 
             customerDao.updateCustomer(customer);
             return ctx.send(StatusCode.NO_CONTENT);

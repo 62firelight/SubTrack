@@ -21,32 +21,32 @@ and open the template in the editor.
             <h1> My Account </h1>
             <navigation></navigation>
             <hr>
-            <form class="login-form">
+            <form @submit.prevent="updateCustomer(customerToUpdate)" class="login-form">
                 <center>
                     <input type="hidden" v-model="customerToUpdate.customerId" required>
 
                     <label for=“username”><strong>Username: </strong></label>
-                    <label>{{customerToUpdate.username}}</label>
+                    <input type="text" v-model="customerToUpdate.username" required>
                     <br>
 
                     <label for=“firstName”><strong>First Name: </strong></label>
-                    <label>{{customerToUpdate.firstName}}</label>
+                    <input type="text" v-model="customerToUpdate.firstName" required>
                     <br>
 
                     <label for=“lastName”><strong>Last Name: </strong></label>
-                    <label>{{customerToUpdate.lastName}}</label>
+                    <input type="text" v-model="customerToUpdate.lastName" required>
                     <br>
 
                     <label for=“phoneNumber”><strong>Phone: </strong></label>
-                    <label>{{customerToUpdate.phoneNumber}}</label>
+                    <input type="text" v-model="customerToUpdate.phoneNumber" required>
                     <br>
 
                     <label for=“emailAddress”><strong>Email: </strong></label>
-                    <label>{{customerToUpdate.emailAddress}}</label>
+                    <input type="email" v-model="customerToUpdate.emailAddress" required>
                     <br>
                     <br>
 
-                    <!--<button type="submit">Update Account</button></center>--> 
+                    <center><button type="submit">Update Account</button></center> 
                     {{updateMessage}}
                 </center>
                 <br>

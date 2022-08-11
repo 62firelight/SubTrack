@@ -56,9 +56,10 @@ const app = Vue.createApp({
         },
 
         updateCustomer(customer) {
-            axios.update(updateAccApi({'username': this.customer.username}), customer)
+            axios.put(updateAccApi({'username': customer.username}), customer)
                     .then(response => {
-
+                        // update customer stored in session storage
+                        dataStore.commit('signIn', customer);
                     })
                     .catch(error => {
                         console.log(error);

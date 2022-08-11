@@ -128,7 +128,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
     @Override
     public void updateCustomer(Customer customer) {
         String sql = "update Customer "
-                + "set Firstname = ?, Lastname = ?, Password = ?, Phone_Number = ?,"
+                + "set Firstname = ?, Lastname = ?, Phone_Number = ?,"
                 + "Email_Address = ?"
                 + "where Customer_ID = ?";
         try (
@@ -137,10 +137,10 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, customer.getFirstName());
             stmt.setString(2, customer.getLastName());
-            stmt.setString(3, ScryptHelper.hash(customer.getPassword()).toString());
-            stmt.setString(4, customer.getPhoneNumber());
-            stmt.setString(5, customer.getEmailAddress());
-            stmt.setInt(6, customer.getCustomerId());
+//            stmt.setString(3, ScryptHelper.hash(customer.getPassword()).toString());
+            stmt.setString(3, customer.getPhoneNumber());
+            stmt.setString(4, customer.getEmailAddress());
+            stmt.setInt(5, customer.getCustomerId());
             stmt.executeUpdate();  // execute the statement
 
         } catch (SQLException ex) {
