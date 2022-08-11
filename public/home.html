@@ -47,7 +47,7 @@ and open the template in the editor.
                             <td>{{subscription.companyName}}</td>
                             <td :style="{ 'color' : getDateColor(subscription) }">{{getConvertedDate(subscription.dueDate)}} 
                                 {{getSubStatus(subscription)}}
-                                <button class="raise" v-if='daysToToday(subscription.dueDate) <= 3' @click.prevent="renewSub(subscription)">Renew</button>
+                                <button class="raise" v-if='daysToToday(subscription.dueDate) <= 0' @click.prevent="renewSub(subscription)">Renew</button>
                             </td>
                             <td>
                                 <div>

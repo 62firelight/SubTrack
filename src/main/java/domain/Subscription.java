@@ -23,7 +23,7 @@ public class Subscription {
     private String description = "No description provided.";
     private String companyName = "No company provided.";
     private String dueDate = LocalDate.now().plusDays(30).toString();
-    private String issueDate = LocalDate.now().toString();
+    private String issueDate = dueDate;
 
     private Customer customer;
 

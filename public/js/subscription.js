@@ -92,9 +92,10 @@ const app = Vue.createApp({
         },
 
         updateSub(subscription) {
+            subscription.issueDate = subscription.dueDate;
+            
             axios.put(updateSubApi({'id': subscription.subscriptionId}), subscription)
                     .then(response => {
-                        dataStore.commit("clearSubToUpdate");
                         this.getSubs();
                         window.location = 'home.html';
                     })
@@ -134,20 +135,45 @@ const app = Vue.createApp({
             }
         },
 
+        /** 
+         * 
+         * Ensures that the subscription will renew in a cyclic manner using
+         * the issue date (AKA the original due date).
+         * 
+         * For example, a subscription that expires on the due date 15/8/2021
+         * and then gets renewed 12 times will have a new due date of 15/8/2022.
+         * 
+         */
         renewSub(subscription) {
-            var newDueDate = new Date(subscription.dueDate);
-            var today = new Date();
-
-            newDueDate.setDate(newDueDate.getDate() - 1);
-
-            // update the due date so that it is no longer expired
-            while (newDueDate < today) {
-                newDueDate.setMonth(newDueDate.getMonth() + 1);
+            let today = new Date();
+            let issueDate = new Date(subscription.issueDate);
+            let daysElapsed = Math.abs(this.daysToToday(subscription.issueDate));
+            
+            alert(`${daysElapsed} day(s) have passed since ${issueDate.toLocaleString()}.`);
+            
+            // find the right amount of days to add to the due date
+            let i = 1;
+            while (daysElapsed >= parseInt((365/12) * i)) {
+                i++;
             }
-
-            var newDueDateString = newDueDate.toISOString();
+            
+            // ensure that we are not under-adding to the due date
+            if (i > 1 && daysElapsed / parseInt((365/12) * (i - 1)) < 1){
+                i--;  
+            }
+            
+            let daysToAdd = parseInt((365/12) * i);
+//            if (daysToAdd / 365 > 1 && this.daysToToday(subscription.issueDate) > 365) {
+//                daysToAdd %= 365;
+//            }
+            alert(`Adding ${daysToAdd} days...`);
+            
+            // calculate new due date by adding days to the old due date
+            let newDueDate = new Date(subscription.dueDate);
+            newDueDate.setDate(newDueDate.getDate() + daysToAdd)
+            let newDueDateString = newDueDate.toISOString();
             subscription.dueDate = newDueDateString;
-
+            
             this.updateSub(subscription);
         },
 

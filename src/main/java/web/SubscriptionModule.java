@@ -44,7 +44,7 @@ public class SubscriptionModule extends Jooby {
             // perform date conversion to avoid errors when storing in database
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
 //            dueDate = dueDate.plusDays(1); // for accurate date
-            System.out.println(dueDate);
+//            System.out.println(dueDate);
             subscription.setDueDate(dueDate.toString());
 
             // decide whether a subscription is paid or not based on price
@@ -129,8 +129,11 @@ public class SubscriptionModule extends Jooby {
             // perform date conversion to avoid errors when storing in database
             LocalDate dueDate = LocalDate.parse(subscription.getDueDate().substring(0, 10));
 //            dueDate = dueDate.plusDays(1); // for accurate date
-            System.out.println(dueDate);
+//            System.out.println(dueDate);
             subscription.setDueDate(dueDate.toString());
+            
+            LocalDate issueDate = LocalDate.parse(subscription.getIssueDate().substring(0, 10));
+            subscription.setIssueDate(issueDate.toString());
 
             // decide whether a subscription is paid or not based on price
             if (subscription.getSubscriptionPrice().equals(BigDecimal.ZERO)) {

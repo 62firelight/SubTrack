@@ -52,7 +52,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
             stmt.setString(5, subscription.getDescription());
             stmt.setString(6, subscription.getCompanyName());
             stmt.setString(7, subscription.getDueDate().toString());
-            stmt.setString(8, subscription.getIssueDate().toString());
+            stmt.setString(8, subscription.getDueDate().toString());
             stmt.setInt(9, subscription.getCustomer().getCustomerId());
 
             stmt.executeUpdate();
@@ -203,7 +203,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
     public void updateSubscription(Subscription subscription) {
         String sql = "update Subscription "
                 + "set Name = ?, Paid = ?, Category = ?, Subscription_Price = ?,"
-                + "Description = ?, Company_Name = ?, Due_Date = ?"
+                + "Description = ?, Company_Name = ?, Due_Date = ?, Issue_Date = ?"
                 + "where Subscription_ID = ?";
         try (
                 // get a connection to the database
@@ -216,8 +216,8 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
             stmt.setString(5, subscription.getDescription());
             stmt.setString(6, subscription.getCompanyName());
             stmt.setString(7, subscription.getDueDate().toString());
-//            stmt.setString(8, subscription.getIssueDate().toString());
-            stmt.setInt(8, subscription.getSubscriptionId());
+            stmt.setString(8, subscription.getIssueDate().toString());
+            stmt.setInt(9, subscription.getSubscriptionId());
             stmt.executeUpdate();  // execute the statement
 
         } catch (SQLException ex) {
