@@ -145,11 +145,10 @@ const app = Vue.createApp({
          * 
          */
         renewSub(subscription) {
-            let today = new Date();
             let issueDate = new Date(subscription.issueDate);
             let daysElapsed = Math.abs(this.daysToToday(subscription.issueDate));
             
-            alert(`${daysElapsed} day(s) have passed since ${issueDate.toLocaleString()}.`);
+//            alert(`${daysElapsed} day(s) have passed since ${issueDate.toLocaleString()}.`);
             
             // find the right amount of days to add to the due date
             let i = 1;
@@ -166,7 +165,7 @@ const app = Vue.createApp({
 //            if (daysToAdd / 365 > 1 && this.daysToToday(subscription.issueDate) > 365) {
 //                daysToAdd %= 365;
 //            }
-            alert(`Adding ${daysToAdd} days...`);
+//            alert(`Adding ${daysToAdd} days...`);
             
             // calculate new due date by adding days to the old due date
             let newDueDate = new Date(subscription.dueDate);
