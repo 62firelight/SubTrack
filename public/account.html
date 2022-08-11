@@ -22,35 +22,33 @@ and open the template in the editor.
             <navigation></navigation>
             <hr>
             <form @submit.prevent="updateCustomer(customerToUpdate)" class="login-form">
-                <center>
                     <input type="hidden" v-model="customerToUpdate.customerId" required>
 
-                    <label for=“username”><strong>Username: </strong></label>
+                    <label for=“username”><strong>Username</strong></label>
                     <input type="text" v-model="customerToUpdate.username" required>
                     <br>
 
-                    <label for=“firstName”><strong>First Name: </strong></label>
+                    <label for=“firstName”><strong>First Name</strong></label>
                     <input type="text" v-model="customerToUpdate.firstName" required>
                     <br>
 
-                    <label for=“lastName”><strong>Last Name: </strong></label>
+                    <label for=“lastName”><strong>Last Name</strong></label>
                     <input type="text" v-model="customerToUpdate.lastName" required>
                     <br>
 
-                    <label for=“phoneNumber”><strong>Phone: </strong></label>
+                    <label for=“phoneNumber”><strong>Phone</strong></label>
                     <input type="text" v-model="customerToUpdate.phoneNumber" required>
                     <br>
 
-                    <label for=“emailAddress”><strong>Email: </strong></label>
+                    <label for=“emailAddress”><strong>Email</strong></label>
                     <input type="email" v-model="customerToUpdate.emailAddress" required>
                     <br>
                     <br>
 
-                    <center><button type="submit">Update Account</button></center> 
+                    <button class="raise" type="submit">Update Account</button>
                     {{updateMessage}}
-                </center>
                 <br>
-                <center><button class="del" type="submit" @click.prevent="openDeleteDialog(customerToUpdate)">Delete Account</button></center>
+                <button class="del" type="submit" @click.prevent="openDeleteDialog(customerToUpdate)">Delete Account</button>
             </form>
         </main>
 

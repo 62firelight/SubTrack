@@ -24,23 +24,31 @@ and open the template in the editor.
 
             </div>
             <hr>
-            <div class="login-form">
+            <div>
                 <!--<p>{{signInMessage}}</p>-->
-                <center>
-                    <form @submit.prevent="signIn()" class='form'>
-                        <fieldset>
-                            <legend align='left'>Account Details</legend>
-                            <label for='uname'>Username:</label>
+                <form @submit.prevent="signIn()" class='login-form'>
+                    <fieldset>
+                        <legend align='left'>Account Details</legend>
+
+                        <div class="login-input">
+                            <label for='uname'><strong>Username</strong></label>
+                            <br>
                             <input type="text" v-model="customer.username" required>
-                            <br><br>
-                            <label for='pword'>Password:</label>
+                            <br>
+                        </div>
+
+                        <div class="login-input">
+                            <label for='pword'><strong>Password</strong></label>
+                            <br>
                             <input type="password" v-model="customer.password" required>
-                            <br><br>
-                            <center><button type='submit' class="raise">Sign In</button></center>
-                        </fieldset>
-                    </form>
-                </center>
-                <center><h4>Don't have an account? <a href=register.html>Create one!</a></h4></center>
+                            <br>
+                        </div>
+
+                        <button type='submit' class="raise">Sign In</button>
+                    </fieldset>
+
+                    <h4>Don't have an account? <a href=register.html>Create one!</a></h4>
+                </form>
             </div>
         </main>
 
