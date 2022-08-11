@@ -24,7 +24,7 @@ and open the template in the editor.
             <form class="login-form">
                 <center>
                     <input type="hidden" v-model="customerToUpdate.customerId" required>
-                    
+
                     <label for=“username”><strong>Username: </strong></label>
                     <label>{{customerToUpdate.username}}</label>
                     <br>
@@ -40,20 +40,20 @@ and open the template in the editor.
                     <label for=“phoneNumber”><strong>Phone: </strong></label>
                     <label>{{customerToUpdate.phoneNumber}}</label>
                     <br>
-                    
+
                     <label for=“emailAddress”><strong>Email: </strong></label>
                     <label>{{customerToUpdate.emailAddress}}</label>
                     <br>
                     <br>
-                    
+
                     <!--<button type="submit">Update Account</button></center>--> 
                     {{updateMessage}}
                 </center>
                 <br>
-                <center><button class="del" type="submit">Delete Account</button></center>
+                <center><button class="del" type="submit" @click.prevent="openDeleteDialog(customerToUpdate)">Delete Account</button></center>
             </form>
         </main>
-        
+
         <script type="module" src="js/customer.js"></script>
     </body>
 </html>

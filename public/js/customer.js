@@ -54,18 +54,7 @@ const app = Vue.createApp({
                         alert('Wrong username and/or password');
                     })
         },
-
-        deleteCustomer(customer) {
-            axios.delete(deleteAccApi({'username': this.customer.username}))
-                    .then(response => {
-                        window.location = 'home.html';
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        alert('An error has occurred - check the console for details');
-                    })
-        },
-
+        
         updateCustomer(customer) {
             axios.update(updateAccApi({'username': this.customer.username}), customer)
                     .then(response => {
@@ -75,7 +64,32 @@ const app = Vue.createApp({
                         console.log(error);
                         alert('An error has occurred - check the console for details');
                     })
+        },
+
+        deleteCustomer(customer) {
+            axios.delete(deleteAccApi({'username': customer.username}))
+                    .then(response => {
+                        sessionStorage.clear();
+                        window.location = 'home.html';
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    })
+        },
+
+        openDeleteDialog(customer) {
+            const wantToDelete = window.confirm(`Are you sure you want to delete your account?`);
+            
+            if (wantToDelete) {
+//                console.log(customer);
+                this.deleteCustomer(customer);
+            } else {
+                // do nothing
+            }
         }
+        
+        
 
     }
 
