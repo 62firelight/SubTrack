@@ -54,7 +54,7 @@ const app = Vue.createApp({
                         alert('Wrong username and/or password');
                     })
         },
-        
+
         updateCustomer(customer) {
             axios.update(updateAccApi({'username': this.customer.username}), customer)
                     .then(response => {
@@ -80,16 +80,13 @@ const app = Vue.createApp({
 
         openDeleteDialog(customer) {
             const wantToDelete = window.confirm(`Are you sure you want to delete your account?`);
-            
+
             if (wantToDelete) {
-//                console.log(customer);
                 this.deleteCustomer(customer);
             } else {
                 // do nothing
             }
         }
-        
-        
 
     }
 

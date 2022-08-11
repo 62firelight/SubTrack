@@ -30,7 +30,7 @@ const app = Vue.createApp({
             subscription: new Object(),
             reminderThreshold: 3,
             total: new Object(),
-            
+
             minDate: `${new Date().getFullYear()}-01-01`,
             defaultDate: new Date().toISOString().slice(0, 10),
             maxDate: `${new Date().getFullYear()}-12-31`
@@ -51,11 +51,11 @@ const app = Vue.createApp({
         if (this.signedIn) {
             // set current date
             this.welcome = `Welcome ${this.customer.username}. The current date is ${this.currentDate.toLocaleDateString()}.`;
-            
+
             this.getSubs();
             this.getCategories();
             this.getTotal();
-            
+
             // set a default date when adding subscription
             if (this.subscription.dueDate === undefined) {
                 this.subscription.dueDate = this.defaultDate;
@@ -91,22 +91,6 @@ const app = Vue.createApp({
                     });
         },
 
-        deleteSub(subscription) {
-            if (window.confirm("Are you sure you want to delete " + subscription.name + "?")) {
-                axios.delete(deleteSubApi({'id': subscription.subscriptionId}))
-                        .then(response => {
-                            this.getSubs();
-                            this.getCategories();
-                            this.getTotal();
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            alert('An error has occurred - check the console for details');
-                        });
-            }
-
-        },
-
         updateSub(subscription) {
             axios.put(updateSubApi({'id': subscription.subscriptionId}), subscription)
                     .then(response => {
@@ -120,10 +104,34 @@ const app = Vue.createApp({
                     });
         },
 
+        deleteSub(subscription) {
+            axios.delete(deleteSubApi({'id': subscription.subscriptionId}))
+                    .then(response => {
+                        this.getSubs();
+                        this.getCategories();
+                        this.getTotal();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('An error has occurred - check the console for details');
+                    });
+
+        },
+
         redirectToUpdate(subscription) {
             dataStore.commit('updateSub', subscription);
             window.location = 'updatesub.html';
 //            window.location = 'subscription.html';
+        },
+
+        openDeleteDialog(subscription) {
+            const wantToDelete = window.confirm("Are you sure you want to delete " + subscription.name + "?");
+
+            if (wantToDelete) {
+                this.deleteSub(subscription);
+            } else {
+                // do nothing
+            }
         },
 
         renewSub(subscription) {
@@ -139,7 +147,7 @@ const app = Vue.createApp({
 
             var newDueDateString = newDueDate.toISOString();
             subscription.dueDate = newDueDateString;
-            
+
             this.updateSub(subscription);
         },
 
