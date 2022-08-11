@@ -23,7 +23,7 @@ export const NavigationMenu = {
     <button class="dropbtn">Menu</button>
     <div class="dropdown-content">
         <a href="home.html">Home</a>
-        <a href="updateacc.html" v-if="signedIn">My Account</a>
+        <a href="account.html" v-if="signedIn">My Account</a>
         <a href="home.html" v-if="signedIn" @click="signOut()">Sign Out</a>
         <a href="signin.html" v-if="!signedIn">Sign In</a>
     </div>
