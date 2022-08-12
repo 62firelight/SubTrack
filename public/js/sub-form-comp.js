@@ -2,7 +2,8 @@ export default {
     props: {
         subscription: Object,
         subscriptions: Array,
-        categories: Array
+        categories: Array,
+        updating: Boolean
     },
     
     emits: [

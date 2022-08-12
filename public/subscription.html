@@ -24,6 +24,7 @@ and open the template in the editor.
                 :subscription="subscription" 
                 :subscriptions="subscriptions" 
                 :categories="categories"
+                :updating='false'
                 @subscription="(sub) => submitSub(sub)">   
             </sub-form-comp>
 <!--            <form @submit.prevent="addSub()" class="login-form">
