@@ -19,7 +19,13 @@ var sortApi = ({username}) => `api/sort/${username}`;
 var filterByCategoryApi = ({category, username}) => `api/categories/${category}/${username}`;
 var totalApi = ({username}) => `api/total/${username}`;
 
+import SubFormComp from './sub-form-comp.js';
+
 const app = Vue.createApp({
+    
+    components: {
+        SubFormComp
+    },
 
     data() {
         return {
