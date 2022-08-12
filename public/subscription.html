@@ -23,7 +23,8 @@ and open the template in the editor.
             <sub-form-comp 
                 :subscription="subscription" 
                 :subscriptions="subscriptions" 
-                :categories="categories">   
+                :categories="categories"
+                @subscription="(sub) => submitSub(sub)">   
             </sub-form-comp>
 <!--            <form @submit.prevent="addSub()" class="login-form">
                 <label for="name"><strong>Name</strong></label>

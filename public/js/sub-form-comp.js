@@ -5,12 +5,19 @@ export default {
         categories: Array
     },
     
-    mounted() {
-        console.log(this.categories);
+    emits: [
+        'subscription'
+    ],
+    
+    methods: {
+        submitSub() {
+            console.log(`Submitting ${this.subscription.name}`);
+            this.$emit('subscription', this.subscription);
+        }
     },
-        
+
     template: `
-<form @submit.prevent="addSub()" class="login-form">
+<form @submit.prevent="submitSub()" class="login-form">
     <label for="name"><strong>Name</strong></label>
         
     <input type="text" v-model="subscription.name" list="nameList" required>

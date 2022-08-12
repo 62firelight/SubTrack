@@ -140,6 +140,10 @@ const app = Vue.createApp({
                 // do nothing
             }
         },
+        
+        submitSub(sub) {
+            console.log(sub);
+        },
 
         /** 
          * 
