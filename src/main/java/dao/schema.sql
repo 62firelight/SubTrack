@@ -25,7 +25,6 @@ create table Subscription(
     Name varchar(50) not null,
     Paid boolean not null,
     Subscription_Price decimal(10,2) not null,
-    --subscriptionType varchar(50) not null,
     Category varchar(50) not null,
     Company_Name varchar(100),
     Description varchar(100),
