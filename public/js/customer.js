@@ -34,11 +34,11 @@ const app = Vue.createApp({
                     .then(response => {
                         dataStore.commit('signIn', this.customer);
                         window.location = 'home.html';
-                        alert('Customer registered');
+//                        alert('Customer registered');
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert('Failed to register account.');
                     });
         },
 
@@ -50,8 +50,8 @@ const app = Vue.createApp({
                         window.location = 'home.html';
                     })
                     .catch(error => {
-//                        console.log(error);
-                        alert('Wrong username and/or password');
+                        console.log(error);
+                        alert('Wrong username and/or password.');
                     })
         },
 
@@ -63,7 +63,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert('Failed to update account.');
                     })
         },
 
@@ -75,7 +75,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert('Failed to delete account.');
                     })
         },
 

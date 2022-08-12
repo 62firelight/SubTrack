@@ -76,7 +76,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert('Failed to add subscription.');
                     });
         },
 
@@ -87,7 +87,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert(`Failed to fetch subscriptions.`);
                     });
         },
 
@@ -101,7 +101,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert('Failed to update subscription.');
                     });
         },
 
@@ -114,7 +114,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert('Failed to delete subscription.');
                     });
 
         },
@@ -227,7 +227,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert(`Failed to fetch categories.`);
                     });
         },
 
@@ -238,7 +238,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert(`Failed to find subscriptions for selected category.`);
                     });
         },
 
@@ -249,7 +249,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert('Failed to calculate total price for subscriptions.');
                     });
         },
 
@@ -260,7 +260,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('An error has occurred - check the console for details');
+                        alert('Failed to fetch a sorted list of subscriptions.');
                     });
         }
 
