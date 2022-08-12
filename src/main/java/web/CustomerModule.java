@@ -6,6 +6,7 @@
 package web;
 
 import dao.CustomerDAO;
+import dao.DAOException;
 import domain.Customer;
 import io.jooby.Jooby;
 import io.jooby.StatusCode;
@@ -29,7 +30,21 @@ public class CustomerModule extends Jooby {
 
         post("/api/register", ctx -> {
             Customer customer = ctx.body().to(Customer.class);
-            customerDao.saveCustomer(customer);
+
+            try {
+                customerDao.saveCustomer(customer);
+            } catch (DAOException ex) {
+                if (ex.getMessage().equals("23505")) {
+                    // 23505 is the H2 error code for a unique constraint violation
+                    return ctx.setResponseCode(StatusCode.UNPROCESSABLE_ENTITY)
+                            .send("Username '" + customer.getUsername()
+                                    + "' already exists! Please enter another "
+                                    + "username.");
+                } else {
+                    return ctx.setResponseCode(StatusCode.UNPROCESSABLE_ENTITY).send(ex.getMessage());
+                }
+            }
+
             return ctx.send(StatusCode.CREATED);
         });
 

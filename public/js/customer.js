@@ -38,7 +38,7 @@ const app = Vue.createApp({
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('Failed to register account.');
+                        alert('Failed to register account.\n\n' + error.response.data);
                     });
         },
 

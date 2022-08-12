@@ -51,7 +51,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
             System.out.println("Saving customer: " + customer);
 
         } catch (SQLException ex) {
-            throw new DAOException(ex.getMessage(), ex);
+            throw new DAOException(ex.getSQLState(), ex);
         }
     }
 
