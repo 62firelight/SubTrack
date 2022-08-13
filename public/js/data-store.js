@@ -16,6 +16,9 @@ export const dataStore = Vuex.createStore({
         
         // basic access authentication token
         authToken: null;
+        
+        // tracks whether the app should add or update a subscription
+        updating: false;
     },
     
     mutations: {
@@ -33,6 +36,10 @@ export const dataStore = Vuex.createStore({
         // store basic access token 
         authToken(state, token) {
             state.authToken = token;
+        },
+        
+        setUpdating(state, updating) {
+            state.updating = updating;
         }
     },
     

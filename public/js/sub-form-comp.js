@@ -65,7 +65,7 @@ export default {
     </datalist>
 
     <br><br>
-    <button class="raise" type="submit">Add Subscription</button>
+    <button class="raise" type="submit">{{ updating == true ? 'Update' : 'Add' }} Subscription</button>
 </form>
   `
 }

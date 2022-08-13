@@ -49,7 +49,8 @@ const app = Vue.createApp({
         },
         ...Vuex.mapState({
                 customer: 'customer',
-                subToUpdate: 'subToUpdate'
+                subToUpdate: 'subToUpdate',
+                updating: 'updating'
         })
     },
 
@@ -65,6 +66,10 @@ const app = Vue.createApp({
             // set a default date when adding subscription
             if (this.subscription.dueDate === undefined) {
                 this.subscription.dueDate = this.defaultDate;
+            }
+            
+            if (this.updating == true) {
+                this.subscription = this.subToUpdate;
             }
         } else {
             this.welcome = 'Welcome. Hover over the Menu and click "Sign In" to get started.';
@@ -125,10 +130,19 @@ const app = Vue.createApp({
 
         },
 
+        redirectToAdd() {
+            dataStore.commit('setUpdating', false);
+            
+            window.location = 'subscription.html';
+        },
+
         redirectToUpdate(subscription) {
+            dataStore.commit('setUpdating', true);
+            
+            // store subscription for updating
             dataStore.commit('updateSub', subscription);
-            window.location = 'updatesub.html';
-//            window.location = 'subscription.html';
+            
+            window.location = 'subscription.html';
         },
 
         openDeleteDialog(subscription) {
