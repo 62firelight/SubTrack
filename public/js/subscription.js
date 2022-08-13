@@ -141,8 +141,15 @@ const app = Vue.createApp({
             }
         },
         
-        submitSub(sub) {
-            console.log(sub);
+        submitSub(submission) {
+            console.log(submission.subscription);
+            
+            if (submission.updating == false) {
+                this.subscription = submission.subscription;
+                this.addSub();
+            } else {
+                this.updateSub(submission.subscription);
+            }
         },
 
         /** 
@@ -273,7 +280,7 @@ const app = Vue.createApp({
                         alert('Failed to fetch a sorted list of subscriptions.');
                     });
         }
-
+       
     },
 
     mixins: [NumberFormatter]

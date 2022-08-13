@@ -7,13 +7,15 @@ export default {
     },
     
     emits: [
-        'subscription'
+        'submission'
     ],
     
     methods: {
         submitSub() {
-            console.log(`Submitting ${this.subscription.name}`);
-            this.$emit('subscription', this.subscription);
+            this.$emit('submission', {
+                subscription: this.subscription,
+                updating: this.updating
+            });
         }
     },
 
