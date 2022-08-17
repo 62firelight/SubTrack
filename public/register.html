@@ -10,7 +10,7 @@ and open the template in the editor.
         <script src="js/external/vuex.global.js"></script>
         <script src="js/external/vuex-persistedstate.umd.js"></script>
         <script src="js/external/axios.js"></script>
-        <title>Create Account</title>
+        <title>SubTrek - Create Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/SubTrack.css">
@@ -18,10 +18,12 @@ and open the template in the editor.
 
     <body>
         <main id="content">
-            <h1> Create Account </h1>
+            <h1>SubTrek</h1>
             <navigation></navigation>
             <hr>
             <form @submit.prevent="registerCustomer(customer)" class="login-form">
+                <h2>Create Account</h2>
+                
                 <label for=“username”><strong>Username</strong></label>
                 <input type="text" v-model="customer.username" required>
                 <br>

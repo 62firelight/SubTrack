@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Sign In</title>
+        <title>SubTrek - Sign In</title>
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/SubTrack.css">
@@ -17,16 +17,14 @@ and open the template in the editor.
     </head>
     <body>
         <main id="content">
-            <div>
-                <h1>Sign In</h1>
-            </div>
-            <div align="center">
-
-            </div>
+            <h1>SubTrek</h1>
+            <navigation></navigation>
             <hr>
             <div>
                 <!--<p>{{signInMessage}}</p>-->
                 <form @submit.prevent="signIn()" class='login-form'>
+                    <h2>Sign In</h2>
+                    
                     <fieldset>
                         <legend align='left'>Account Details</legend>
 

@@ -260,7 +260,7 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 40px;
+    padding: 1.5rem 1.5rem;
     color: white;
     background: #1f262e;
     border-radius: 10px;
