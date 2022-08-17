@@ -19,8 +19,10 @@ export default {
         }
     },
 
-    template: `
+    template: `    
 <form @submit.prevent="submitSub()" class="login-form">
+    <h2> {{ updating == true ? 'Update' : 'Add' }} Subscription </h2>
+        
     <label for="name"><strong>Name</strong></label>
         
     <input type="text" v-model="subscription.name" list="nameList" required>
