@@ -53,21 +53,15 @@ public class CustomerDAOTest {
 
         this.cust1 = new Customer();
         //This customer setup becomes redundant due to my set up
-//        cust1.setFirstName("Taine");
-//        cust1.setLastName("Bayly");
         cust1.setUsername("bayta267");
         cust1.setPassword("INFO310");
-//        cust1.setPhoneNumber("0273842");
         cust1.setEmailAddress("bayta@student.com");
         cust1.setReminderThreshold(2);
         cust1.setCustomerId(1);
 
         this.cust2 = new Customer();
-//        cust2.setFirstName("ne");
-//        cust2.setLastName("ly");
         cust2.setUsername("a267");
         cust2.setPassword("1234");
-//        cust2.setPhoneNumber("042");
         cust2.setEmailAddress("tudent.com");
         cust2.setReminderThreshold(4);
         cust2.setCustomerId(2);
@@ -114,20 +108,16 @@ public class CustomerDAOTest {
 
         //assertTrue("cust1 should exist", CustDAO.contains(cust1));
         CustDAO.saveCustomer(cust2);
-        Customer secondRetreieved = CustDAO.getCustomer("a267");
+        Customer fetchedCustomer = CustDAO.getCustomer("a267");
 
         //Manual checks of each function
-//        assertEquals(cust2.getFirstName(), secondRetreieved.getFirstName());
-//        assertEquals(cust2.getLastName(), secondRetreieved.getLastName());
-        assertEquals(cust2.getUsername(), secondRetreieved.getUsername());
-//        assertEquals(cust2.getPassword(), secondRetreieved.getPassword());
-//        assertEquals(cust2.getPhoneNumber(), secondRetreieved.getPhoneNumber());
-        assertEquals(cust2.getEmailAddress(), secondRetreieved.getEmailAddress());
-        assertEquals(cust2.getReminderThreshold(), secondRetreieved.getReminderThreshold());
+        assertEquals(cust2.getUsername(), fetchedCustomer.getUsername());
+        assertEquals(cust2.getEmailAddress(), fetchedCustomer.getEmailAddress());
+        assertEquals(cust2.getReminderThreshold(), fetchedCustomer.getReminderThreshold());
 //        assertEquals(cust2.getCustomerId(), secondRetreieved.getCustomerId());
 
         // Check that hashed password is the same
-        String hash = secondRetreieved.getPassword();
+        String hash = fetchedCustomer.getPassword();
         assertTrue(ScryptHelper.check(hash, cust2.getPassword()));
     }
 

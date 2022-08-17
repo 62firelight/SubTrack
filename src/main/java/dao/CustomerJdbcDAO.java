@@ -38,8 +38,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
         try (
                 Connection dbCon = DbConnection.getConnection(url);
                 PreparedStatement stmt = dbCon.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-
-            //ResultSet rs = stmt.getGeneratedKeys();
+            
             stmt.setString(1, customer.getUsername());
             stmt.setString(2, ScryptHelper.hash(customer.getPassword()).toString());
             stmt.setString(3, customer.getEmailAddress());
@@ -63,15 +62,12 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
             while (rs.next()) {
                 Integer id = rs.getInt("Customer_ID");
-                String user_name = rs.getString("Username");
+                String fetchedUsername = rs.getString("Username");
                 String password = rs.getString("Password");
-//                String firstname = rs.getString("Firstname");
-//                String lastname = rs.getString("Lastname");
-//                String phoneNumber = rs.getString("Phone_Number");
                 String emailAddress = rs.getString("Email_Address");
                 Integer reminderThreshold = rs.getInt("Reminder_Threshold");
 
-                Customer cust1 = new Customer(id, username, password, emailAddress, reminderThreshold);
+                Customer cust1 = new Customer(id, fetchedUsername, password, emailAddress, reminderThreshold);
                 return cust1;
             }
             return null;
@@ -132,10 +128,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 // get a connection to the database
                 Connection dbCon = DbConnection.getConnection(url); // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) { 
-//            stmt.setString(1, customer.getFirstName());
-//            stmt.setString(2, customer.getLastName());
 //            stmt.setString(3, ScryptHelper.hash(customer.getPassword()).toString());
-//            stmt.setString(3, customer.getPhoneNumber());
             stmt.setString(1, customer.getEmailAddress());
             stmt.setInt(2, customer.getReminderThreshold());
             stmt.setInt(3, customer.getCustomerId());
