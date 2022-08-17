@@ -176,8 +176,16 @@ const app = Vue.createApp({
          * 
          */
         renewSub(subscription) {
+            let daysToDueDate = this.daysToToday(subscription.dueDate);
+            
             let issueDate = new Date(subscription.issueDate);
             let daysElapsed = Math.abs(this.daysToToday(subscription.issueDate));
+            
+            // check if subscription has expired
+            if (daysToDueDate > 0) {
+                // deduct days left until expiration
+                daysElapsed -= daysToDueDate;
+            }
             
 //            alert(`${daysElapsed} day(s) have passed since ${issueDate.toLocaleString()}.`);
             
