@@ -37,7 +37,7 @@ export default {
     <br>
 
     <label for="subscriptionPrice"><strong>Price</strong> </label>
-    <input type="number" v-model="subscription.subscriptionPrice" list="priceList" required>
+    <input type="number" step=".01" v-model="subscription.subscriptionPrice" list="priceList" required>
     <datalist id="priceList">
         <option v-for="subscription in subscriptions">{{subscription.subscriptionPrice}}</option>
     </datalist>
