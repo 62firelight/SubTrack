@@ -35,9 +35,8 @@ and open the template in the editor.
                 <label for=“reminderThreshold”><strong>Reminder Threshold</strong></label>
                 <input type="number" max="30" v-model="customerToUpdate.reminderThreshold" required>
                 <br>
-
+                
                 <button class="raise" type="submit">Update Account</button>
-                {{updateMessage}}
                 <br>
                 <button class="del" type="submit" @click.prevent="openDeleteDialog(customerToUpdate)">Delete Account</button>
             </form>

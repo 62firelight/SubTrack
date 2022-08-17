@@ -15,7 +15,7 @@ const app = Vue.createApp({
     data() {
         return {
             customer: new Object(),
-            updateMessage: new String()
+            updateMessage: 'Successfully updated account.'
         }
     },
 
@@ -60,6 +60,7 @@ const app = Vue.createApp({
                     .then(response => {
                         // update customer stored in session storage
                         dataStore.commit('signIn', customer);
+                        alert(this.updateMessage);
                     })
                     .catch(error => {
                         console.log(error);
