@@ -25,15 +25,15 @@ and open the template in the editor.
                 <h2>Create Account</h2>
                 
                 <label for=“username”><strong>Username</strong></label>
-                <input type="text" v-model="customer.username" required>
+                <input type="text" maxlength="50" v-model="customer.username" required>
                 <br>
 
                 <label for=“password”><strong>Password</strong></label>
-                <input type="password" v-model="customer.password" required>
+                <input type="password" maxlength="50" v-model="customer.password" required>
                 <br>
 
                 <label for=“emailAddress”><strong>Email</strong></label>
-                <input type="email" v-model="customer.emailAddress" required>
+                <input type="email" maxlength="50" v-model="customer.emailAddress" required>
                 <br>
                 
                 <label for=“reminderThreshold”><strong>Reminder Threshold</strong></label>
