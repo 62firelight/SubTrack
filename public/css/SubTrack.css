@@ -95,6 +95,7 @@ th,td{
     padding: 15px;
 
 }
+
 button {
     background: none;
     border: 2px solid;
@@ -117,7 +118,11 @@ button2{
     color: aquamarine;
 }
 
-a{
+button:hover {
+    cursor: pointer;
+}
+
+a {
     color: black;
 }
 
