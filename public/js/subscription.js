@@ -58,6 +58,7 @@ const app = Vue.createApp({
         if (this.signedIn) {
             // set current date
             this.welcome = `Welcome ${this.customer.username}. The current date is ${this.currentDate.toLocaleDateString()}.`;
+            this.reminderThreshold = this.customer.reminderThreshold;
 
             this.getSubs();
             this.getCategories();
