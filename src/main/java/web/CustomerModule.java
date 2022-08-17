@@ -40,6 +40,11 @@ public class CustomerModule extends Jooby {
                             .send("Username '" + customer.getUsername()
                                     + "' already exists! Please enter another "
                                     + "username.");
+                } else if (ex.getMessage().equals("22001")) {
+                    // 22001 is the H2 error code for a value that is too long
+                    return ctx.setResponseCode(StatusCode.UNPROCESSABLE_ENTITY)
+                            .send("Username is too long! Please enter a username"
+                                    + " that is less than 50 characters.");
                 } else {
                     return ctx.setResponseCode(StatusCode.UNPROCESSABLE_ENTITY).send(ex.getMessage());
                 }
@@ -61,6 +66,11 @@ public class CustomerModule extends Jooby {
                             .send("Username '" + customer.getUsername()
                                     + "' already exists! Please enter another "
                                     + "username.");
+                } else if (ex.getMessage().equals("22001")) {
+                    // 22001 is the H2 error code for a value that is too long
+                    return ctx.setResponseCode(StatusCode.UNPROCESSABLE_ENTITY)
+                            .send("Username is too long! Please enter a username"
+                                    + " that is less than 50 characters.");
                 } else {
                     return ctx.setResponseCode(StatusCode.UNPROCESSABLE_ENTITY).send(ex.getMessage());
                 }
