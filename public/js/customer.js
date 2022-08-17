@@ -24,7 +24,10 @@ const app = Vue.createApp({
     }),
 
     mounted() {
-
+        if (this.customerToUpdate !== undefined) {
+            // make a deep copy of the customer in session storage
+            this.customer = JSON.parse(JSON.stringify(this.customerToUpdate));
+        }
     },
 
     methods: {
@@ -55,16 +58,16 @@ const app = Vue.createApp({
                     })
         },
 
-        updateCustomer(customer) {
-            axios.put(updateAccApi({'username': customer.username}), customer)
-                    .then(response => {
+        updateCustomer(username, customer) {
+            axios.put(updateAccApi({'username': username}), customer)
+                    .then(response => {                      
                         // update customer stored in session storage
                         dataStore.commit('signIn', customer);
                         alert(this.updateMessage);
                     })
                     .catch(error => {
                         console.log(error);
-                        alert('Failed to update account.');
+                        alert('Failed to update account.\n\n' + error.response.data);
                     })
         },
 

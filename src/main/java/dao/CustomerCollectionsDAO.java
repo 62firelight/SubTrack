@@ -57,7 +57,9 @@ public final class CustomerCollectionsDAO implements CustomerDAO {
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateCustomer(String username, Customer customer) {
+        customers.remove(username);
+        
         customers.put(customer.getUsername(), customer);
     }
 

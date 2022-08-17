@@ -120,22 +120,23 @@ public class CustomerJdbcDAO implements CustomerDAO {
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateCustomer(String username, Customer customer) {
         String sql = "update Customer "
-                + "set Email_Address = ?, Reminder_Threshold = ? "
+                + "set Username = ?, Email_Address = ?, Reminder_Threshold = ? "
                 + "where Customer_ID = ?";
         try (
                 // get a connection to the database
                 Connection dbCon = DbConnection.getConnection(url); // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) { 
 //            stmt.setString(3, ScryptHelper.hash(customer.getPassword()).toString());
-            stmt.setString(1, customer.getEmailAddress());
-            stmt.setInt(2, customer.getReminderThreshold());
-            stmt.setInt(3, customer.getCustomerId());
+            stmt.setString(1, customer.getUsername());
+            stmt.setString(2, customer.getEmailAddress());
+            stmt.setInt(3, customer.getReminderThreshold());
+            stmt.setInt(4, customer.getCustomerId());
             stmt.executeUpdate();  // execute the statement
 
         } catch (SQLException ex) {
-            throw new DAOException(ex.getMessage(), ex);
+            throw new DAOException(ex.getSQLState(), ex);
         }
     }
 }

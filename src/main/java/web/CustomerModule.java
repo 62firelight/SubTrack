@@ -52,7 +52,20 @@ public class CustomerModule extends Jooby {
             String username = ctx.path("username").value();
             Customer customer = ctx.body().to(Customer.class);
 
-            customerDao.updateCustomer(customer);
+            try {
+                customerDao.updateCustomer(username, customer);
+            } catch (DAOException ex) {
+                if (ex.getMessage().equals("23505")) {
+                    // 23505 is the H2 error code for a unique constraint violation
+                    return ctx.setResponseCode(StatusCode.UNPROCESSABLE_ENTITY)
+                            .send("Username '" + customer.getUsername()
+                                    + "' already exists! Please enter another "
+                                    + "username.");
+                } else {
+                    return ctx.setResponseCode(StatusCode.UNPROCESSABLE_ENTITY).send(ex.getMessage());
+                }
+            }
+            
             return ctx.send(StatusCode.NO_CONTENT);
         });
 

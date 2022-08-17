@@ -22,5 +22,5 @@ public interface CustomerDAO extends CredentialsValidator {
     
     void deleteCustomer(Customer customer);
     
-    void updateCustomer(Customer customer);
+    void updateCustomer(String username, Customer customer);
 }
