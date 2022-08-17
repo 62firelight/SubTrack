@@ -55,6 +55,7 @@ public class Server extends Jooby {
         System.out.println("\nStarting Server.");
 
         new Server().start();
+        System.out.println();
 
 //        CompletableFuture.runAsync(() -> {
 //            server.start();
