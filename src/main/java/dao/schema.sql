@@ -12,10 +12,11 @@ create table Customer(
     Customer_ID int auto_increment,
     Username varchar(50) not null unique,
     Password varchar(200) not null,
-    Firstname varchar(50) not null,
-    Lastname varchar(50) not null,
-    Phone_Number varchar(50) not null,
+--     Firstname varchar(50) not null,
+--     Lastname varchar(50) not null,
+--     Phone_Number varchar(50) not null,
     Email_Address varchar(50) not null,
+    Reminder_Threshold decimal(3, 0) not null
 
     constraint Customer_PK primary key (Customer_ID)
 );

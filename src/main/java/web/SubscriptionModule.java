@@ -55,9 +55,11 @@ public class SubscriptionModule extends Jooby {
             subscriptionDao.saveSubscription(subscription);
 
             Customer c = subscription.getCustomer();
+            String customerUsername = c.getUsername();
             String customerEmail = c.getEmailAddress();
-            String fName = c.getFirstName();
-            String lName = c.getLastName();
+            Integer customerReminderThreshold = c.getReminderThreshold();
+//            String fName = c.getFirstName();
+//            String lName = c.getLastName();
             String subName = subscription.getName();
             String date = subscription.getDueDate();
             CompletableFuture.runAsync(() -> {
@@ -67,7 +69,7 @@ public class SubscriptionModule extends Jooby {
                     email.setSmtpPort(2525);
                     email.setFrom("SubTrack@gmail.com");
                     email.setSubject("Subscription Renewal Warning");
-                    email.setMsg("Hi " + fName + ", \n\nThis is an email to "
+                    email.setMsg("Hi " + customerUsername + ", \n\nThis is an email to "
                             + "warn you that your " + subName + " subscription "
                             + "expires soon on "
                             + date + ".\n\nRemember to renew or delete your "

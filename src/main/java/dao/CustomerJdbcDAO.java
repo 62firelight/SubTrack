@@ -32,8 +32,8 @@ public class CustomerJdbcDAO implements CustomerDAO {
     @Override
     public void saveCustomer(Customer customer) {
         String sql = "insert into Customer (Username, "
-                + "Firstname, Lastname, Password, Phone_Number, Email_Address) "
-                + "values (?,?,?,?,?,?)";
+                + "Password, Email_Address, Reminder_Threshold) "
+                + "values (?,?,?,?)";
 
         try (
                 Connection dbCon = DbConnection.getConnection(url);
@@ -41,15 +41,12 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
             //ResultSet rs = stmt.getGeneratedKeys();
             stmt.setString(1, customer.getUsername());
-            stmt.setString(2, customer.getFirstName());
-            stmt.setString(3, customer.getLastName());
-            stmt.setString(4, ScryptHelper.hash(customer.getPassword()).toString());
-            stmt.setString(5, customer.getPhoneNumber());
-            stmt.setString(6, customer.getEmailAddress());
+            stmt.setString(2, ScryptHelper.hash(customer.getPassword()).toString());
+            stmt.setString(3, customer.getEmailAddress());
+            stmt.setInt(4, customer.getReminderThreshold());
 
             stmt.executeUpdate();
             System.out.println("Saving customer: " + customer);
-
         } catch (SQLException ex) {
             throw new DAOException(ex.getSQLState(), ex);
         }
@@ -68,12 +65,13 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 Integer id = rs.getInt("Customer_ID");
                 String user_name = rs.getString("Username");
                 String password = rs.getString("Password");
-                String firstname = rs.getString("Firstname");
-                String lastname = rs.getString("Lastname");
-                String phoneNumber = rs.getString("Phone_Number");
+//                String firstname = rs.getString("Firstname");
+//                String lastname = rs.getString("Lastname");
+//                String phoneNumber = rs.getString("Phone_Number");
                 String emailAddress = rs.getString("Email_Address");
+                Integer reminderThreshold = rs.getInt("Reminder_Threshold");
 
-                Customer cust1 = new Customer(id, username, firstname, lastname, password, phoneNumber, emailAddress);
+                Customer cust1 = new Customer(id, username, password, emailAddress, reminderThreshold);
                 return cust1;
             }
             return null;
@@ -128,19 +126,19 @@ public class CustomerJdbcDAO implements CustomerDAO {
     @Override
     public void updateCustomer(Customer customer) {
         String sql = "update Customer "
-                + "set Firstname = ?, Lastname = ?, Phone_Number = ?,"
-                + "Email_Address = ?"
+                + "set Email_Address = ?, Reminder_Threshold = ? "
                 + "where Customer_ID = ?";
         try (
                 // get a connection to the database
                 Connection dbCon = DbConnection.getConnection(url); // create the statement
-                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-            stmt.setString(1, customer.getFirstName());
-            stmt.setString(2, customer.getLastName());
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) { 
+//            stmt.setString(1, customer.getFirstName());
+//            stmt.setString(2, customer.getLastName());
 //            stmt.setString(3, ScryptHelper.hash(customer.getPassword()).toString());
-            stmt.setString(3, customer.getPhoneNumber());
-            stmt.setString(4, customer.getEmailAddress());
-            stmt.setInt(5, customer.getCustomerId());
+//            stmt.setString(3, customer.getPhoneNumber());
+            stmt.setString(1, customer.getEmailAddress());
+            stmt.setInt(2, customer.getReminderThreshold());
+            stmt.setInt(3, customer.getCustomerId());
             stmt.executeUpdate();  // execute the statement
 
         } catch (SQLException ex) {

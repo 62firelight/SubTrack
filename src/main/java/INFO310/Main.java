@@ -30,21 +30,23 @@ public class Main {
 
         // Create customer objects using data from test classes
         Customer cust1 = new Customer();
-        cust1.setFirstName("Taine");
-        cust1.setLastName("Bayly");
+//        cust1.setFirstName("Taine");
+//        cust1.setLastName("Bayly");
         cust1.setUsername("bayta267");
         cust1.setPassword("INFO310");
-        cust1.setPhoneNumber("0273842");
+//        cust1.setPhoneNumber("0273842");
         cust1.setEmailAddress("bayta@student.com");
+        cust1.setReminderThreshold(3);
         cust1.setCustomerId(1);
 
         Customer cust2 = new Customer();
-        cust2.setFirstName("ne");
-        cust2.setLastName("ly");
+//        cust2.setFirstName("ne");
+//        cust2.setLastName("ly");
         cust2.setUsername("a267");
         cust2.setPassword("1234");
-        cust2.setPhoneNumber("042");
+//        cust2.setPhoneNumber("042");
         cust2.setEmailAddress("tudent.com");
+        cust2.setReminderThreshold(2);
         cust2.setCustomerId(2);
 
         // Create subscription objects using data from test classes

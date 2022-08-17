@@ -15,21 +15,19 @@ public class Customer {
 
     private Integer customerId = 0;
     private String username = "defaultUsername";
-    private String firstName = "defaultFirstName";
-    private String lastName = "defaultLastName";
     private String password = "defaultPassword";
-    private String phoneNumber = "defaultPhoneNumber";
+//    private String firstName = "defaultFirstName";
+//    private String lastName = "defaultLastName";
+//    private String phoneNumber = "defaultPhoneNumber";
     private String emailAddress = "defaultEmailAddress";
+    private Integer reminderThreshold = 3;
 
-    //private Integer cardNum;
-    public Customer(Integer customerID, String username, String firstname, String lastname, String password, String phoneNumber, String emailAddress) {
+    public Customer(Integer customerID, String username, String password, String emailAddress, Integer reminderThreshold) {
         this.customerId = customerID;
         this.username = username;
-        this.firstName = firstname;
-        this.lastName = lastname;
         this.password = password;
-        this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
+        this.reminderThreshold = reminderThreshold;
     }
 
     public Customer() {
@@ -38,69 +36,53 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerId=" + customerId + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", phoneNumber=" + phoneNumber + ", emailAddress=" + emailAddress + '}';
+        return "Customer{" + "customerId=" + customerId + ", username=" + username + ", password=" + password + ", emailAddress=" + emailAddress + ", reminderThreshold=" + reminderThreshold + '}';
     }
 
     public Integer getCustomerId() {
         return customerId;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public Integer getReminderThreshold() {
+        return reminderThreshold;
+    }
+
+    public void setReminderThreshold(Integer reminderThreshold) {
+        this.reminderThreshold = reminderThreshold;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.customerId);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.customerId);
         return hash;
     }
 
