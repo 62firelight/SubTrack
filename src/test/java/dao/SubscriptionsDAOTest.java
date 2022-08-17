@@ -58,21 +58,23 @@ public class SubscriptionsDAOTest {
         subDAO = new SubscriptionJdbcDAO(url);
 
         cust1 = new Customer();
-        cust1.setFirstName("Taine");
-        cust1.setLastName("Bayly");
+//        cust1.setFirstName("Taine");
+//        cust1.setLastName("Bayly");
         cust1.setUsername("bayta267");
         cust1.setPassword("INFO310");
-        cust1.setPhoneNumber("0273842");
+//        cust1.setPhoneNumber("0273842");
         cust1.setEmailAddress("bayta@student.com");
+        cust1.setReminderThreshold(2);
         cust1.setCustomerId(1);
 
         cust2 = new Customer();
-        cust2.setFirstName("Luke");
-        cust2.setLastName("Tang");
+//        cust2.setFirstName("Luke");
+//        cust2.setLastName("Tang");
         cust2.setUsername("tanlu824");
         cust2.setPassword("INFO310");
-        cust2.setPhoneNumber("0276292");
+//        cust2.setPhoneNumber("0276292");
         cust2.setEmailAddress("tanlu@student.com");
+        cust2.setReminderThreshold(4);
         cust2.setCustomerId(2);
 
         // comment out if using collections

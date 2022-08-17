@@ -16,7 +16,7 @@ create table Customer(
 --     Lastname varchar(50) not null,
 --     Phone_Number varchar(50) not null,
     Email_Address varchar(50) not null,
-    Reminder_Threshold decimal(3, 0) not null
+    Reminder_Threshold decimal(3, 0) not null,
 
     constraint Customer_PK primary key (Customer_ID)
 );
