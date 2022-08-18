@@ -61,8 +61,8 @@ const app = Vue.createApp({
             this.reminderThreshold = this.customer.reminderThreshold;
 
             this.getSubs(this.customer.username);
-            this.getCategories();
-            this.getTotal();
+            this.getCategories(this.customer.username);
+            this.getTotal(this.customer.username);
 
             // set a default date when adding subscription
             if (this.subscription.dueDate === undefined) {
@@ -119,8 +119,8 @@ const app = Vue.createApp({
             axios.delete(deleteSubApi({'id': subscription.subscriptionId}))
                     .then(response => {
                         this.getSubs(this.customer.username);
-                        this.getCategories();
-                        this.getTotal();
+                        this.getCategories(this.customer.username);
+                        this.getTotal(this.customer.username);
                     })
                     .catch(error => {
                         console.log(error);
@@ -256,8 +256,8 @@ const app = Vue.createApp({
             return numberOfDays;
         },
 
-        getCategories() {
-            axios.get(categoryApi({'username': this.customer.username}))
+        getCategories(username) {
+            axios.get(categoryApi({'username': username}))
                     .then(response => {
                         this.categories = response.data;
                     })
@@ -278,8 +278,8 @@ const app = Vue.createApp({
                     });
         },
 
-        getTotal() {
-            axios.get(totalApi({'username': this.customer.username}))
+        getTotal(username) {
+            axios.get(totalApi({'username': username}))
                     .then(response => {
                         this.total = response.data;
                     })
