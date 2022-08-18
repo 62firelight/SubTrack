@@ -40,10 +40,9 @@ const app = Vue.createApp({
 
         registerCustomer(customer) {
             axios.post(registerApi, customer)
-                    .then(response => {          
-                        dataStore.commit('signIn', customer);
+                    .then(response => {
+                        this.signIn();
                         window.location = 'home.html';
-//                        alert('Customer registered');
                     })
                     .catch(error => {
                         console.log(error);
@@ -103,6 +102,7 @@ const app = Vue.createApp({
             console.log(submission);
             
             if (submission.updating == false) {
+                this.customer = submission.customer;
                 this.registerCustomer(submission.customer);
             } else {
                 this.updateCustomer(this.customerToUpdate.username, submission.customer);
