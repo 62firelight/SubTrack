@@ -21,7 +21,13 @@ and open the template in the editor.
             <h1>SubTrek</h1>
             <navigation></navigation>
             <hr>
-            <form @submit.prevent="updateCustomer(customerToUpdate.username, customer)" class="login-form">
+            <acc-form-comp
+                :customer="customer"
+                :updating="true"
+                @submission="(submission) => submitAccount(submission)"
+                >
+            </acc-form-comp>
+<!--            <form @submit.prevent="updateCustomer(customerToUpdate.username, customer)" class="login-form">
                 <h2>My Account</h2>
                 
                 <input type="hidden" v-model="customer.customerId" required>
@@ -41,7 +47,7 @@ and open the template in the editor.
                 <button class="raise" type="submit">Update Account</button>
                 <br>
                 <button class="del" type="submit" @click.prevent="openDeleteDialog(customer)">Delete Account</button>
-            </form>
+            </form>-->
         </main>
 
         <script type="module" src="js/customer.js"></script>
