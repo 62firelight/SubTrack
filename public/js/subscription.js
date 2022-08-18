@@ -22,7 +22,7 @@ var totalApi = ({username}) => `api/total/${username}`;
 import SubFormComp from './sub-form-comp.js';
 
 const app = Vue.createApp({
-    
+
     components: {
         SubFormComp
     },
@@ -68,7 +68,7 @@ const app = Vue.createApp({
             if (this.subscription.dueDate === undefined) {
                 this.subscription.dueDate = this.defaultDate;
             }
-            
+
             if (this.updating == true) {
                 this.subscription = this.subToUpdate;
             }
@@ -79,10 +79,8 @@ const app = Vue.createApp({
 
     methods: {
 
-        addSub() {
-            this.subscription.customer = this.customer;
-
-            axios.post(addSubApi, this.subscription)
+        addSub(subscription) {
+            axios.post(addSubApi, subscription)
                     .then(response => {
                         window.location = 'home.html';
                     })
@@ -105,7 +103,7 @@ const app = Vue.createApp({
 
         updateSub(subscription) {
             subscription.issueDate = subscription.dueDate;
-            
+
             axios.put(updateSubApi({'id': subscription.subscriptionId}), subscription)
                     .then(response => {
                         this.getSubs();
@@ -133,16 +131,16 @@ const app = Vue.createApp({
 
         redirectToAdd() {
             dataStore.commit('setUpdating', false);
-            
+
             window.location = 'subscription.html';
         },
 
         redirectToUpdate(subscription) {
             dataStore.commit('setUpdating', true);
-            
+
             // store subscription for updating
             dataStore.commit('updateSub', subscription);
-            
+
             window.location = 'subscription.html';
         },
 
@@ -155,13 +153,11 @@ const app = Vue.createApp({
                 // do nothing
             }
         },
-        
+
         submitSub(submission) {
-            console.log(submission.subscription);
-            
             if (submission.updating == false) {
-                this.subscription = submission.subscription;
-                this.addSub();
+                submission.subscription.customer = this.customer;
+                this.addSub(submission.subscription);
             } else {
                 this.updateSub(submission.subscription);
             }
@@ -178,41 +174,41 @@ const app = Vue.createApp({
          */
         renewSub(subscription) {
             let daysToDueDate = this.daysToToday(subscription.dueDate);
-            
+
             let issueDate = new Date(subscription.issueDate);
             let daysElapsed = Math.abs(this.daysToToday(subscription.issueDate));
-            
+
             // check if subscription has expired
             if (daysToDueDate > 0) {
                 // deduct days left until expiration
                 daysElapsed -= daysToDueDate;
             }
-            
+
 //            alert(`${daysElapsed} day(s) have passed since ${issueDate.toLocaleString()}.`);
-            
+
             // find the right amount of days to add to the due date
             let i = 1;
-            while (daysElapsed >= parseInt((365/12) * i)) {
+            while (daysElapsed >= parseInt((365 / 12) * i)) {
                 i++;
             }
-            
+
             // ensure that we are not under-adding to the due date
-            if (i > 1 && daysElapsed / parseInt((365/12) * (i - 1)) < 1){
-                i--;  
+            if (i > 1 && daysElapsed / parseInt((365 / 12) * (i - 1)) < 1) {
+                i--;
             }
-            
-            let daysToAdd = parseInt((365/12) * i);
+
+            let daysToAdd = parseInt((365 / 12) * i);
 //            if (daysToAdd / 365 > 1 && this.daysToToday(subscription.issueDate) > 365) {
 //                daysToAdd %= 365;
 //            }
 //            alert(`Adding ${daysToAdd} days...`);
-            
+
             // calculate new due date by adding days to the old due date
             let newDueDate = new Date(subscription.dueDate);
             newDueDate.setDate(newDueDate.getDate() + daysToAdd)
             let newDueDateString = newDueDate.toISOString();
             subscription.dueDate = newDueDateString;
-            
+
             this.updateSub(subscription);
         },
 
@@ -303,7 +299,7 @@ const app = Vue.createApp({
                         alert('Failed to fetch a sorted list of subscriptions.');
                     });
         }
-       
+
     },
 
     mixins: [NumberFormatter]
