@@ -27,27 +27,6 @@ and open the template in the editor.
                 @submission="(submission) => submitAccount(submission)"
                 >
             </acc-form-comp>
-<!--            <form @submit.prevent="updateCustomer(customerToUpdate.username, customer)" class="login-form">
-                <h2>My Account</h2>
-                
-                <input type="hidden" v-model="customer.customerId" required>
-
-                <label for=“username”><strong>Username</strong></label>
-                <input type="text" maxlength="50" v-model="customer.username" required>
-                <br>
-
-                <label for=“emailAddress”><strong>Email</strong></label>
-                <input type="email" maxlength="50" v-model="customer.emailAddress" required>
-                <br>
-
-                <label for=“reminderThreshold”><strong>Reminder Threshold</strong></label>
-                <input type="number" max="30" v-model="customer.reminderThreshold" required>
-                <br>
-                
-                <button class="raise" type="submit">Update Account</button>
-                <br>
-                <button class="del" type="submit" @click.prevent="openDeleteDialog(customer)">Delete Account</button>
-            </form>-->
         </main>
 
         <script type="module" src="js/customer.js"></script>
