@@ -306,3 +306,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
+.reminder-help {
+    margin: 0.25rem;
+    cursor: pointer;
+}
