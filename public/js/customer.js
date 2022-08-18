@@ -89,7 +89,7 @@ const app = Vue.createApp({
         },
 
         openDeleteDialog(customer) {
-            const wantToDelete = window.confirm(`Are you sure you want to delete your account?`);
+            const wantToDelete = window.confirm('Are you sure you want to delete your account?\n\nAll of your subscriptions will be deleted!');
 
             if (wantToDelete) {
                 this.deleteCustomer(customer);
