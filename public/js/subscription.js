@@ -289,8 +289,8 @@ const app = Vue.createApp({
                     });
         },
 
-        sort() {
-            axios.get(sortApi({'username': this.customer.username}))
+        sort(username) {
+            axios.get(sortApi({'username': username}))
                     .then(response => {
                         this.subscriptions = response.data;
                     })
