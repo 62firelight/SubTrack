@@ -41,7 +41,8 @@ const app = Vue.createApp({
         registerCustomer(customer) {
             axios.post(registerApi, customer)
                     .then(response => {
-                        this.signIn();
+                        // sign in again to fetch the auto-generated customer ID
+                        this.signIn(this.customer.username);
                         window.location = 'home.html';
                     })
                     .catch(error => {
@@ -50,8 +51,8 @@ const app = Vue.createApp({
                     });
         },
 
-        signIn() {
-            axios.get(signInApi({'username': this.customer.username}))
+        signIn(username) {
+            axios.get(signInApi({'username': username}))
                     .then(response => {
                         this.customer = response.data;
                         dataStore.commit('signIn', this.customer);
@@ -96,9 +97,7 @@ const app = Vue.createApp({
             }
         },
         
-        submitAccount(submission) {
-            console.log(submission);
-            
+        submitAccount(submission) {    
             if (submission.deleting == true) {
                 this.openDeleteDialog(submission.customer);
             } else if (submission.updating == false) {
