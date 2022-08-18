@@ -45,7 +45,7 @@ export default {
     <br>
 
     <label for=“reminderThreshold”><strong>Days For Reminder</strong></label>
-    <input type="number" min="0" max="30" style="text-align: center; margin-bottom: 0.5rem;" placeholder="e.g. 3" v-model="customer.reminderThreshold" required> day(s)
+    <input type="number" min="0" max="30" style="text-align: center; margin-bottom: 0.25rem;" placeholder="e.g. 3" v-model="customer.reminderThreshold" required> day(s)
     <br><br>
 
     <button type="submit" class="raise">{{ updating == true ? 'Update' : 'Create' }} Account</button>
