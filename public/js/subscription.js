@@ -60,7 +60,7 @@ const app = Vue.createApp({
             this.welcome = `Welcome ${this.customer.username}. The current date is ${this.currentDate.toLocaleDateString()}.`;
             this.reminderThreshold = this.customer.reminderThreshold;
 
-            this.getSubs();
+            this.getSubs(this.customer.username);
             this.getCategories();
             this.getTotal();
 
@@ -90,8 +90,8 @@ const app = Vue.createApp({
                     });
         },
 
-        getSubs() {
-            axios.get(subApi({'username': this.customer.username}))
+        getSubs(username) {
+            axios.get(subApi({'username': username}))
                     .then(response => {
                         this.subscriptions = response.data;
                     })
@@ -106,7 +106,7 @@ const app = Vue.createApp({
 
             axios.put(updateSubApi({'id': subscription.subscriptionId}), subscription)
                     .then(response => {
-                        this.getSubs();
+                        this.getSubs(this.customer.username);
                         window.location = 'home.html';
                     })
                     .catch(error => {
@@ -118,7 +118,7 @@ const app = Vue.createApp({
         deleteSub(subscription) {
             axios.delete(deleteSubApi({'id': subscription.subscriptionId}))
                     .then(response => {
-                        this.getSubs();
+                        this.getSubs(this.customer.username);
                         this.getCategories();
                         this.getTotal();
                     })
