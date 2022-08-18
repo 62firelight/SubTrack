@@ -1,7 +1,6 @@
 export default {
     props: {
         customer: Object,
-        categories: Array,
         updating: Boolean
     },
 
@@ -13,7 +12,16 @@ export default {
         submitAccount() {
             this.$emit('submission', {
                 customer: this.customer,
-                updating: this.updating
+                updating: this.updating,
+                deleting: false
+            });
+        },
+        
+        submitDeletion() {
+            this.$emit('submission', {
+                customer: this.customer,
+                updating: this.updating,
+                deleting: true
             });
         }
     },
@@ -41,6 +49,8 @@ export default {
     <br><br>
 
     <button type="submit" class="raise">{{ updating == true ? 'Update' : 'Create' }} Account</button>
+    <br>
+    <button class="del" @click.prevent="submitDeletion()">Delete Account</button>
 </form>
   `
 }

@@ -93,15 +93,15 @@ const app = Vue.createApp({
 
             if (wantToDelete) {
                 this.deleteCustomer(customer);
-            } else {
-                // do nothing
             }
         },
         
         submitAccount(submission) {
             console.log(submission);
             
-            if (submission.updating == false) {
+            if (submission.deleting == true) {
+                this.openDeleteDialog(submission.customer);
+            } else if (submission.updating == false) {
                 this.customer = submission.customer;
                 this.registerCustomer(submission.customer);
             } else {
