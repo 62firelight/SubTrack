@@ -126,6 +126,11 @@ a {
     color: black;
 }
 
+h4 a {
+    color: #3366BB;
+    text-decoration: underline;
+}
+
 /* Dropdown Button */
 .dropbtn {
     color: white;
