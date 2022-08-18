@@ -10,7 +10,13 @@ var signInApi = ({username}) => `/api/customers/${username}`;
 var updateAccApi = ({username}) => `/api/customers/${username}`;
 var deleteAccApi = ({username}) => `/api/customers/${username}`;
 
+import AccFormComp from './acc-form-comp.js';
+
 const app = Vue.createApp({
+    
+    components: {
+        AccFormComp
+    },
 
     data() {
         return {
@@ -34,7 +40,7 @@ const app = Vue.createApp({
 
         registerCustomer(customer) {
             axios.post(registerApi, customer)
-                    .then(response => {
+                    .then(response => {          
                         dataStore.commit('signIn', this.customer);
                         window.location = 'home.html';
 //                        alert('Customer registered');
@@ -91,7 +97,17 @@ const app = Vue.createApp({
             } else {
                 // do nothing
             }
-        }
+        },
+        
+        submitAccount(submission) {
+            console.log(submission);
+            
+            if (submission.updating == false) {
+                this.registerCustomer(submission.customer);
+            } else {
+                this.updateCustomer(this.customerToUpdate.username, submission.customer);
+            }
+        },
 
     }
 

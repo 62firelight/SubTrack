@@ -21,7 +21,13 @@ and open the template in the editor.
             <h1>SubTrek</h1>
             <navigation></navigation>
             <hr>
-            <form @submit.prevent="registerCustomer(customer)" class="login-form">
+            <acc-form-comp
+                :customer="customer"
+                :updating="false"
+                @submission="(submission) => submitAccount(submission)"
+                >
+            </acc-form-comp>
+<!--            <form @submit.prevent="registerCustomer(customer)" class="login-form">
                 <h2>Create Account</h2>
                 
                 <label for=“username”><strong>Username</strong></label>
@@ -41,7 +47,7 @@ and open the template in the editor.
                 <br><br>
 
                 <button type="submit" class="raise">Create Account</button>
-            </form>
+            </form>-->
         </main>
 
         <script type="module" src="js/customer.js"></script>
