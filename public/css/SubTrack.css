@@ -125,15 +125,6 @@ button:hover {
     cursor: pointer;
 }
 
-a {
-    color: black;
-}
-
-h4 a {
-    color: #3366BB;
-    text-decoration: underline;
-}
-
 /* Dropdown Button */
 .dropbtn {
     color: white;
@@ -365,4 +356,13 @@ input[type=number] {
 
 .sub-buttons {
     text-align: right;
+}
+
+.register-text {
+    margin: 1.5rem;
+}
+
+a {
+    color: #3366BB;
+    text-decoration: underline;
 }
