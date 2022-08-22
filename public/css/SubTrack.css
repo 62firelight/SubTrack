@@ -14,7 +14,8 @@ html {
 }
 
 body {
-    background-color: #2C3845;
+    /*background-color: #2C3845;*/
+    background-color: #303030;
 }
 
 
@@ -76,11 +77,11 @@ table {
 }
 
 tr:nth-child(odd) {
-    background-color: #1f262e;
+    background-color: #212121; /* Alternative(s): #1f262e */
     color: white;
 }
 tr:nth-child(even) {
-    background-color: #2C3845;
+    background-color: #303030; /* Alternative(s): #2C3845 */
     color: white;
 }
 
@@ -259,7 +260,7 @@ a{
     align-items: center;
     padding: 1.5rem 1.5rem;
     color: white;
-    background: #1f262e;
+    background: #212121; /* Alternative(s): #1f262e */ 
     border-radius: 10px;
     /*    box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109),
             0 1px 1px rgba(128, 128, 128, 0.155),
