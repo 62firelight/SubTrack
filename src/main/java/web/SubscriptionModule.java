@@ -90,50 +90,7 @@ public class SubscriptionModule extends Jooby {
 
             return ctx.send(StatusCode.CREATED);
         });
-
-        get("/api/categories/{username}", ctx -> {
-            String username = ctx.path("username").value();
-            Collection<String> subs = subscriptionDao.getCategories(username);
-
-            if (subs == null) {
-                return ctx.send(StatusCode.NOT_FOUND);
-            } else {
-                return subscriptionDao.getCategories(username);
-            }
-        });
-
-        get("/api/categories/{category}/{username}", ctx -> {
-            String category = ctx.path("category").value();
-            String username = ctx.path("username").value();
-            Collection<Subscription> subs = subscriptionDao.filterByCategory(category, username);
-
-            return subs;
-        });
-
-        delete("/api/subscriptions/{id}", ctx -> {
-            Integer id = Integer.valueOf(ctx.path("id").value());
-            Subscription subscription = subscriptionDao.getSubscriptionById(id);
-            subscriptionDao.deleteSubscription(subscription);
-
-            return ctx.send(StatusCode.NO_CONTENT);
-        });
-
-        get("/api/total/{username}", ctx -> {
-            String username = ctx.path("username").value();
-            Total total = subscriptionDao.getTotal(username);
-
-            return total;
-        });
         
-        get("/api/total/{username}/{category}", ctx -> {
-            String username = ctx.path("username").value();
-            String category = ctx.path("category").value();
-            
-            Total total = subscriptionDao.getTotalForCategory(category, username);
-
-            return total;
-        });
-
         put("/api/subscriptions/{id}", ctx -> {
             Subscription subscription = ctx.body().to(Subscription.class);
 
@@ -155,6 +112,49 @@ public class SubscriptionModule extends Jooby {
 
             subscriptionDao.updateSubscription(subscription);
             return ctx.send(StatusCode.NO_CONTENT);
+        });
+        
+        delete("/api/subscriptions/{id}", ctx -> {
+            Integer id = Integer.valueOf(ctx.path("id").value());
+            Subscription subscription = subscriptionDao.getSubscriptionById(id);
+            subscriptionDao.deleteSubscription(subscription);
+
+            return ctx.send(StatusCode.NO_CONTENT);
+        });
+
+        get("/api/categories/{username}", ctx -> {
+            String username = ctx.path("username").value();
+            Collection<String> subs = subscriptionDao.getCategories(username);
+
+            if (subs == null) {
+                return ctx.send(StatusCode.NOT_FOUND);
+            } else {
+                return subscriptionDao.getCategories(username);
+            }
+        });
+
+        get("/api/categories/{category}/{username}", ctx -> {
+            String category = ctx.path("category").value();
+            String username = ctx.path("username").value();
+            Collection<Subscription> subs = subscriptionDao.filterByCategory(category, username);
+
+            return subs;
+        });
+
+        get("/api/total/{username}", ctx -> {
+            String username = ctx.path("username").value();
+            Total total = subscriptionDao.getTotal(username);
+
+            return total;
+        });
+        
+        get("/api/total/{username}/{category}", ctx -> {
+            String username = ctx.path("username").value();
+            String category = ctx.path("category").value();
+            
+            Total total = subscriptionDao.getTotalForCategory(category, username);
+
+            return total;
         });
 
         get("/api/sort/{username}", ctx -> {
