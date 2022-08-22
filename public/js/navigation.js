@@ -23,7 +23,7 @@ export const NavigationMenu = {
     <div class="nav-buttons">
         <li><a href="home.html" class="logo">SubTrek</a></li>
 
-        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html">{{signedIn ? 'My Subscriptions' : 'Home'}}</a></li>
         <li><a href="account.html" v-if="signedIn">My Account</a></li>
         <li><a href="home.html" @click.prevent="openSignOutDialog()" v-if="signedIn">Sign Out</a></li>
         <li><a href="register.html" v-if="!signedIn">Register</a></li>
