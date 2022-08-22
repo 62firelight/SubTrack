@@ -20,15 +20,16 @@ and open the template in the editor.
             <navigation></navigation>
             <!--<div id='welcome' align="center" class="">{{ welcome }}</div>-->
             <div class="subscriptions">
-                <div align="center">
-                    <button class="butgreen up" v-if="signedIn" @click.prevent="redirectToAdd()">Add Subscription</button>
-                </div>
                 <div v-if="signedIn">
+                    <h2>Categories</h2>
                     <button class="raise" @click.prevent="getSubs(customer.username)">All</button>
                     <button class="raise" type="button" class="pink-button" v-for="category in categories" 
                             @click.prevent="filterByCat(category); getTotalForCategory(category, customer.username)">{{category}}</button>
+                    <h2>Subscriptions</h2>
+                    <div align="center">
+                        <button class="butgreen up" v-if="signedIn" @click.prevent="redirectToAdd()">Add Subscription</button>
+                    </div>
                     <table>
-
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
