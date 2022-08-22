@@ -21,11 +21,13 @@ var totalApi = ({username}) => `api/total/${username}`;
 var totalForCategoryApi = ({category, username}) => `api/total/${username}/${category}`;
 
 import SubFormComp from './sub-form-comp.js';
+import FooterComp from './footer-comp.js';
 
 const app = Vue.createApp({
 
     components: {
-        SubFormComp
+        SubFormComp,
+        FooterComp
     },
 
     data() {

@@ -23,6 +23,10 @@ html, body {
     color: white;
 }
 
+.landing-page {
+    margin-bottom: 20rem;
+}
+
 .landing-page-img {
     margin: 1rem;
 }
@@ -373,4 +377,14 @@ input[type=number] {
 a {
     color: #3366BB;
     text-decoration: underline;
+}
+
+footer {
+    margin: 0;
+    padding: 5rem;
+    background-color: #212121;
+}
+
+footer p {
+    color: gray;
 }

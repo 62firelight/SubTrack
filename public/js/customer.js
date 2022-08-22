@@ -11,6 +11,7 @@ var updateAccApi = ({username}) => `/api/customers/${username}`;
 var deleteAccApi = ({username}) => `/api/customers/${username}`;
 
 import AccFormComp from './acc-form-comp.js';
+import FooterComp from './footer-comp.js';
 
 const app = Vue.createApp({
     
