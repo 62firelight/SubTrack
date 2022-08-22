@@ -50,11 +50,8 @@ and open the template in the editor.
                                 <button class="raise" v-if='daysToToday(subscription.dueDate) <= reminderThreshold' @click.prevent="renewSub(subscription)">Renew</button>
                             </td>
                             <td>
-                                <div>
+                                <div class="sub-buttons">
                                     <button class="raise" @click.prevent="redirectToUpdate(subscription)">Update</button>
-                                </div>
-                                <br>
-                                <div>
                                     <button class="del" @click.prevent="openDeleteDialog(subscription)">Delete</button>
                                 </div>
                             </td>

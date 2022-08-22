@@ -21,6 +21,7 @@ body {
 #menu button {
     border-radius: 50px;
 }
+
 .raise:hover,
 .raise:focus {
     box-shadow: 0 0.8em 0.8em -0.4em var(--hover);
@@ -87,8 +88,8 @@ tr:nth-child(even) {
     filter: brightness(100%);
 }
 
-th,td {
-    padding: 15px;
+th, td {
+    padding: 1rem;
 }
 
 button {
@@ -306,4 +307,8 @@ input[type=number] {
 #welcome {
     color: white;
     margin: 0.5rem;
+}
+
+.sub-buttons {
+    text-align: right;
 }
