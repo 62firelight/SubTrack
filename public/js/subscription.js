@@ -150,8 +150,6 @@ const app = Vue.createApp({
 
             if (wantToDelete) {
                 this.deleteSub(subscription);
-            } else {
-                // do nothing
             }
         },
 
