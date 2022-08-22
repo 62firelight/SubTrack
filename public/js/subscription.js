@@ -18,6 +18,7 @@ var categoryApi = ({username}) => `api/categories/${username}`;
 var sortApi = ({username}) => `api/sort/${username}`;
 var filterByCategoryApi = ({category, username}) => `api/categories/${category}/${username}`;
 var totalApi = ({username}) => `api/total/${username}`;
+var totalForCategoryApi = ({category, username}) => `api/total/${username}/${category}`;
 
 import SubFormComp from './sub-form-comp.js';
 
@@ -280,6 +281,17 @@ const app = Vue.createApp({
 
         getTotal(username) {
             axios.get(totalApi({'username': username}))
+                    .then(response => {
+                        this.total = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert('Failed to calculate total price for subscriptions.');
+                    });
+        },
+        
+        getTotalForCategory(category, username) {
+            axios.get(totalForCategoryApi({'category': category, 'username': username}))
                     .then(response => {
                         this.total = response.data;
                     })
