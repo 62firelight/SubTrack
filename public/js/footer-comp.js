@@ -7,7 +7,10 @@ export default {
 
     template: `
 <footer>
-    <p>Thank you for choosing SubTrek.</p>
+    <h2>About</h2>
+    <p>Developed as part of a a software engineering course, SubTrek <br> is a web application that allows users to track their subscriptions, including <br> their costs and expiration dates.</p>
+    <hr>
+    <p>Created by the SubTrek Team in 2021</p>
 </footer>
   `
 }

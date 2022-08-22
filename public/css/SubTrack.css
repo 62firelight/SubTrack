@@ -388,3 +388,7 @@ footer {
 footer p {
     color: gray;
 }
+
+footer hr {
+    border-color: gray;
+}
