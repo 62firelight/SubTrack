@@ -26,6 +26,7 @@ export const NavigationMenu = {
         <li><a href="home.html">Home</a></li>
         <li><a href="account.html" v-if="signedIn">My Account</a></li>
         <li><a href="home.html" @click="signOut()" v-if="signedIn">Sign Out</a></li>
+        <li><a href="register.html" v-if="!signedIn">Register</a></li>
         <li><a href="signin.html" v-if="!signedIn">Sign In</a></li>
     </div>
 </ul>
