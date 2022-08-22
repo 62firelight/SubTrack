@@ -35,7 +35,7 @@ export default {
     template: `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 <form @submit.prevent="submitAccount()" class="login-form">
-    <h2>{{ updating == true ? 'Update' : 'Create' }} Account</h2>
+    <h2>{{ updating == true ? 'My' : 'Create' }} Account</h2>
         
     <input type="hidden" v-if="updating" v-model="customer.customerId" required>
 
