@@ -129,6 +129,10 @@ const app = Vue.createApp({
                     });
 
         },
+        
+        redirectToRegister() {
+            window.location = 'register.html';
+        },
 
         redirectToAdd() {
             dataStore.commit('setUpdating', false);
