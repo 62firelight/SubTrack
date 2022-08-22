@@ -66,7 +66,7 @@ export default {
     </datalist>
     <br>
 
-    <label for="dueDate"><strong>Due Date</strong>
+    <label for="dueDate"><strong>Expiry Date</strong>
     <i class="fa fa-question-circle reminder-help" :title="dueDateText"></i> </label>
     <input type="date" v-model="subscription.dueDate" name="trip-start"
            min="2020-01-01" max="2030-12-31" list="dateList" required>
