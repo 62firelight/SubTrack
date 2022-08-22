@@ -8,17 +8,17 @@ and open the template in the editor.
     Author     : Sayyed
 */
 
-html{
+html {
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
-body{
+body {
     background-color: #2C3845;
 }
 
 
-#menu button{
+#menu button {
     border-radius: 50px;
 }
 .raise:hover,
@@ -58,14 +58,14 @@ button {
     }
 }
 
-.container{
+.container {
 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-table{
+table {
     border-bottom: 1px solid white;
     margin: 0.8em auto;
     padding: 0.25em;
@@ -74,26 +74,21 @@ table{
     border-collapse: collapse;
 }
 
-tr:nth-child(odd){
+tr:nth-child(odd) {
     background-color: #1f262e;
     color: white;
 }
-tr:nth-child(even){
-    
+tr:nth-child(even) {
     background-color: #2C3845;
     color: white;
 }
-td{
-    text-transform: capitalize;
-}
 
-.lighten{
+.lighten {
     filter: brightness(100%);
 }
 
-th,td{
+th,td {
     padding: 15px;
-
 }
 
 button {
@@ -103,18 +98,16 @@ button {
     line-height: 1;
     margin: 0.5em;
     padding: 1em 2em;
-    text-transform: capitalize;
     color: white;
 }
 
-button2{
+button2 {
     background: none;
     border: 2px solid;
     font: inherit;
     line-height: 1;
     margin: 0.5em;
     padding: 1em 2em;
-    text-transform: capitalize;
     color: aquamarine;
 }
 
@@ -168,51 +161,49 @@ h4 a {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     box-shadow: 0 0.8em 0.8em -0.4em var(--hover);
-    color: #ffa260;}
+    color: #ffa260;
+}
 
-h1{
+h1 {
     padding: 20px;
     color: white;
 }
 
-h3{
+h3 {
     color:white;
 }
 
-.butred{
-     background: none;
+.butred {
+    background: none;
     border: 2px solid;
     font: inherit;
     line-height: 1;
     margin: 0.5em;
     padding: 1em 2em;
-    text-transform: capitalize;
     color: crimson;
 }
 
 .butgreen {
-     background: none;
+    background: none;
     border: 2px solid;
     font: inherit;
     line-height: 1;
     margin: 0.5em;
     padding: 1em 2em;
-    text-transform: capitalize;
     color: #009B77;
 }
-
-/*hr{
-    padding: 5px;
-    background-color: black;
-}*/
 
 a{
     text-decoration: none;
@@ -269,11 +260,11 @@ a{
     color: white;
     background: #1f262e;
     border-radius: 10px;
-/*    box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109),
-        0 1px 1px rgba(128, 128, 128, 0.155),
-        0 2.1px 2.1px rgba(128, 128, 128, 0.195),
-        0 4.4px 4.4px rgba(128, 128, 128, 0.241),
-        0 12px 12px rgba(128, 128, 128, 0.35);*/
+    /*    box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109),
+            0 1px 1px rgba(128, 128, 128, 0.155),
+            0 2.1px 2.1px rgba(128, 128, 128, 0.195),
+            0 4.4px 4.4px rgba(128, 128, 128, 0.241),
+            0 12px 12px rgba(128, 128, 128, 0.35);*/
 
     h1 {
         margin: 0 0 24px 0;
@@ -310,4 +301,9 @@ input[type=number] {
 .reminder-help {
     margin: 0.25rem;
     cursor: pointer;
+}
+
+#welcome {
+    color: white;
+    margin: 0.5rem;
 }
