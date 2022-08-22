@@ -14,8 +14,7 @@ html {
 }
 
 body {
-    /*background-color: #2C3845;*/
-    background-color: #303030;
+    background-color: #303030; /* Alternative(s): #2C3845 */
 }
 
 html, body {
@@ -158,7 +157,7 @@ ul {
 
 li {
     float: left;
-    border-right: 1px solid #bbb;
+    /*border-right: 1px solid #bbb;*/
 }
 
 li:last-child {
