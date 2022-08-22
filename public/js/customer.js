@@ -16,7 +16,8 @@ import FooterComp from './footer-comp.js';
 const app = Vue.createApp({
     
     components: {
-        AccFormComp
+        AccFormComp,
+        FooterComp
     },
 
     data() {
