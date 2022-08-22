@@ -20,12 +20,14 @@ export const NavigationMenu = {
 
     template: `
 <ul>
-    <li><a href="home.html" class="logo">SubTrek</a></li>
+    <div class="nav-buttons">
+        <li><a href="home.html" class="logo">SubTrek</a></li>
 
-    <li><a href="home.html">Home</a></li>
-    <li><a href="account.html" v-if="signedIn">My Account</a></li>
-    <li><a href="home.html" @click="signOut()" v-if="signedIn">Sign Out</a></li>
-    <li><a href="signin.html" v-if="!signedIn">Sign In</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="account.html" v-if="signedIn">My Account</a></li>
+        <li><a href="home.html" @click="signOut()" v-if="signedIn">Sign Out</a></li>
+        <li><a href="signin.html" v-if="!signedIn">Sign In</a></li>
+    </div>
 </ul>
 `,
 

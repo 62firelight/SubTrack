@@ -144,6 +144,7 @@ h4 a {
 /* CSS for alternative navbar */
 .logo {
     font-weight: bold;
+    font-size: 2em;
     color: white;
 }
 
@@ -156,25 +157,27 @@ ul {
 }
 
 li {
-    float: left;
+    display: inline-block;
+    /*float: left;*/
     /*border-right: 1px solid #bbb;*/
-}
-
-li:last-child {
-    border-right: none;
 }
 
 li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 1.5rem 1.25rem;
+    padding: 2rem 1.25rem;
     text-decoration: none;
 }
 
-li a:hover {
-    background-color: #111;
+li a:hover  {
+    /*background-color: #111;*/
+    opacity: 0.5;
     cursor: pointer;
+}
+
+.nav-buttons .logo {
+    margin-right: 25rem;
 }
 
 .subscriptions {
