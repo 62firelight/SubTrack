@@ -23,6 +23,18 @@ html, body {
     color: white;
 }
 
+.landing-page {
+    margin: 4rem;
+}
+
+.landing-page-img {
+/*    border: 1px solid white;*/
+}
+
+.landing-page-text h1 {
+    padding: 0 0 0 0;
+}
+
 h1, h2, h3, h4, h5 {
     color: white;
 }
