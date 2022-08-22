@@ -74,7 +74,7 @@ const app = Vue.createApp({
                 this.subscription = this.subToUpdate;
             }
         } else {
-            this.welcome = 'Welcome. Hover over the Menu and click "Sign In" to get started.';
+//            this.welcome = 'Welcome. Hover over the Menu and click "Sign In" to get started.';
         }
     },
 

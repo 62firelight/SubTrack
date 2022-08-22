@@ -19,16 +19,29 @@ export const NavigationMenu = {
     },
 
     template: `
-<div class="dropdown" id="menu">
-    <button class="dropbtn">Menu</button>
-    <div class="dropdown-content">
-        <a href="home.html">Home</a>
-        <a href="account.html" v-if="signedIn">My Account</a>
-        <a href="home.html" v-if="signedIn" @click="signOut()">Sign Out</a>
-        <a href="signin.html" v-if="!signedIn">Sign In</a>
-    </div>
-</div>
+<ul>
+    <li><a href="home.html" class="logo">SubTrek</a></li>
+
+    <li><a href="home.html">Home</a></li>
+    <li><a href="account.html" v-if="signedIn">My Account</a></li>
+    <li><a href="home.html" @click="signOut()" v-if="signedIn">Sign Out</a></li>
+    <li><a href="signin.html" v-if="!signedIn">Sign In</a></li>
+</ul>
 `,
+
+//    template: `
+//<h1>SubTrek</h1>
+//<div class="dropdown" id="menu">
+//    <button class="dropbtn">Menu</button>
+//    <div class="dropdown-content">
+//        <a href="home.html">Home</a>
+//        <a href="account.html" v-if="signedIn">My Account</a>
+//        <a href="home.html" v-if="signedIn" @click="signOut()">Sign Out</a>
+//        <a href="signin.html" v-if="!signedIn">Sign In</a>
+//    </div>
+//</div>
+//<hr>
+//`,
 
     methods: {
         signOut() {

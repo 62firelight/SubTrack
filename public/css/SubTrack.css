@@ -18,6 +18,10 @@ body {
     background-color: #303030;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
 
 #menu button {
     border-radius: 50px;
@@ -138,6 +142,47 @@ h4 a {
     }
 }
 
+/* CSS for alternative navbar */
+.logo {
+    font-weight: bold;
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #212121;
+}
+
+li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1.25rem;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+    cursor: pointer;
+}
+
+.subscriptions {
+    margin-top: 1rem;
+}
+
+/* CSS for original navbar */
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
@@ -260,7 +305,7 @@ a{
     align-items: center;
     padding: 1.5rem 1.5rem;
     color: white;
-    background: #212121; /* Alternative(s): #1f262e */ 
+    background: #303030; /* Alternative(s): #1f262e */ 
     border-radius: 10px;
     /*    box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109),
             0 1px 1px rgba(128, 128, 128, 0.155),
