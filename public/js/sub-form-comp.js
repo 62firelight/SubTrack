@@ -1,15 +1,21 @@
 export default {
+    data() {
+        return {
+            dueDateText: 'The date that the subscription expires on.'
+        }
+    },
+
     props: {
         subscription: Object,
         subscriptions: Array,
         categories: Array,
         updating: Boolean
     },
-    
+
     emits: [
         'submission'
     ],
-    
+
     methods: {
         submitSub() {
             this.$emit('submission', {
@@ -20,6 +26,7 @@ export default {
     },
 
     template: `    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 <form @submit.prevent="submitSub()" class="login-form">
     <h2> {{ updating == true ? 'Update' : 'Add' }} Subscription </h2>
         
@@ -59,7 +66,8 @@ export default {
     </datalist>
     <br>
 
-    <label for="dueDate"><strong>Due Date</strong></label>
+    <label for="dueDate"><strong>Due Date</strong>
+    <i class="fa fa-question-circle reminder-help" :title="dueDateText"></i> </label>
     <input type="date" v-model="subscription.dueDate" name="trip-start"
            min="2020-01-01" max="2030-12-31" list="dateList" required>
     <datalist id="dateList">
