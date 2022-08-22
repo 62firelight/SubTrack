@@ -24,7 +24,7 @@ and open the template in the editor.
                 <button class="raise" @click.prevent="getSubs(customer.username); getTotal(customer.username)">All</button>
                 <button class="raise" type="button" class="pink-button" v-for="category in categories" 
                         @click.prevent="filterByCat(category); getTotalForCategory(category, customer.username)">{{category}}</button>
-                <h2>Subscriptions</h2>
+                <h2>Your Subscriptions</h2>
                 <div align="center">
                     <button class="butgreen up" v-if="signedIn" @click.prevent="redirectToAdd()">Add Subscription</button>
                 </div>
