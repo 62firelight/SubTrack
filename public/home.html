@@ -19,54 +19,53 @@ and open the template in the editor.
         <main id="content">
             <navigation></navigation>
             <!--<div id='welcome' align="center" class="">{{ welcome }}</div>-->
-            <div class="subscriptions">
-                <div v-if="signedIn">
-                    <h2>Categories</h2>
-                    <button class="raise" @click.prevent="getSubs(customer.username); getTotal(customer.username)">All</button>
-                    <button class="raise" type="button" class="pink-button" v-for="category in categories" 
-                            @click.prevent="filterByCat(category); getTotalForCategory(category, customer.username)">{{category}}</button>
-                    <h2>Subscriptions</h2>
-                    <div align="center">
-                        <button class="butgreen up" v-if="signedIn" @click.prevent="redirectToAdd()">Add Subscription</button>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Company</th>
-                            <th>Due Date</th>
-                            <th></th>
-                        </tr>
-
-                        <tbody>
-                            <tr v-for="subscription in subscriptions">
-                                <td>{{subscription.name}}</td>
-                                <td>{{subscription.description}}</td>
-                                <td>{{subscription.paid ? formatCurrency(subscription.subscriptionPrice) : 'Free'}}</td>
-                                <td>{{subscription.companyName}}</td>
-                                <td :style="{ 'color' : getDateColor(subscription) }">{{getConvertedDate(subscription.dueDate)}} 
-                                    {{getSubStatus(subscription)}}
-                                    <button class="raise" v-if='daysToToday(subscription.dueDate) <= reminderThreshold' @click.prevent="renewSub(subscription)">Renew</button>
-                                </td>
-                                <td>
-                                    <div class="sub-buttons">
-                                        <button class="raise" @click.prevent="redirectToUpdate(subscription)">Update</button>
-                                        <button class="del" @click.prevent="openDeleteDialog(subscription)">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Total</td>
-                                <td>{{formatCurrency(total.value)}}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="subscriptions" v-if="signedIn">
+                <h2>Categories</h2>
+                <button class="raise" @click.prevent="getSubs(customer.username); getTotal(customer.username)">All</button>
+                <button class="raise" type="button" class="pink-button" v-for="category in categories" 
+                        @click.prevent="filterByCat(category); getTotalForCategory(category, customer.username)">{{category}}</button>
+                <h2>Subscriptions</h2>
+                <div align="center">
+                    <button class="butgreen up" v-if="signedIn" @click.prevent="redirectToAdd()">Add Subscription</button>
                 </div>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Company</th>
+                        <th>Due Date</th>
+                        <th></th>
+                    </tr>
+
+                    <tbody>
+                        <tr v-for="subscription in subscriptions">
+                            <td>{{subscription.name}}</td>
+                            <td>{{subscription.description}}</td>
+                            <td>{{subscription.paid ? formatCurrency(subscription.subscriptionPrice) : 'Free'}}</td>
+                            <td>{{subscription.companyName}}</td>
+                            <td :style="{ 'color' : getDateColor(subscription) }">{{getConvertedDate(subscription.dueDate)}} 
+                                {{getSubStatus(subscription)}}
+                                <button class="raise" v-if='daysToToday(subscription.dueDate) <= reminderThreshold' @click.prevent="renewSub(subscription)">Renew</button>
+                            </td>
+                            <td>
+                                <div class="sub-buttons">
+                                    <button class="raise" @click.prevent="redirectToUpdate(subscription)">Update</button>
+                                    <button class="del" @click.prevent="openDeleteDialog(subscription)">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Total</td>
+                            <td>{{formatCurrency(total.value)}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </main>
 
         <script type="module" src="js/subscription.js"></script>
