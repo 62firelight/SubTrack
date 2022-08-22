@@ -335,6 +335,34 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
+    
+    @Override
+    public Total getTotalForCategory(String category, String username) {
+        String sql = "SELECT subscription_price FROM SUBSCRIPTION "
+                + "inner join Customer using (customer_ID) where category = ? "
+                + " and username = ?";
+        try (
+                Connection dbCon = DbConnection.getConnection(url);
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            stmt.setString(1, category);
+            stmt.setString(2, username);
+
+            ResultSet rs = stmt.executeQuery();
+
+            BigDecimal totalValue = new BigDecimal(0);
+
+            while (rs.next()) {
+                BigDecimal subPrice = rs.getBigDecimal("Subscription_Price");
+                totalValue = totalValue.add(subPrice);
+            }
+
+            Total total = new Total(totalValue);
+
+            return total;
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
 
     @Override
     public Collection<Subscription> sortAscending(String username) {

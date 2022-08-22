@@ -74,13 +74,25 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     }
 
     @Override
-    public Total getTotal(String Username) {
+    public Total getTotal(String username) {
         BigDecimal totalValue = new BigDecimal(0);
         Total total = new Total(totalValue);
 
+        // TODO: Implement method properly
+        
         return total;
     }
 
+    @Override
+    public Total getTotalForCategory(String category, String username) {
+        BigDecimal totalValue = new BigDecimal(0);
+        Total total = new Total(totalValue);
+
+        // TODO: Implement method properly
+        
+        return total;
+    }
+    
     @Override
     public Collection<Subscription> sortAscending(String username) {
 

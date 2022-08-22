@@ -32,4 +32,6 @@ public interface SubscriptionDAO {
     Collection<Subscription> sortAscending(String username);
 
     Total getTotal(String username);
+    
+    Total getTotalForCategory(String category, String username);
 }
