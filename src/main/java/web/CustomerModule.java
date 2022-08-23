@@ -88,5 +88,7 @@ public class CustomerModule extends Jooby {
             customerDao.deleteCustomer(customer);
             return ctx.send(StatusCode.NO_CONTENT);
         });
+        
+        
     }
 }

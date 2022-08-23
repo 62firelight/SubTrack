@@ -17,6 +17,8 @@ public interface SubscriptionDAO {
 
     void saveSubscription(Subscription subscription);
 
+    Collection<Subscription> getSubscriptions();
+    
     Collection<Subscription> getSubscriptionsByUsername(String username);
 
     Subscription getSubscriptionById(Integer id);

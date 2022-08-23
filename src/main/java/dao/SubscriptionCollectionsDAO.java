@@ -33,6 +33,11 @@ public class SubscriptionCollectionsDAO implements SubscriptionDAO {
     }
 
     @Override
+    public Collection<Subscription> getSubscriptions() {
+        return subscriptions.values();
+    }
+
+    @Override
     public Collection<Subscription> getSubscriptionsByUsername(String username) {
         System.out.println(subscriptions.get(username));
         return subscriptions.get(username);

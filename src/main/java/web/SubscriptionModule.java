@@ -27,6 +27,16 @@ import org.apache.commons.mail.SimpleEmail;
 public class SubscriptionModule extends Jooby {
 
     public SubscriptionModule(SubscriptionDAO subscriptionDao) {
+        get("/api/subscriptions", ctx -> {
+            Collection<Subscription> subs = subscriptionDao.getSubscriptions();
+
+            if (subs == null) {
+                return ctx.send(StatusCode.NOT_FOUND);
+            } else {
+                return subs;
+            }
+        });
+        
         get("/api/subscriptions/{username}", ctx -> {
             String username = ctx.path("username").value();
             Collection<Subscription> subs = subscriptionDao.getSubscriptionsByUsername(username);
@@ -160,6 +170,6 @@ public class SubscriptionModule extends Jooby {
         get("/api/sort/{username}", ctx -> {
             String username = ctx.path("username").value();
             return subscriptionDao.sortAscending(username);
-        });
+        });                
     }
 }

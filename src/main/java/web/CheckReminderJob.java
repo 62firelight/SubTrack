@@ -5,6 +5,7 @@
  */
 package web;
 
+import domain.Subscription;
 import io.jooby.quartz.Scheduled;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,9 +21,9 @@ public class CheckReminderJob implements Job {
     @Scheduled("5s")
     public void execute(JobExecutionContext jec) throws JobExecutionException {
         LocalDateTime currentDateTime = LocalDateTime.now();
-        String text = currentDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+        String text = currentDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM));
         
-        System.out.println("The date and time is " + text);
+        System.out.println(text + " - Hello there :)");
     }
     
 }
