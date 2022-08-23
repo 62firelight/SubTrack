@@ -17,7 +17,6 @@ import dao.SubscriptionDAO;
 import dao.SubscriptionJdbcDAO;
 import io.jooby.Jooby;
 import io.jooby.ServerOptions;
-import io.jooby.di.GuiceModule;
 import io.jooby.json.GsonModule;
 import io.jooby.quartz.QuartzModule;
 import java.util.Arrays;
@@ -25,6 +24,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+import org.quartz.spi.JobFactory;
 import web.auth.BasicHttpAuthenticator;
 
 /**
@@ -45,31 +45,16 @@ public class Server extends Jooby {
         setServerOptions(new ServerOptions().setPort(8081));
         mount(new AssetModule());
         install(new GsonModule());
-
-//        System.out.println("Hello? Anyone?");
-//        
-//        try {
-//            Scheduler scheduler = QuartzModule.newScheduler(this);
-//            
-//            System.out.println(scheduler);
-//
-//            scheduler.setJobFactory((bundle, sch) -> {
-//                Class jobClass = bundle.getJobDetail().getJobClass();
-//                System.out.println("!!!!! - " + jobClass);
-//                if (jobClass == CheckReminderJob.class) {
-//                    System.out.println("Injecting DAO...");
-//                    return new CheckReminderJob(subscriptionDao);
-//                }
-//                return null;
-//            });
-//        } catch (SchedulerException e) {
-//            System.out.println(e);
-//            System.exit(1);
-//        }
-
-        install(new GuiceModule());
-//        bind(SubscriptionDAO.class).to(SubscriptionJdbcDAO.class);
+        
+        Scheduler scheduler = QuartzModule.newScheduler(this);     
         install(new QuartzModule(CheckReminderJob.class));
+        try {
+            scheduler.setJobFactory(new ReminderJobFactory(subscriptionDao));
+        } catch (SchedulerException e) {
+            System.out.println("Failed to set job factory. Exiting...");
+            System.exit(1);
+        }
+        
         mount(new CustomerModule(customerDao));
         mount(new SubscriptionModule(subscriptionDao));
     }

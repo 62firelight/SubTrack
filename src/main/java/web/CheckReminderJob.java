@@ -6,7 +6,6 @@
 package web;
 
 import dao.SubscriptionDAO;
-import dao.SubscriptionJdbcDAO;
 import domain.Subscription;
 import io.jooby.quartz.Scheduled;
 import java.time.LocalDateTime;
@@ -21,10 +20,9 @@ import javax.inject.Inject;
 
 public class CheckReminderJob implements Job {
 
-    SubscriptionJdbcDAO subscriptionDao;
+    private SubscriptionDAO subscriptionDao;
 
-    @Inject
-    public CheckReminderJob(SubscriptionJdbcDAO subscriptionDao) {
+    public CheckReminderJob(SubscriptionDAO subscriptionDao) {
         this.subscriptionDao = subscriptionDao;
     }
     
@@ -34,8 +32,7 @@ public class CheckReminderJob implements Job {
         LocalDateTime currentDateTime = LocalDateTime.now();
         String time = currentDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM));
         
-        System.out.println(time + " - " + this.subscriptionDao);
-//        System.out.println(time + " - There are " + this.subscriptionDao.getSubscriptions().size() + " subscription(s).");
+        System.out.println(time + " - There are " + this.subscriptionDao.getSubscriptions().size() + " subscription(s).");
     }
     
 }
