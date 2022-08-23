@@ -18,6 +18,7 @@ import dao.SubscriptionJdbcDAO;
 import io.jooby.Jooby;
 import io.jooby.ServerOptions;
 import io.jooby.json.GsonModule;
+import io.jooby.quartz.QuartzModule;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -40,6 +41,7 @@ public class Server extends Jooby {
         setServerOptions(new ServerOptions().setPort(8081));
         mount(new AssetModule());
         install(new GsonModule());
+//        install(new QuartzModule(SampleJob.class));
         mount(new CustomerModule(customerDao));
         mount(new SubscriptionModule(subscriptionDao));
 //        port(8081);
