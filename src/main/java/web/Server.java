@@ -40,6 +40,7 @@ public class Server extends Jooby {
     // use embedded database file (SubTrack.mv.db in project root directory)
 //    CustomerDAO customerDao = new CustomerJdbcDAO("jdbc:h2:./SubTrackDatabase");
 //    SubscriptionDAO subscriptionDao = new SubscriptionJdbcDAO("jdbc:h2:./SubTrackDatabase");
+    
     public Server() {
         setServerOptions(new ServerOptions().setPort(8081));
         mount(new AssetModule());
@@ -65,19 +66,12 @@ public class Server extends Jooby {
 //            System.out.println(e);
 //            System.exit(1);
 //        }
-        System.out.println(subscriptionDao);
+
         install(new GuiceModule());
 //        bind(SubscriptionDAO.class).to(SubscriptionJdbcDAO.class);
         install(new QuartzModule(CheckReminderJob.class));
         mount(new CustomerModule(customerDao));
         mount(new SubscriptionModule(subscriptionDao));
-//        port(8081);
-//        use(new Gzon());
-//        use(new AssetModule());
-////        List<String> noAuth = Arrays.asList("/api/register");
-////        use(new BasicHttpAuthenticator(customerDao, noAuth));
-//        use(new CustomerModule(customerDao));
-//        use(new SubscriptionModule(subscriptionDao));
     }
 
     public static void main(String[] args) throws Exception {
