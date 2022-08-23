@@ -41,7 +41,7 @@ public class Server extends Jooby {
         setServerOptions(new ServerOptions().setPort(8081));
         mount(new AssetModule());
         install(new GsonModule());
-//        install(new QuartzModule(SampleJob.class));
+        install(new QuartzModule(CheckReminderJob.class));
         mount(new CustomerModule(customerDao));
         mount(new SubscriptionModule(subscriptionDao));
 //        port(8081);

@@ -6,17 +6,23 @@
 package web;
 
 import io.jooby.quartz.Scheduled;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-public class SampleJob implements Job {    
+public class CheckReminderJob implements Job {    
 
     @Override
     @Scheduled("5s")
     public void execute(JobExecutionContext jec) throws JobExecutionException {
-        System.out.println("Hello world!");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        String text = currentDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+        
+        System.out.println("The date and time is " + text);
     }
     
 }
