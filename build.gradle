@@ -29,9 +29,13 @@ dependencies {
     implementation group: 'io.jooby', name: 'jooby-netty', version: jooby2Ver
     implementation group: 'io.jooby', name: 'jooby-gson', version: jooby2Ver
     implementation group: 'io.jooby', name: 'jooby-quartz', version: jooby2Ver
+    implementation group: 'io.jooby', name: 'jooby-guice', version: jooby2Ver
     
     // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
     implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
+    
+    // https://mvnrepository.com/artifact/com.google.inject/guice
+    implementation group: 'com.google.inject', name: 'guice', version: '5.1.0'
 
 }
 
