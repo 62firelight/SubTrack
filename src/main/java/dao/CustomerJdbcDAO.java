@@ -32,8 +32,8 @@ public class CustomerJdbcDAO implements CustomerDAO {
     @Override
     public void saveCustomer(Customer customer) {
         String sql = "insert into Customer (Username, "
-                + "Password, Email_Address, Reminder_Threshold) "
-                + "values (?,?,?,?)";
+                + "Password, Reminder_Threshold) "
+                + "values (?,?,?)";
 
         try (
                 Connection dbCon = DbConnection.getConnection(url);
@@ -41,8 +41,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
             
             stmt.setString(1, customer.getUsername());
             stmt.setString(2, ScryptHelper.hash(customer.getPassword()).toString());
-            stmt.setString(3, customer.getEmailAddress());
-            stmt.setInt(4, customer.getReminderThreshold());
+            stmt.setInt(3, customer.getReminderThreshold());
 
             stmt.executeUpdate();
             System.out.println("Saving customer: " + customer);
@@ -64,10 +63,9 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 Integer id = rs.getInt("Customer_ID");
                 String fetchedUsername = rs.getString("Username");
                 String password = rs.getString("Password");
-                String emailAddress = rs.getString("Email_Address");
                 Integer reminderThreshold = rs.getInt("Reminder_Threshold");
 
-                Customer cust1 = new Customer(id, fetchedUsername, password, emailAddress, reminderThreshold);
+                Customer cust1 = new Customer(id, fetchedUsername, password, reminderThreshold);
                 return cust1;
             }
             return null;
@@ -128,7 +126,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
     @Override
     public void updateCustomer(String username, Customer customer) {
         String sql = "update Customer "
-                + "set Username = ?, Email_Address = ?, Reminder_Threshold = ? "
+                + "set Username = ?, Reminder_Threshold = ? "
                 + "where Customer_ID = ?";
         try (
                 // get a connection to the database
@@ -136,9 +134,8 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) { 
 //            stmt.setString(3, ScryptHelper.hash(customer.getPassword()).toString());
             stmt.setString(1, customer.getUsername());
-            stmt.setString(2, customer.getEmailAddress());
-            stmt.setInt(3, customer.getReminderThreshold());
-            stmt.setInt(4, customer.getCustomerId());
+            stmt.setInt(2, customer.getReminderThreshold());
+            stmt.setInt(3, customer.getCustomerId());
             stmt.executeUpdate();  // execute the statement
 
         } catch (SQLException ex) {

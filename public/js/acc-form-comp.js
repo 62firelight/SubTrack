@@ -47,10 +47,6 @@ export default {
     <input type="password" maxlength="50" v-if="!updating" v-model="customer.password" required>
     <br v-if="!updating">
 
-    <label for=“emailAddress”><strong>Email</strong></label>
-    <input type="email" maxlength="50" v-model="customer.emailAddress" required>
-    <br>
-
     <label for=“reminderThreshold”><strong>Days For Reminder</strong> 
     <i class="fa fa-question-circle reminder-help" :title="reminderText"></i> </label>
     <input type="number" min="0" max="30" 

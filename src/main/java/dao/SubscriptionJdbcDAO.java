@@ -97,7 +97,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 //                customer.setLastName(rs.getString("Lastname"));
                 customer.setPassword(rs.getString("Password"));
 //                customer.setPhoneNumber(rs.getString("Phone_Number"));
-                customer.setEmailAddress(rs.getString("Email_Address"));
+//                customer.setEmailAddress(rs.getString("Email_Address"));
                 customer.setReminderThreshold(rs.getInt("Reminder_Threshold"));
 
                 //commented out to keep file integrity 
@@ -159,7 +159,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 //                customer.setLastName(rs.getString("Lastname"));
                 customer.setPassword(rs.getString("Password"));
 //                customer.setPhoneNumber(rs.getString("Phone_Number"));
-                customer.setEmailAddress(rs.getString("Email_Address"));
+//                customer.setEmailAddress(rs.getString("Email_Address"));
                 customer.setReminderThreshold(rs.getInt("Reminder_Threshold"));
 
                 //commented out to keep file integrity 
@@ -220,7 +220,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 //                customer.setLastName(rs.getString("Lastname"));
                 customer.setPassword(rs.getString("Password"));
 //                customer.setPhoneNumber(rs.getString("Phone_Number"));
-                customer.setEmailAddress(rs.getString("Email_Address"));
+//                customer.setEmailAddress(rs.getString("Email_Address"));
                 customer.setReminderThreshold(rs.getInt("Reminder_Threshold"));
 
                 //commented out to keep file integrity 
@@ -347,7 +347,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 //                customer.setLastName(rs.getString("Lastname"));
                 customer.setPassword(rs.getString("Password"));
 //                customer.setPhoneNumber(rs.getString("Phone_Number"));
-                customer.setEmailAddress(rs.getString("Email_Address"));
+//                customer.setEmailAddress(rs.getString("Email_Address"));
                 customer.setReminderThreshold(rs.getInt("Reminder_Threshold"));
 
                 Subscription sub = new Subscription();
@@ -459,7 +459,7 @@ public class SubscriptionJdbcDAO implements SubscriptionDAO {
 //                customer.setLastName(rs.getString("Lastname"));
                 customer.setPassword(rs.getString("Password"));
 //                customer.setPhoneNumber(rs.getString("Phone_Number"));
-                customer.setEmailAddress(rs.getString("Email_Address"));
+//                customer.setEmailAddress(rs.getString("Email_Address"));
                 customer.setReminderThreshold(rs.getInt("Reminder_Threshold"));
 
                 Subscription sub = new Subscription();

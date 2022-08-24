@@ -64,39 +64,39 @@ public class SubscriptionModule extends Jooby {
 
             subscriptionDao.saveSubscription(subscription);
 
-            Customer c = subscription.getCustomer();
-            String customerUsername = c.getUsername();
-            String customerEmail = c.getEmailAddress();
-            Integer customerReminderThreshold = c.getReminderThreshold();
-//            String fName = c.getFirstName();
-//            String lName = c.getLastName();
-            String subName = subscription.getName();
-            String date = subscription.getDueDate();
-            CompletableFuture.runAsync(() -> {
-                try {
-                    Email email = new SimpleEmail();
-                    email.setHostName("localhost");
-                    email.setSmtpPort(2525);
-                    email.setFrom("SubTrack@gmail.com");
-                    email.setSubject("Subscription Renewal Warning");
-                    email.setMsg("Hi " + customerUsername + ", \n\nThis is an email to "
-                            + "warn you that your " + subName + " subscription "
-                            + "expires soon on "
-                            + date + ".\n\nRemember to renew or delete your "
-                            + "subscription before it's too late!\n\n"
-                            + "This message was automatically generated "
-                            + "by SubTrack. Change your account settings "
-                            + "if you wish to receive notifications at a "
-                            + "different time.");
-                    email.addTo(customerEmail);
-                    email.send();
-                } catch (EmailException ex) {
-//                    Logger.getLogger(SubscriptionModule.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println(ex.getMessage());
-                    System.out.println("Couldn't send an email to the FakeSMTP server. Make sure that the FakeSMTP server is active and listening on port 2525.");
-                    System.out.println("Don't have FakeSMTP? Download it from http://nilhcem.com/FakeSMTP/");
-                }
-            });
+//            Customer c = subscription.getCustomer();
+//            String customerUsername = c.getUsername();
+//            String customerEmail = c.getEmailAddress();
+//            Integer customerReminderThreshold = c.getReminderThreshold();
+////            String fName = c.getFirstName();
+////            String lName = c.getLastName();
+//            String subName = subscription.getName();
+//            String date = subscription.getDueDate();
+//            CompletableFuture.runAsync(() -> {
+//                try {
+//                    Email email = new SimpleEmail();
+//                    email.setHostName("localhost");
+//                    email.setSmtpPort(2525);
+//                    email.setFrom("SubTrack@gmail.com");
+//                    email.setSubject("Subscription Renewal Warning");
+//                    email.setMsg("Hi " + customerUsername + ", \n\nThis is an email to "
+//                            + "warn you that your " + subName + " subscription "
+//                            + "expires soon on "
+//                            + date + ".\n\nRemember to renew or delete your "
+//                            + "subscription before it's too late!\n\n"
+//                            + "This message was automatically generated "
+//                            + "by SubTrack. Change your account settings "
+//                            + "if you wish to receive notifications at a "
+//                            + "different time.");
+//                    email.addTo(customerEmail);
+//                    email.send();
+//                } catch (EmailException ex) {
+////                    Logger.getLogger(SubscriptionModule.class.getName()).log(Level.SEVERE, null, ex);
+//                    System.out.println(ex.getMessage());
+//                    System.out.println("Couldn't send an email to the FakeSMTP server. Make sure that the FakeSMTP server is active and listening on port 2525.");
+//                    System.out.println("Don't have FakeSMTP? Download it from http://nilhcem.com/FakeSMTP/");
+//                }
+//            });
 
             return ctx.send(StatusCode.CREATED);
         });

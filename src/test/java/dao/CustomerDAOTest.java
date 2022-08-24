@@ -55,14 +55,14 @@ public class CustomerDAOTest {
         //This customer setup becomes redundant due to my set up
         cust1.setUsername("bayta267");
         cust1.setPassword("INFO310");
-        cust1.setEmailAddress("bayta@student.com");
+//        cust1.setEmailAddress("bayta@student.com");
         cust1.setReminderThreshold(2);
         cust1.setCustomerId(1);
 
         this.cust2 = new Customer();
         cust2.setUsername("a267");
         cust2.setPassword("1234");
-        cust2.setEmailAddress("tudent.com");
+//        cust2.setEmailAddress("tudent.com");
         cust2.setReminderThreshold(4);
         cust2.setCustomerId(2);
 
@@ -112,7 +112,7 @@ public class CustomerDAOTest {
 
         //Manual checks of each function
         assertEquals(cust2.getUsername(), fetchedCustomer.getUsername());
-        assertEquals(cust2.getEmailAddress(), fetchedCustomer.getEmailAddress());
+//        assertEquals(cust2.getEmailAddress(), fetchedCustomer.getEmailAddress());
         assertEquals(cust2.getReminderThreshold(), fetchedCustomer.getReminderThreshold());
 //        assertEquals(cust2.getCustomerId(), secondRetreieved.getCustomerId());
 

@@ -19,14 +19,13 @@ public class Customer {
 //    private String firstName = "defaultFirstName";
 //    private String lastName = "defaultLastName";
 //    private String phoneNumber = "defaultPhoneNumber";
-    private String emailAddress = "defaultEmailAddress";
+//    private String emailAddress = "defaultEmailAddress";
     private Integer reminderThreshold = 3;
 
-    public Customer(Integer customerID, String username, String password, String emailAddress, Integer reminderThreshold) {
+    public Customer(Integer customerID, String username, String password, Integer reminderThreshold) {
         this.customerId = customerID;
         this.username = username;
         this.password = password;
-        this.emailAddress = emailAddress;
         this.reminderThreshold = reminderThreshold;
     }
 
@@ -36,7 +35,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerId=" + customerId + ", username=" + username + ", password=" + password + ", emailAddress=" + emailAddress + ", reminderThreshold=" + reminderThreshold + '}';
+        return "Customer{" + "customerId=" + customerId + ", username=" + username + ", password=" + password + ", reminderThreshold=" + reminderThreshold + '}';
     }
 
     public Integer getCustomerId() {
@@ -61,14 +60,6 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
     }
 
     public Integer getReminderThreshold() {
