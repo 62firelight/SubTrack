@@ -44,7 +44,6 @@ public class CustomerJdbcDAO implements CustomerDAO {
             stmt.setInt(3, customer.getReminderThreshold());
 
             stmt.executeUpdate();
-            System.out.println("Saving customer: " + customer);
         } catch (SQLException ex) {
             throw new DAOException(ex.getSQLState(), ex);
         }
