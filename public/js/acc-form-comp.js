@@ -1,7 +1,7 @@
 export default {
     data() {
         return {
-            reminderText: 'When this amount of days remains before a subscription expires, a reminder email will be sent out to your email address.'
+            reminderText: 'When this amount of days remains before a subscription expires, the subscription will be highlighted orange.'
         }
     },    
         
