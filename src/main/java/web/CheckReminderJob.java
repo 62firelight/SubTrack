@@ -99,9 +99,9 @@ public class CheckReminderJob implements Job {
 //            });
 //        }
 
-        System.out.println(time + " - Reporting " 
-                + expiredSubs.keySet().size() + " customer(s) with " 
-                + expiredSubs.values().size() + " total expired subscription(s).");
+//        System.out.println(time + " - Reporting " 
+//                + expiredSubs.keySet().size() + " customer(s) with " 
+//                + expiredSubs.values().size() + " total expired subscription(s).");
     }
 
 }
