@@ -1,7 +1,7 @@
 
 # SubTrack
 
-[Latest release](https://github.com/62firelight/SubTrack/releases/tag/v2)
+[Latest release](https://github.com/62firelight/SubTrack/releases/tag/v2.0.1)
 
 A Vue.js web application that allows you to track your subscriptions.
 
@@ -9,7 +9,7 @@ SubTrack was originally built as part of a University course. This version of Su
 
 ## Usage
 
-Access the [latest release](https://github.com/62firelight/SubTrack/releases/tag/v2) and follow the provided instructions.
+Access the [latest release](https://github.com/62firelight/SubTrack/releases/tag/v2.0.1) and follow the provided instructions.
 
 ## Screenshots
 
@@ -35,8 +35,8 @@ Access the [latest release](https://github.com/62firelight/SubTrack/releases/tag
 
 ## Special Thanks
 
-* The initial SubTrek team which I developed the initial version with
-  * Yi Ran Ong
-  * Emma Brothers
-  * Taine Bayly
-  * Sayyed Latif
+* The initial SubTrek team which I developed the initial version with, including:
+  * Yi Ran
+  * Emma
+  * Taine
+  * Sayyed
